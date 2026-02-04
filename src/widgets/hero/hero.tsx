@@ -1,38 +1,54 @@
 "use client";
 
-import styles from './hero.module.scss';
-import ArrowRight from '@/shared/ui/icons/arrow-right';
-import Download from '@/shared/ui/icons/download';
-import { useTranslations } from 'next-intl';
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Pagination } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/pagination";
+
+import styles from "./hero.module.scss";
+import { Button } from "@/shared/ui/button";
+import { ArrowRightIcon, DownloadIcon } from "@/shared/ui/icons";
+import { heroSlides } from "./model/slides";
 
 export function Hero() {
-  const t = useTranslations('hero');
-
   return (
-    <section className={styles.hero} role="region" aria-label={t('aria')}> 
-      <div className={styles.container}>
-        <div className={styles.eyebrow}>{t('eyebrow')}</div>
-        <h1 className={styles.title}>
-          {t('titleLine1')}
-          <br />
-          {t('titleLine2')}
-        </h1>
-        <p className={styles.subtitle}>{t('subtitle')}</p>
+    <section className={styles.hero}>
+      <Swiper
+        modules={[Pagination]}
+        pagination={{ clickable: true }}
+        loop
+        className={styles.swiper}
+      >
+        {heroSlides.map((slide, _) => (
+          <SwiperSlide key={slide.id} className={styles.swiperSlide}>
+            <div className={styles.slide}>
+              <div className={styles.overlay} />
 
-        <div className={styles.actions}>
-          <a href="#" className={styles.primary} aria-label={t('primaryAria')}>
-            <span>{t('primary')}</span>
-            <span className={styles.primaryIconWrapper}><ArrowRight /></span>
-          </a>
+              <div className={styles.content}>
+                <p className={styles.subtitle}>{slide.subtitle}</p>
 
-          <a href="#" className={styles.secondary} aria-label={t('secondaryAria')}>
-            <span>{t('secondary')}</span>
-            <span className={styles.secondaryIconWrapper}><Download /></span>
-          </a>
-        </div>
-      </div>
+                <h1 className={styles.title}>{slide.title}</h1>
+
+                <div className={styles.actions}>
+                  <button className={styles.primaryBtn}>
+                    <span>{slide.primaryCta}</span>
+                    <span className={styles.iconCircle}>
+                      <ArrowRightIcon className={styles.icon} />
+                    </span>
+                  </button>
+
+                  <button className={styles.secondaryBtn}>
+                    <span>{slide.secondaryCta}</span>
+                    <span className={styles.iconCircle}>
+                      <DownloadIcon />
+                    </span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </SwiperSlide>
+        ))}
+      </Swiper>
     </section>
   );
 }
-
-export default Hero;

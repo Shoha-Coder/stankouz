@@ -65,8 +65,8 @@ export function MainNavbar() {
             <li
               key={m.key}
               role="none"
-              onMouseEnter={() => m.key === "catalog" && setCatalogOpen(true)}
-              onFocus={() => m.key === "catalog" && setCatalogOpen(true)}
+            //   onMouseEnter={() => m.key === "catalog" && setCatalogOpen(true)}
+            //   onFocus={() => m.key === "catalog" && setCatalogOpen(true)}
             >
               {m.key === "catalog" ? (
                 <button
