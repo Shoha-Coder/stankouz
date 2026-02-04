@@ -1,0 +1,494 @@
+{
+    "home": {
+        "title": "Hush kelibsiz",
+        "cta": "Boshlash",
+        "hero": {
+            "title": "OQQUZA — XALQARO STANDARTLAR BO'YICHA KOMPONENTLARNI YUQORI ANIQLIKDA ISHLAB CHIQARISH",
+            "description": "3D modellashtirish, ChBQ ishlab chiqarish va sifat nazorati bilan buyurtma asosida detallar ishlab chiqarish",
+            "cta": "BATAFSIL",
+            "imageAlt": "Yuqori aniqlikdagi ChBQ komponent ishlab chiqarish",
+            "ariaLabel": "Asosiy banner"
+        },
+        "aboutSection": {
+            "title": "O`QQUZA HAQIDA MA'LUMOT",
+            "description": "Bizning tajriba va texnik imkoniyatlarimiz minimal vaqt ichida ham oddiy, ham murakkab korpus, mahkamlash, tugun, ulanish va boshqa detallarni ishlab chiqarishga imkon beradi, ular xalqaro sifat standartlari va barcha mijoz talablariga javob beradi",
+            "ariaLabel": "Kompaniya haqida",
+            "statistics": {
+                "years": {
+                    "value": "32+",
+                    "label": "MAHSULOT ISHLAB CHIQARISH YILLARI"
+                },
+                "technologies": {
+                    "value": "14+",
+                    "label": "YUQORI TEXNOLOGIYALAR EKSTRUZIYA LINIYALARI"
+                },
+                "production": {
+                    "value": "25+",
+                    "label": "BIZ YILDA ISHLAB CHIQARADIGAN MAHSULOT MING TONNALARI"
+                }
+            },
+            "cta": {
+                "details": "BATAFSIL",
+                "contact": "MENEJER BILAN BOG'LANISH"
+            },
+            "imageAlt": "O`QQUZA kompaniya grafikasi"
+        },
+        "servicesSection": {
+            "title": "BIZNING XIZMATLAR",
+            "subtitle": "PROFESSIONAL METALL ISHLASH",
+            "ariaLabel": "Xizmatlar bo'limi",
+            "logoAlt": "O`QQUZA logotipi",
+            "services": [
+                {
+                    "title": "FREZERLASH",
+                    "imageAlt": "ChBQ frezerlash jarayoni"
+                },
+                {
+                    "title": "TOKARLASH",
+                    "imageAlt": "ChBQ tokarlash jarayoni"
+                },
+                {
+                    "title": "PRESS-FORMA VA SHTAMPLAR ISHLAB CHIQARISH",
+                    "imageAlt": "Press-forma va shtamplar ishlab chiqarish"
+                },
+                {
+                    "title": "BOSIM OSTIDA QUYISH",
+                    "imageAlt": "Bosim ostida quyish jarayoni"
+                }
+            ],
+            "features": [
+                {
+                    "title": "TAYYOR MAHSULOTLARNING BENAZIR SIFATI",
+                    "icon": "checkmark"
+                },
+                {
+                    "title": "BUYURTMALARNI BAJARISH UCHUN CHAQIRILGAN MUDDATLAR",
+                    "icon": "delivery"
+                },
+                {
+                    "title": "CHIZMALAR VA NAMUNALAR BO'YICHA ISHLASH",
+                    "icon": "collaboration"
+                },
+                {
+                    "title": "METALL ISHLASH UCHUN ENG YAXSHI NARXLAR",
+                    "icon": "pricing"
+                }
+            ]
+        },
+        "modelingServices": {
+            "title": "3D MODELLASHTIRISH VA BUYURTMA ASOSIDA DETALLAR ISHLAB CHIQARISH BO'YICHA XIZMATLAR KO'RSATISH",
+            "description": "CAD/CAE modellarini ishlab chiqish, ishlab chiqarishni texnologik tayyorlash va mijozning loyiha hujjatlari va texnik talablariga muvofiq ChBQ uskunalaridan foydalangan holda detallarni ishlab chiqarish",
+            "ariaLabel": "Modellashtirish xizmatlari bo'limi",
+            "cta": {
+                "contact": "MENEJER BILAN BOG'LANISH",
+                "process": "ISH JARAYONI"
+            },
+            "imageAlt": "3D modellashtirish va CAD dizayn mutaxassisi"
+        },
+        "mainActivity": {
+            "title": "ASOSIY FAOLIYAT – KOMPONENTLAR ISHLAB CHIQARISH",
+            "ariaLabel": "Asosiy faoliyat",
+            "cards": [
+                {
+                    "label": "TIBBIY",
+                    "imageAlt": "Tibbiy komponentlar ishlab chiqarish"
+                },
+                {
+                    "label": "QISHLOQ XO'JALIGI",
+                    "imageAlt": "Qishloq xo'jaligi komponentlari ishlab chiqarish"
+                },
+                {
+                    "label": "MASHINASOZLIK",
+                    "imageAlt": "Mashinasozlik komponentlari ishlab chiqarish"
+                }
+            ]
+        },
+        "contactFooter": {
+            "ariaLabel": "Kontakt ma'lumotlari va aloqa formasi",
+            "contactDetails": {
+                "title": "KONTAKT MA'LUMOTLARI",
+                "address": {
+                    "label": "Manzil:",
+                    "value": "ZIYOLILAR STREET, 1B TASHKENT, UZBEKISTAN"
+                },
+                "phone": {
+                    "label": "Telefon raqami:",
+                    "numbers": ["+998 90 646 72 77", "+998 90 646 72 77"]
+                },
+                "email": {
+                    "label": "E-mail:",
+                    "value": "info@stanko.uz"
+                }
+            },
+            "form": {
+                "title": "ALOQA FORMASI",
+                "inputs": {
+                    "name": {
+                        "placeholder": "Ismingiz"
+                    },
+                    "email": {
+                        "placeholder": "Email manzili"
+                    }
+                },
+                "submit": "YUBORISH",
+                "recaptchaLoading": "reCAPTCHA yuklanmoqda...",
+                "errors": {
+                    "nameRequired": "Ism talab qilinadi",
+                    "emailRequired": "Email talab qilinadi",
+                    "emailInvalid": "To'g'ri email manzil kiriting",
+                    "recaptchaRequired": "Iltimos, reCAPTCHA tekshiruvini to'liq bajaring"
+                }
+            }
+        },
+        "productsCatalog": {
+            "title": "MAHSULOTLAR",
+            "cta": "KATALOGGA O'TISH",
+            "ariaLabel": "Mahsulotlar katalogi",
+            "products": [
+                {
+                    "category": "Shassi",
+                    "title": "Shassi Pravornye 59",
+                    "imageSrc": "/images/product1.jpg",
+                    "imageAlt": "Shassi Pravornye 59"
+                },
+                {
+                    "category": "Tishli g'ildiraklar",
+                    "title": "Tishli g'ildiraklar AB-106",
+                    "imageSrc": "/images/product2.jpg",
+                    "imageAlt": "Tishli g'ildiraklar AB-106"
+                },
+                {
+                    "category": "Tishli g'ildiraklar",
+                    "title": "Tishli g'ildiraklar Duga-69",
+                    "imageSrc": "/images/product3.jpg",
+                    "imageAlt": "Tishli g'ildiraklar Duga-69"
+                },
+                {
+                    "category": "Yarim tayyor mahsulotlar",
+                    "title": "Shassi Pravornye 59",
+                    "imageSrc": "/images/product4.jpg",
+                    "imageAlt": "Yarim tayyor mahsulotlar"
+                },
+                {
+                    "category": "Galvanika",
+                    "title": "Galvanika po'lat plitalar",
+                    "imageSrc": "/images/product5.jpg",
+                    "imageAlt": "Galvanika po'lat plitalar"
+                },
+                {
+                    "category": "Galvanika",
+                    "title": "Galvanika po'lat model 120",
+                    "imageSrc": "/images/product6.jpg",
+                    "imageAlt": "Galvanika po'lat model 120"
+                },
+                {
+                    "category": "Yarim tayyor mahsulotlar",
+                    "title": "Shassi Pravornye 59",
+                    "imageSrc": "/images/product7.jpg",
+                    "imageAlt": "Yarim tayyor mahsulotlar"
+                },
+                {
+                    "category": "Yarim tayyor mahsulotlar",
+                    "title": "Shassi Pravornye 59",
+                    "imageSrc": "/images/product8.jpg",
+                    "imageAlt": "Yarim tayyor mahsulotlar"
+                }
+            ]
+        }
+  },
+  "header": {
+    "topBar": {
+      "address": "Toshkent sh., Chilonzor t., Bunyodkor shoh ko‘chasi, 24",
+      "workingHours": "Working hours: Mon-Sun 9:00 - 17:00",
+      "phone": "+998 90 646 72 77",
+      "email": "info@stanko.uz"
+    },
+    "nav": {
+      "home": "BOSH SAHIFA",
+      "about": "KOMPANIYA HAQIDA",
+      "catalog": "MAHSULOT KATALOGI",
+      "services": "XIZMATLAR",
+      "contacts": "KONTAKTLAR"
+    },
+    "logoAlt": "O`QQUZA logotipi",
+    "aria": {
+      "toggleMenu": "Menyuni ochish"
+    },
+    "localeLabels": {
+      "ru": "Ru",
+      "en": "En",
+      "uz": "Uz"
+    },
+    "catalog": {
+      "shaftsRotors": "Vallar va rotorlar",
+      "chassisTransmission": "Shassi va transmissiya",
+      "gears": "Tishli g'ildiraklar",
+      "blanks": "Yarim tayyor mahsulotlar",
+      "electroplating": "Galvanika",
+      "categoryP": "Kategoriya P"
+    }
+  },
+  "common": {
+    "brandName": "O`QQUZA",
+    "breadcrumbs": {
+      "home": "Bosh sahifa",
+      "brand": "O`QQUZA"
+    },
+    "loading": "Yuklanmoqda...",
+    "aria": {
+      "pageBanner": "Sahifa banneri",
+      "breadcrumbNavigation": "Yo'l ko'rsatkichlar navigatsiyasi",
+      "productCatalog": "Mahsulotlar katalogi",
+      "productCard": "{category} - {title}"
+    }
+  },
+  "auth": {
+    "login": {
+      "emailPlaceholder": "Email",
+      "passwordPlaceholder": "Parol",
+      "signIn": "Kirish",
+      "signingIn": "Kirilmoqda..."
+    }
+  },
+  "aboutPage": {
+    "mainAbout": {
+      "title": "OQQUZA KOMPANIYASI HAQIDA",
+      "description": "OQQUZA — metall komponentlar va buyurtma asosida detallarni ishlab chiqish va ishlab chiqarishga ixtisoslashgan ishlab chiqarish kompaniyasi. Bizning tajriba va muhandislik ekspertizamiz, zamonaviy texnologik imkoniyatlar bilan birgalikda, xalqaro sifat standartlari va mijoz talablariga javob beradigan oddiy va murakkab detallarni (korpuslar, tugunlar, mahkamlash elementlari, ulagichlar) ishlab chiqarishga imkon beradi.",
+      "imageAlt": "OQQUZA ishlab chiqarish korxonasi",
+      "ariaLabel": "Kompaniya haqida"
+    },
+    "qualityControl": {
+      "title": "SIFAT NAZORATI VA ISHONCHLILIK",
+      "description": "Kompaniyaning asosiy faoliyati quyidagilar uchun komponentlar ishlab chiqarishdir:",
+      "ariaLabel": "Sifat nazorati va ishonchlilik",
+      "industries": [
+        "Tibbiyot sanoati,",
+        "Qishloq xo'jaligi sektori,",
+        "Mashinasozlik va sanoat uskunalari."
+      ],
+      "imageAlt": "Sifat nazorati va ishlab chiqarish jarayoni"
+    },
+    "statistics": {
+      "ariaLabel": "Statistika",
+      "year": {
+        "value": "1994 YIL",
+        "label": "Komponentlar ishlab chiqarish bozorida"
+      },
+      "production": {
+        "value": "100 TONNA",
+        "label": "yiliga mahsulot Ishlab chiqarish quvvatlari"
+      },
+      "engineering": {
+        "value": "100%",
+        "label": "Muhandislik yondashuvi va texnologiyalar"
+      },
+      "qualityText": "Mahsulot sifati ishlab chiqarishning barcha bosqichlarida qat'iy nazorat orqali ta'minlanadi. Kompaniya metall nazorati laboratoriyasiga ega va mahsulotlarning ishqalanishga chidamliligini va ekspluatatsion xususiyatlarini yaxshilash uchun galvanik qayta ishlash jarayonlaridan foydalanadi."
+    },
+    "qualityAssurance": {
+      "description": "Mahsulot sifati ishlab chiqarishning barcha bosqichlarida qat'iy nazorat orqali ta'minlanadi. Kompaniya metall nazorati laboratoriyasiga ega va mahsulotlarning ishqalanishga chidamliligini va ekspluatatsion xususiyatlarini yaxshilash uchun galvanik qayta ishlash jarayonlaridan foydalanadi.",
+      "imageAlt": "Sifatni ta'minlash va ishlab chiqarish sexi",
+      "ariaLabel": "Sifat ta'minoti"
+    },
+    "partnerDescription": {
+      "description": "OQQUZA — muhandislik aniqligi, texnologik rivojlanish va uzoq muddatli hamkorlikka e'tibor qaratgan ishonchli ishlab chiqarish hamkori.",
+      "imageAlt1": "Ishlab chiqarish uskunalari",
+      "imageAlt2": "Ishlab chiqarish jarayoni",
+      "ariaLabel": "Hamkor tavsifi"
+    },
+    "engineering": {
+      "title": "MUHANDISLIK YONDASHUVI VA TEXNOLOGIYALAR",
+      "description": "OQQUZA 3D modellashtirish va loyihalashtirishdan tortib detallarning seriyali va individual ishlab chiqarishigacha bo'lgan to'liq xizmatlar tsiklini taqdim etadi. Biz zamonaviy CAD/CAE tizimlaridan, ChBQ uskunalaridan va sovuq, yarim issiq va issiq shakllantirish texnologiyalaridan foydalanamiz, bu yuqori aniqlik, takrorlanuvchanlik va materialning optimal sarfini erishishga imkon beradi.",
+      "subtitle": "BIZ ISHLAB CHIQARAMIZ:",
+      "ariaLabel": "Muhandislik yondashuvi va texnologiyalar",
+      "products": [
+        "turli geometriyadagi yarim tayyor mahsulotlar",
+        "vallar va rotorlar",
+        "shassi va transmissiya elementlari",
+        "murakkab ichki va tashqi konturlarga ega detallar",
+        "tishli g'ildiraklar"
+      ]
+    }
+  },
+  "footer": {
+    "aria": {
+      "siteFooter": "Pastgi qism",
+      "navigation": "Pastgi navigatsiya"
+    },
+    "logo": {
+      "primary": "CCQ",
+      "secondary": "UZA"
+    },
+    "nav": {
+      "home": "Bosh sahifa",
+      "product": "Mahsulot",
+      "about": "Biz haqimizda",
+      "review": "Sharhlar",
+      "media": "Media",
+      "contact": "Kontaktlar"
+    },
+    "contact": {
+      "email": {
+        "label": "Email:",
+        "value": "info@stanko.uz"
+      },
+      "phone": {
+        "label": "Telefon:",
+        "value": "+998 90 646 72 77"
+      },
+      "address": {
+        "label": "Manzil:",
+        "value": "Ziyolilar street, 1B Tashkent, Uzbekistan"
+      }
+    },
+    "copyright": "Copyright © 1994 OQQUZA LLC"
+  },
+  "catalogPage": {
+    "title": "MAHSULOT KATALOGI",
+    "emptyState": "Ushbu kategoriyada mahsulotlar topilmadi.",
+    "categories": {
+      "title": "KATEGORIYALAR",
+      "list": {
+        "gears": "Tishli g'ildiraklar",
+        "blanks": "Yarim tayyor mahsulotlar",
+        "electroplating": "Galvanika",
+        "shaftsRotors": "Vallar va rotorlar",
+        "chassisTransmission": "Shassi va transmissiya"
+      }
+    },
+    "aria": {
+      "categorySidebar": "Mahsulot kategoriyalari",
+      "categoryNavigation": "Kategoriya navigatsiyasi",
+      "filterBy": "{category} bo'yicha filtrlash"
+    },
+    "products": [
+      {
+        "title": "Shassi Pravornye 59",
+        "imageSrc": "/images/product1.jpg",
+        "imageAlt": "Shassi Pravornye 59"
+      },
+      {
+        "title": "Tishli g'ildiraklar AB-106",
+        "imageSrc": "/images/product2.jpg",
+        "imageAlt": "Tishli g'ildiraklar AB-106"
+      },
+      {
+        "title": "Tishli g'ildiraklar Duga-69",
+        "imageSrc": "/images/product3.jpg",
+        "imageAlt": "Tishli g'ildiraklar Duga-69"
+      },
+      {
+        "title": "Shassi Pravornye 59",
+        "imageSrc": "/images/product4.jpg",
+        "imageAlt": "Yarim tayyor mahsulotlar"
+      },
+      {
+        "title": "Po'lat vallar",
+        "imageSrc": "/images/product5.jpg",
+        "imageAlt": "Po'lat vallar"
+      },
+      {
+        "title": "Galvanika po'lat model d20",
+        "imageSrc": "/images/product6.jpg",
+        "imageAlt": "Galvanika po'lat model d20"
+      },
+      {
+        "title": "Shassi Pravornye 59",
+        "imageSrc": "/images/product7.jpg",
+        "imageAlt": "Yarim tayyor mahsulotlar"
+      },
+      {
+        "title": "Shassi Pravornye 59",
+        "imageSrc": "/images/product8.jpg",
+        "imageAlt": "Yarim tayyor mahsulotlar"
+      },
+      {
+        "title": "Galvanika po'lat plitalar",
+        "imageSrc": "/images/product5.jpg",
+        "imageAlt": "Galvanika po'lat plitalar"
+      },
+      {
+        "title": "Galvanika po'lat model d20",
+        "imageSrc": "/images/product6.jpg",
+        "imageAlt": "Galvanika po'lat model d20"
+      },
+      {
+        "title": "Shassi Pravornye 59",
+        "imageSrc": "/images/product7.jpg",
+        "imageAlt": "Yarim tayyor mahsulotlar"
+      },
+      {
+        "title": "Shassi Pravornye 59",
+        "imageSrc": "/images/product8.jpg",
+        "imageAlt": "Yarim tayyor mahsulotlar"
+      }
+    ]
+  },
+  "productDetail": {
+    "contactManager": "MENEDJER BILAN BOG'LANISH",
+    "breadcrumbs": {
+      "catalog": "MAHSULOT KATALOGI"
+    },
+    "otherProducts": {
+      "title": "BOSHQA MAHSULOTLAR",
+      "cta": "KATALOGGA O'TISH",
+      "ariaLabel": "Boshqa mahsulotlar"
+    },
+    "products": {
+      "1": {
+        "title": "Shassi Pravornye 59",
+        "description": "Polietilen quvur liniyasini o'rnatish HDPE fitinglarining xilma-xilligi va funksionalligi tufayli osonlashadi. Ishlatiladigan fiting turi o'rnatish usuliga bog'liq. Quvurlar kabi fitinglar ham agressiv kimyoviy muhitlarga chidamli bo'lib, o'nlab yillar davomida uzluksiz ishlashni ta'minlaydi."
+      }
+    },
+    "gallery": {
+      "ariaLabel": "Mahsulot rasmlari galereyasi",
+      "defaultImageAlt": "Mahsulot rasmi",
+      "imageAltWithIndex": "{imageAlt} {index}",
+      "thumbnailAlt": "{imageAlt} miniatyurasi {index}"
+    }
+  },
+  "contactPage": {
+    "title": "KONTAKTLAR",
+    "map": {
+      "markerTitle": "OQQUZA Ofisi",
+      "ariaLabel": "Joylashuv xaritasi"
+    },
+    "form": {
+      "title": "ALOQA FORMASI",
+      "inputs": {
+        "name": {
+          "placeholder": "Ismingiz"
+        },
+        "phone": {
+          "placeholder": "Telefon raqami"
+        },
+        "email": {
+          "placeholder": "Email manzili"
+        },
+        "town": {
+          "placeholder": "Shahringiz"
+        }
+      },
+      "submit": "YUBORISH >",
+      "recaptchaLoading": "reCAPTCHA yuklanmoqda...",
+      "errors": {
+        "nameRequired": "Ism talab qilinadi",
+        "phoneRequired": "Telefon raqami talab qilinadi",
+        "emailRequired": "Email talab qilinadi",
+        "emailInvalid": "Iltimos, to'g'ri email manzilini kiriting",
+        "townRequired": "Shahar talab qilinadi",
+        "recaptchaRequired": "Iltimos, reCAPTCHA tekshiruvini yakunlang"
+      }
+    },
+    "contactDetails": {
+      "ariaLabel": "Kontakt ma'lumotlari",
+      "labels": {
+        "address": "Manzil:",
+        "phone": "Bog'lanish:",
+        "email": "mailto:"
+      },
+      "address": "Ziyolilar street, 1B Tashkent",
+      "phone": "+998 90 646 72 77",
+      "email": "info@stanko.uz"
+    }
+  }
+}

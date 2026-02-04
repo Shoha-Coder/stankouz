@@ -1,0 +1,118 @@
+@use '../../shared/styles/variables' as *;
+
+.topInfoBar {
+  background-color: $top-bar-bg;
+  padding: 0.75rem 2rem;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  font-size: 0.875rem;
+  color: $text-light;
+
+  @media (max-width: 800px) {
+    padding: 0.75rem 1rem;
+  }
+}
+
+.container {
+  width: 100%;
+  max-width: 1440px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  @media (max-width: 800px) {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+}
+
+.leftSection,
+.rightSection {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.infoText {
+  white-space: nowrap;
+}
+
+.divider {
+  opacity: 0.4;
+
+  @media (max-width: 768px) {
+    display: none;
+  }
+}
+
+/* ===== Language ===== */
+
+.langWrapper {
+  position: relative;
+}
+
+.langButton {
+  background: none;
+  border: none;
+  color: $text-light;
+  font-size: 0.9375rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.chevron {
+  transition: transform 0.2s ease;
+}
+
+.chevronOpen {
+  transform: rotate(180deg);
+}
+
+/* ===== Dropdown ===== */
+
+.langDropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  min-width: 96px;
+  background-color: $dropdown-bg;
+  border-radius: 6px;
+  padding: 0.5rem 0;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  z-index: 2000;
+  animation: fadeIn 0.15s ease-out;
+}
+
+.langOption {
+  width: 100%;
+  padding: 0.5rem 1rem;
+  background: none;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  font-size: 0.875rem;
+
+  &:hover {
+    background-color: #f3f4f6;
+  }
+}
+
+.active {
+  color: $blue-primary;
+  font-weight: 500;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

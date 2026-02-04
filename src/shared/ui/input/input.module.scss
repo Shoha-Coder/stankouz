@@ -1,0 +1,54 @@
+@use '../../../shared/styles/variables' as *;
+
+.inputWrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: clamp(4px, 0.5vw, 8px);
+}
+
+.label {
+    font-size: clamp(12px, 1vw, 14px);
+    font-weight: 400;
+    color: $text-dark;
+    font-family: 'Roboto', sans-serif;
+}
+
+.input {
+    width: 100%;
+    padding: clamp(8px, 1vw, 12px) 0;
+    font-size: clamp(14px, 1.125vw, 16px);
+    font-weight: 400;
+    color: #ffffff;
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    outline: none;
+    transition: border-color 0.3s ease;
+    font-family: 'Roboto', sans-serif;
+
+    &::placeholder {
+        color: rgba(255, 255, 255, 0.5);
+    }
+
+    &:focus {
+        border-bottom-color: rgba(255, 255, 255, 0.7);
+    }
+
+    &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+}
+
+.inputError {
+    border-bottom-color: #ef4444;
+}
+
+.errorMessage {
+    font-size: clamp(11px, 0.875vw, 13px);
+    color: #ff6b6b;
+    margin-top: clamp(2px, 0.25vw, 4px);
+    font-family: 'Roboto', sans-serif;
+}
+
