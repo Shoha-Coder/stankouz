@@ -1,3 +1,4 @@
+import { About } from '@/widgets/about/about';
 import { Hero } from '@/widgets/hero/hero';
 
 export default async function HomePage() {
@@ -7,6 +8,7 @@ export default async function HomePage() {
       {/* Hero is a client component */}
       {/* eslint-disable-next-line react/jsx-no-undef */}
       <Hero />
+      <About />
     </main>
   );
 }

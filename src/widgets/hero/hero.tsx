@@ -25,12 +25,12 @@ export function Hero() {
               <div className={styles.overlay} />
 
               <div className={styles.content}>
-                <p className={styles.subtitle}>{slide.subtitle}</p>
+                <p className={`${styles.subtitle} inter`}>{slide.subtitle}</p>
 
-                <h1 className={styles.title}>{slide.title}</h1>
+                <h1 className={`${styles.title} inter`}>{slide.title}</h1>
 
                 <div className={styles.actions}>
-                  <button className={styles.primaryBtn}>
+                  <button className={`${styles.primaryBtn} inter`}>
                     <span>{slide.primaryCta}</span>
                     <span className={styles.iconCircle}>
                       <ArrowRightIcon className={styles.icon} />
