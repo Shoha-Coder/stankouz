@@ -6,3 +6,27 @@
   color: #ffffff;
   cursor: pointer;
 }
+
+.outlineBtn {
+  height: 60px;
+  padding: 5px 5px 5px 20px;
+  border-radius: 30px;
+  border: 1px solid #0863ad;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  font-family: "Inter";
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.iconCircle {
+  width: 50px;
+  height: 50px;
+  background: #ffd427;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

@@ -14,6 +14,8 @@
     align-items: center;
     justify-content: space-between;
     box-shadow: 0 6px 18px rgba(9, 30, 66, 0.08);
+    max-width: 1360px;
+    margin: 0 auto;
 }
 
 .left {
@@ -113,7 +115,7 @@
     transform: translateX(-50%);
     top: calc(100% + 14px);
     width: 100%;
-    max-width: clamp(90%, 83.5vw, 1813px);
+    max-width: 1360px;
     background: #ffffff;
     border-radius: 18px;
     padding: 22px;

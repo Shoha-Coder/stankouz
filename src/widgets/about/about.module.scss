@@ -1,6 +1,8 @@
 .about {
     width: 100%;
     padding: 0 40px;
+    max-width: 1360px;
+    margin: 0 auto;
 }
 
 /* === TOP BLOCK === */
@@ -77,28 +79,12 @@
     gap: 15px;
 }
 
-.outlineBtn {
-    height: 60px;
-    padding: 5px 5px 5px 20px;
-    border-radius: 30px;
-    border: 1px solid #0863ad;
-    background: transparent;
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    font-family: "Inter";
+.btnText {
+    font-family: Inter;
+    font-weight: 500;
+    font-style: Medium;
     font-size: 16px;
-    cursor: pointer;
-}
-
-.iconCircle {
-    width: 50px;
-    height: 50px;
-    background: #ffd427;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    color: #0863AD;
 }
 
 /* RIGHT IMAGE */
@@ -114,74 +100,4 @@
         height: 100%;
         object-fit: cover;
     }
-}
-
-/* === ADVANTAGES === */
-
-.advantages {
-    margin-top: 60px;
-    display: flex;
-    gap: 40px;
-}
-
-.card {
-    width: 433px;
-    height: 280px;
-    border-radius: 25px;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    position: relative;
-}
-
-.light {
-    background: #f6f6f6;
-}
-
-.accent {
-    background: #0863ad;
-    box-shadow: 0 0 30px rgba(8, 100, 171, 0.2);
-}
-
-.cardTitle {
-    font-family: "Inter";
-    font-weight: 600;
-    font-size: 24px;
-}
-
-.light .cardTitle {
-    color: #282828;
-}
-
-.accent .cardTitle {
-    color: #ffffff;
-}
-
-.cardText {
-    font-family: "Inter";
-    font-size: 18px;
-}
-
-.light .cardText {
-    color: #6c6c6c;
-}
-
-.accent .cardText {
-    color: #62adea;
-}
-
-.cardIndex {
-    font-family: "Unbounded";
-    font-weight: 900;
-    font-size: 42px;
-    opacity: 0.1;
-}
-
-.light .cardIndex {
-    color: #282828;
-}
-
-.accent .cardIndex {
-    color: #ffffff;
 }

@@ -1,6 +1,9 @@
+import Advantages from "@/shared/ui/advantages/advantages";
 import styles from "./about.module.scss";
 import { stats } from "./model/stats";
-import { advantages } from "./model/advantages";
+import Image from "next/image";
+import { ArrowRightIcon } from "@/shared/ui/icons";
+import { Button } from "@/shared/ui/button";
 
 export function About() {
   return (
@@ -25,49 +28,39 @@ export function About() {
           <div className={styles.stats}>
             {stats.map((item) => (
               <div key={item.value} className={styles.stat}>
-                <span className={`${styles.statValue} inter`}>{item.value}</span>
-                <span className={`${styles.statLabel} inter`}>{item.label}</span>
+                <span className={`${styles.statValue} inter`}>
+                  {item.value}
+                </span>
+                <span className={`${styles.statLabel} inter`}>
+                  {item.label}
+                </span>
               </div>
             ))}
           </div>
 
           <div className={styles.actions}>
-            <button className={styles.outlineBtn}>
-              Sertifikatlar
-              <span className={styles.iconCircle}>→</span>
-            </button>
-
-            <button className={styles.outlineBtn}>
+            <Button outlineButton textClassName={styles.btnText}>
               Biz haqimizda batafsil
-              <span className={styles.iconCircle}>→</span>
-            </button>
+            </Button>
+            <Button outlineButton textClassName={styles.btnText}>
+              Sertifikatlar
+            </Button>
           </div>
         </div>
 
         {/* RIGHT IMAGE */}
         <div className={styles.imageWrapper}>
-          <img src="/images/about-image.png" alt="Gidro Stanko Servis" />
+          <Image
+            src="/images/about-image.png"
+            width={665}
+            height={437}
+            alt="Gidro Stanko Servis"
+          />
         </div>
       </div>
 
       {/* ADVANTAGES */}
-      <div className={styles.advantages}>
-        {advantages.map((item) => (
-          <div
-            key={item.id}
-            className={`${styles.card} ${
-              item.variant === "accent" ? styles.accent : styles.light
-            }`}
-          >
-            <div className={styles.cardTop}>
-              <h3 className={`${styles.cardTitle} inter`}>{item.title}</h3>
-              <p className={`${styles.cardText} inter`}>{item.text}</p>
-            </div>
-
-            <span className={`${styles.cardIndex} inter`}>{item.id}</span>
-          </div>
-        ))}
-      </div>
+      <Advantages />
     </section>
   );
 }

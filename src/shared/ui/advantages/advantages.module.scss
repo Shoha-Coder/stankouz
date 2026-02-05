@@ -1,0 +1,91 @@
+.advantages {
+    margin-top: 60px;
+}
+
+.cards {
+    display: flex;
+    gap: 40px;
+}
+
+.header {
+    width: 600px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.title {
+    font-family: "Unbounded";
+    font-weight: 600;
+    font-size: 32px;
+    line-height: 100%;
+    color: #282828;
+}
+
+.subtitle {
+    margin-top: 12px;
+    font-family: "Inter";
+    font-size: 18px;
+    line-height: 100%;
+    color: #6c6c6c;
+}
+
+.card {
+    width: 433px;
+    height: 280px;
+    border-radius: 25px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+}
+
+.light {
+    background: #f6f6f6;
+}
+
+.accent {
+    background: #0863ad;
+    box-shadow: 0 0 30px rgba(8, 100, 171, 0.2);
+}
+
+.cardTitle {
+    font-family: "Inter";
+    font-weight: 600;
+    font-size: 24px;
+}
+
+.light .cardTitle {
+    color: #282828;
+}
+
+.accent .cardTitle {
+    color: #ffffff;
+}
+
+.cardText {
+    font-family: "Inter";
+    font-size: 18px;
+}
+
+.light .cardText {
+    color: #6c6c6c;
+}
+
+.accent .cardText {
+    color: #62adea;
+}
+
+.cardIndex {
+    font-weight: 900;
+    font-size: 42px;
+    opacity: 0.1;
+}
+
+.light .cardIndex {
+    color: #282828;
+}
+
+.accent .cardIndex {
+    color: #ffffff;
+}

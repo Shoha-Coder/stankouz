@@ -1,0 +1,149 @@
+.products {
+    width: 100%;
+    padding: 0 40px;
+    margin-top: 180px;
+}
+
+/* HEADER */
+
+.header {
+    width: 805px;
+    margin: 0 auto 40px;
+    text-align: center;
+}
+
+.title {
+    font-family: "Unbounded";
+    font-weight: 600;
+    font-size: 32px;
+    line-height: 100%;
+    color: #282828;
+}
+
+.subtitle {
+    margin-top: 12px;
+    font-family: "Inter";
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 100%;
+    color: #6c6c6c;
+}
+
+/* GRID */
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(3, 433px);
+    gap: 40px;
+    justify-content: center;
+}
+
+/* CARD */
+
+.card {
+    width: 433px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* IMAGE */
+
+.imageWrapper {
+    position: relative;
+    width: 433px;
+    height: 256px;
+    border-radius: 25px;
+    border: 1px solid #e4e4e4;
+    overflow: hidden;
+    background: #fff;
+
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+    }
+}
+
+/* BADGE */
+
+.badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+
+    height: 27px;
+    padding: 5px 10px;
+    border-radius: 8px;
+    background: #f6f6f6;
+
+    font-family: "Inter";
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 100%;
+    color: #282828;
+}
+
+/* TEXT */
+
+.cardTitle {
+    font-family: "Inter";
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 100%;
+    color: #282828;
+}
+
+.cardText {
+    font-family: "Inter";
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 100%;
+    color: #6c6c6c;
+}
+
+/* LINK */
+
+.details {
+    font-family: "Inter";
+    font-size: 18px;
+    color: #3882e3;
+    text-decoration: none;
+}
+
+/* ACTION BUTTON (SAME AS OTHERS) */
+
+.action {
+    margin-top: 40px;
+    display: flex;
+    justify-content: center;
+}
+
+.outlineBtn {
+    height: 60px;
+    padding: 5px 5px 5px 20px;
+    border-radius: 30px;
+    border: 1px solid #0863ad;
+    background: transparent;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-family: "Inter";
+    font-size: 16px;
+    color: #0863AD;
+    cursor: pointer;
+}
+
+.iconCircle {
+    width: 50px;
+    height: 50px;
+    background: #ffd427;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    svg {
+        width: 24px;
+        height: 24px;
+    }
+}

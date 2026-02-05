@@ -81,7 +81,7 @@ export function MainNavbar() {
                   />
                 </button>
               ) : (
-                <Link href={{pathname: `/${locale}/${m.key}`, hash: `#${m.key}`}}>
+                <Link href={{pathname: `/${locale}/${m.key}`}}>
                   <span className={styles.menuLink}>{m.label}</span>
                 </Link>
               )}

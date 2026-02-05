@@ -1,0 +1,98 @@
+.services {
+    width: 100%;
+    padding: 0 40px;
+    margin-top: 180px;
+    max-width: 1360px;
+    margin: 0 auto;
+    margin-top: 180px;
+}
+
+/* HEADER */
+
+.header {
+    width: 805px;
+    margin: 0 auto 40px;
+    text-align: center;
+}
+
+.title {
+    font-family: "Unbounded";
+    font-weight: 600;
+    font-size: 32px;
+    line-height: 100%;
+    color: #282828;
+}
+
+.subtitle {
+    margin-top: 12px;
+    font-family: "Inter";
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 100%;
+    color: #6c6c6c;
+}
+
+/* LIST */
+
+.list {
+    display: flex;
+    flex-direction: column;
+}
+
+/* ROW */
+
+.row {
+    display: grid;
+    grid-template-columns: 433px 433px 433px;
+    column-gap: 40px;
+    padding: 40px 0;
+    border-bottom: 1px solid #f0f0f0;
+    &:last-child {
+        border-bottom: none;
+    }
+}
+
+/* IMAGE */
+
+.image {
+    width: 433px;
+    height: 275px;
+    border-radius: 20px;
+    object-fit: cover;
+}
+
+/* TEXT BLOCK (TITLE + SHORT) */
+
+.textBlock {
+    width: 433px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.rowTitle {
+    font-family: "Unbounded";
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 100%;
+    color: #282828;
+}
+
+.rowShort {
+    font-family: "Inter";
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 100%;
+    color: #6c6c6c;
+}
+
+/* LONG TEXT */
+
+.rowText {
+    width: 433px;
+    font-family: "Inter";
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 140%;
+    color: #6c6c6c;
+}

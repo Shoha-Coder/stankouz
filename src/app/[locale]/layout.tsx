@@ -1,8 +1,9 @@
-import { NextIntlClientProvider } from 'next-intl';
-import { getMessages } from 'next-intl/server';
-import { ReactNode } from 'react';
-import { Providers } from '@/shared/config/providers';
-import { Header } from '@/widgets/header';
+import { NextIntlClientProvider } from "next-intl";
+import { getMessages } from "next-intl/server";
+import { ReactNode } from "react";
+import { Providers } from "@/shared/config/providers";
+import { Header } from "@/widgets/header";
+import { Footer } from "@/widgets/footer/footer";
 
 export default async function LocaleLayout({
   children,
@@ -20,7 +21,7 @@ export default async function LocaleLayout({
         <Header />
         <Providers>{children}</Providers>
       </div>
-      {/* Footer */}
+      <Footer />
     </NextIntlClientProvider>
   );
 }
