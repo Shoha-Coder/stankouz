@@ -10,7 +10,7 @@ import styles from "./news.module.scss";
 import ArrowRight from "@/shared/ui/icons/arrow-right";
 import { AnimatedItem } from "@/shared/ui/animated-item";
 import { news } from "./model/news";
-import Image from "next/image";
+import { ImageWithLoader } from "@/shared/ui/image-with-loader";
 import Link from "next/link";
 import { getLocaleFromPath } from "@/shared/lib/i18n/get-locale-from-path";
 import { usePathname } from "next/navigation";
@@ -54,7 +54,7 @@ export function News() {
               <AnimatedItem index={index}>
               <article className={styles.card}>
                 <div className={styles.imageWrap}>
-                  <Image src={item.image} alt={item.title} width={433} height={256} />
+                  <ImageWithLoader src={item.image} alt={item.title} width={433} height={256} fillWrapper />
                 </div>
 
                 <span className={styles.date}>{item.date}</span>

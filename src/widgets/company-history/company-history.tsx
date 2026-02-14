@@ -3,7 +3,7 @@
 import { useState, useCallback } from "react";
 import styles from "./company-history.module.scss";
 import type { HistoryItem } from "./model/history";
-import Image from "next/image";
+import { ImageWithLoader } from "@/shared/ui/image-with-loader";
 import { Swiper, SwiperSlide } from "swiper/react";
 import type { Swiper as SwiperType } from "swiper";
 
@@ -60,7 +60,7 @@ export function CompanyHistory({ title, items }: Props) {
           >
             {items.map((item) => (
               <SwiperSlide key={item.year}>
-                <Image src={item.image} alt={item.title} width={433} height={256} />
+                <ImageWithLoader src={item.image} alt={item.title} width={433} height={256} fillWrapper />
               </SwiperSlide>
             ))}
           </Swiper>
@@ -79,7 +79,7 @@ export function CompanyHistory({ title, items }: Props) {
                 onClick={() => goToIndex(items.findIndex((i) => i.year === item.year))}
                 aria-label={`Show year ${item.year}`}
               >
-                <Image src={item.image} alt="" width={433} height={256} />
+                <ImageWithLoader src={item.image} alt="" width={433} height={256} fillWrapper />
               </button>
             ))}
           </div>

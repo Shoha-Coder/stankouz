@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useLayoutEffect, useRef, useCallback } from 'react';
+import React, { useLayoutEffect, useRef, useCallback, useEffect } from 'react';
 import type { ReactNode } from 'react';
 import Lenis from 'lenis';
 import './scroll-stack.css';
@@ -54,6 +54,7 @@ const ScrollStack: React.FC<ScrollStackProps> = ({
     const animationFrameRef = useRef<number | null>(null);
     const lenisRef = useRef<Lenis | null>(null);
     const cardsRef = useRef<HTMLElement[]>([]);
+    const effectiveStackDistanceRef = useRef(itemStackDistance);
     const lastTransformsRef = useRef(new Map<number, any>());
     const isUpdatingRef = useRef(false);
 
@@ -126,9 +127,10 @@ const ScrollStack: React.FC<ScrollStackProps> = ({
                 ? card.parentElement
                 : card;
             const cardTop = getElementOffset(positionEl);
-            const triggerStart = cardTop - stackPositionPx - itemStackDistance * i;
+            const stackDist = effectiveStackDistanceRef.current;
+            const triggerStart = cardTop - stackPositionPx - stackDist * i;
             const triggerEnd = cardTop - scaleEndPositionPx;
-            const pinStart = cardTop - stackPositionPx - itemStackDistance * i;
+            const pinStart = cardTop - stackPositionPx - stackDist * i;
             const pinEnd = Math.max(pinStart, endElementTop - containerHeight / 2);
 
             const scaleProgress = calculateProgress(scrollTop, triggerStart, triggerEnd);
@@ -145,7 +147,7 @@ const ScrollStack: React.FC<ScrollStackProps> = ({
                         ? jCard.parentElement
                         : jCard;
                     const jCardTop = jPosEl ? getElementOffset(jPosEl as HTMLElement) : 0;
-                    const jTriggerStart = jCardTop - stackPositionPx - itemStackDistance * j;
+                    const jTriggerStart = jCardTop - stackPositionPx - effectiveStackDistanceRef.current * j;
                     if (scrollTop >= jTriggerStart) {
                         topCardIndex = j;
                     }
@@ -161,9 +163,9 @@ const ScrollStack: React.FC<ScrollStackProps> = ({
             const isPinned = scrollTop >= pinStart && scrollTop <= pinEnd;
 
             if (isPinned) {
-                translateY = scrollTop - cardTop + stackPositionPx + itemStackDistance * i;
+                translateY = scrollTop - cardTop + stackPositionPx + stackDist * i;
             } else if (scrollTop > pinEnd) {
-                translateY = pinEnd - cardTop + stackPositionPx + itemStackDistance * i;
+                translateY = pinEnd - cardTop + stackPositionPx + stackDist * i;
             }
 
             const newTransform = {
@@ -219,6 +221,23 @@ const ScrollStack: React.FC<ScrollStackProps> = ({
         getElementOffset
     ]);
 
+    useEffect(() => {
+        const updateResponsive = () => {
+            const h = typeof window !== 'undefined' ? window.innerHeight : 800;
+            const w = typeof window !== 'undefined' ? window.innerWidth : 1024;
+            if (w <= 640 || h <= 700) {
+                effectiveStackDistanceRef.current = Math.min(itemStackDistance, 24);
+            } else if (w <= 1024 || h <= 800) {
+                effectiveStackDistanceRef.current = Math.min(itemStackDistance, 40);
+            } else {
+                effectiveStackDistanceRef.current = itemStackDistance;
+            }
+        };
+        updateResponsive();
+        window.addEventListener('resize', updateResponsive);
+        return () => window.removeEventListener('resize', updateResponsive);
+    }, [itemStackDistance]);
+
     const handleScroll = useCallback(() => {
         updateCardTransforms();
     }, [updateCardTransforms]);
@@ -272,6 +291,19 @@ const ScrollStack: React.FC<ScrollStackProps> = ({
         const scroller = scrollerRef.current;
         if (!scroller) return;
 
+        if (typeof window !== 'undefined') {
+            const h = window.innerHeight;
+            const w = window.innerWidth;
+            if (w <= 640 || h <= 700) {
+                effectiveStackDistanceRef.current = Math.min(itemStackDistance, 24);
+            } else if (w <= 1024 || h <= 800) {
+                effectiveStackDistanceRef.current = Math.min(itemStackDistance, 40);
+            } else {
+                effectiveStackDistanceRef.current = itemStackDistance;
+            }
+        } else {
+            effectiveStackDistanceRef.current = itemStackDistance;
+        }
         const container = useWindowScroll ? innerRef.current : scroller;
         const cards = container
             ? (Array.from(container.querySelectorAll('.scroll-stack-card')) as HTMLElement[])

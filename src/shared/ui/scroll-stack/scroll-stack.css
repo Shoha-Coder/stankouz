@@ -25,7 +25,13 @@
 }
 
 .scroll-stack-scroller.scroll-stack-window .scroll-stack-inner {
-  padding: 0 0 20vh;
+  padding: 0 0 250px;
+}
+
+@media (max-width: 640px) {
+  .scroll-stack-scroller.scroll-stack-window .scroll-stack-inner {
+    padding: 0 0 350px;
+  }
 }
 
 .scroll-stack-item {

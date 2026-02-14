@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Product } from "../model/types";
 import styles from "./product-card.module.scss";
-import Image from "next/image";
+import { ImageWithLoader } from "@/shared/ui/image-with-loader";
 import { getLocaleFromPath } from "@/shared/lib/i18n/get-locale-from-path";
 import { usePathname } from "next/navigation";
 
@@ -16,11 +16,11 @@ export const ProductCard = ({ product, isProductPage }: Props) => {
   return (
     <Link href={{ pathname: `/${locale}/machines/${product.id}` }} className={styles.card}>
       <div className={styles.image}>
-        <Image
+        <ImageWithLoader
           src={product.image}
           alt={product.title}
           fill
-          sizes={"168"}
+          sizes="168"
         />
       </div>
 

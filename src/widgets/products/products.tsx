@@ -6,7 +6,7 @@ import ArrowRight from "@/shared/ui/icons/arrow-right";
 import Link from "next/link";
 import { getLocaleFromPath } from "@/shared/lib/i18n/get-locale-from-path";
 import { usePathname } from "next/navigation";
-import Image from "next/image";
+import { ImageWithLoader } from "@/shared/ui/image-with-loader";
 
 export function Products({ isLab }: { isLab?: boolean }) {
   const pathname = usePathname()
@@ -31,7 +31,7 @@ export function Products({ isLab }: { isLab?: boolean }) {
           <Link href={`/${locale}/${isLab ? 'labs' : 'machines'}/${item.id}`} className={styles.card}>
             <div className={styles.imageWrapper}>
               <span className={styles.badge}>{item.category}</span>
-              <Image src={item.image} alt={item.title} width={433} height={256} />
+              <ImageWithLoader src={item.image} alt={item.title} width={433} height={256} fillWrapper />
             </div>
 
             <h3 className={styles.cardTitle}>{item.title}</h3>

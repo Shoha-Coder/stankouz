@@ -1,7 +1,7 @@
 "use client";
 
 import styles from "./media-preview.module.scss";
-import Image from "next/image";
+import { ImageWithLoader } from "@/shared/ui/image-with-loader";
 
 type Props = {
   poster: string;
@@ -16,7 +16,7 @@ export function MediaPreview({ poster, onClick }: Props) {
       onClick={onClick}
       aria-label="Play video"
     >
-      <Image src={poster} alt="" className={styles.image} width={433} height={256} />
+      <ImageWithLoader src={poster} alt="" className={styles.image} width={433} height={256} fillWrapper />
 
       <svg
         width="90"

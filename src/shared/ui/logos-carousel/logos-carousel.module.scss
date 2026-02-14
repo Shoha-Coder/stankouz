@@ -4,6 +4,7 @@
     max-width: 1360px;
     margin: 0 auto;
     margin-top: clamp(60px, 12vw, 180px);
+
     :global(.swiper-wrapper) {
         transition-timing-function: linear !important;
     }
@@ -43,7 +44,13 @@
     display: flex;
     align-items: center;
     justify-content: center;
-
+    .image {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+    }
     img {
         max-width: 70%;
         max-height: 70%;

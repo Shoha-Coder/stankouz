@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useCallback } from "react";
-import Image from "next/image";
+import { ImageWithLoader } from "@/shared/ui/image-with-loader";
 import { Swiper, SwiperSlide } from "swiper/react";
 import type { Swiper as SwiperType } from "swiper";
 import "swiper/css";
@@ -42,13 +42,14 @@ export function ProductGallery({ images, alt }: Props) {
             aria-label={`${alt} - ${index + 1}`}
             aria-pressed={index === activeIndex}
           >
-            <Image
+            <ImageWithLoader
               src={src}
               alt={`${alt} - ${index + 1}`}
               width={108}
               height={78}
               className={styles.thumbnailImage}
               unoptimized
+              fillWrapper
             />
           </button>
         ))}
@@ -65,7 +66,7 @@ export function ProductGallery({ images, alt }: Props) {
         >
           {images.map((src, index) => (
             <SwiperSlide key={index}>
-              <Image
+              <ImageWithLoader
                 src={src}
                 alt={`${alt} - ${index + 1}`}
                 width={537}
@@ -73,6 +74,7 @@ export function ProductGallery({ images, alt }: Props) {
                 className={styles.mainImage}
                 priority={index === 0}
                 unoptimized
+                fillWrapper
               />
             </SwiperSlide>
           ))}

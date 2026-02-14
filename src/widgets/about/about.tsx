@@ -1,7 +1,7 @@
 import Advantages from "@/shared/ui/advantages/advantages";
 import styles from "./about.module.scss";
 import { stats } from "./model/stats";
-import Image from "next/image";
+import { ImageWithLoader } from "@/shared/ui/image-with-loader";
 import { Button } from "@/shared/ui/button";
 import { AnimatedCounter } from "@/shared/ui/animated-counter";
 
@@ -52,11 +52,14 @@ export function About() {
 
         {/* RIGHT IMAGE */}
         <div className={styles.imageWrapper}>
-          <Image
+          <ImageWithLoader
             src="/images/about-image.png"
-            fill
+            // fill
+            width={665}
+            height={437}
             sizes="(max-width: 768px) 100vw, 50vw"
             alt="Gidro Stanko Servis"
+            // wrapperClassName={styles.imageFill}
           />
         </div>
       </div>

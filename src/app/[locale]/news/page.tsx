@@ -5,7 +5,7 @@ import { Breadcrumb } from "@/shared/ui/breadcrumb/breadcrumb";
 import { AnimatedItem } from "@/shared/ui/animated-item";
 import styles from "./news.module.scss";
 import { news } from "@/widgets/news/model/news";
-import Image from "next/image";
+import { ImageWithLoader } from "@/shared/ui/image-with-loader";
 import Link from "next/link";
 import { getLocaleFromPath } from "@/shared/lib/i18n/get-locale-from-path";
 import { usePathname } from "next/navigation";
@@ -36,7 +36,7 @@ const Page = () => {
           <AnimatedItem key={item.id} index={index}>
             <article className={styles.card}>
             <div className={styles.imageWrap}>
-              <Image src={item.image} alt={item.title} width={433} height={256} className={styles.image} />
+              <ImageWithLoader src={item.image} alt={item.title} width={433} height={256} className={styles.image} fillWrapper />
             </div>
 
             <span className={styles.date}>{item.date}</span>

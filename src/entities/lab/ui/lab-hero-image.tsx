@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import { ImageWithLoader } from "@/shared/ui/image-with-loader";
 import styles from "./lab-hero-image.module.scss";
 
 interface Props {
@@ -11,7 +11,7 @@ interface Props {
 export function LabHeroImage({ src, alt }: Props) {
   return (
     <div className={styles.wrap}>
-      <Image
+      <ImageWithLoader
         src={src}
         alt={alt}
         width={1029}
@@ -19,6 +19,7 @@ export function LabHeroImage({ src, alt }: Props) {
         className={styles.image}
         priority
         unoptimized
+        fillWrapper
       />
     </div>
   );

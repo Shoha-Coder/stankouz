@@ -2,7 +2,7 @@
 
 import styles from "./services.module.scss";
 import { services } from "./model/services";
-import Image from "next/image";
+import { ImageWithLoader } from "@/shared/ui/image-with-loader";
 import ScrollStack, { ScrollStackItem } from "@/shared/ui/scroll-stack/scroll-stack";
 
 export function Services() {
@@ -29,7 +29,7 @@ export function Services() {
         <div className={styles.list}>
           {services.map((item) => (
             <ScrollStackItem itemClassName={styles.row} key={item.id}>
-              <Image src={item.image} alt={item.title} className={styles.image} width={433} height={256} />
+              <ImageWithLoader src={item.image} alt={item.title} className={styles.image} width={433} height={256} fillWrapper />
 
               <div className={styles.textBlock}>
                 <h3 className={styles.rowTitle}>{item.title}</h3>

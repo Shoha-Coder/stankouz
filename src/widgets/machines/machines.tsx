@@ -1,7 +1,7 @@
 "use client";
 import styles from "./machines.module.scss";
 import ArrowRight from "@/shared/ui/icons/arrow-right";
-import Image from "next/image";
+import { ImageWithLoader } from "@/shared/ui/image-with-loader";
 import Link from "next/link";
 import { getLocaleFromPath } from "@/shared/lib/i18n/get-locale-from-path";
 import { usePathname } from "next/navigation";
@@ -22,7 +22,7 @@ export function Machines() {
       <div className={styles.cards}>
         {/* LEFT CARD */}
         <article className={styles.card}>
-          <Image src="/images/stanok1.png" alt="Laboratoriya" width={433} height={256} />
+          <ImageWithLoader src="/images/stanok1.png" alt="Laboratoriya" width={433} height={256} fillWrapper />
           <div className={styles.overlay}>
             <div>
               <h3>Laboratoriya</h3>
@@ -43,7 +43,7 @@ export function Machines() {
 
         {/* RIGHT CARD */}
         <article className={styles.card}>
-          <Image src="/images/stanok2.png" alt="Stanoklar" width={433} height={256} />
+          <ImageWithLoader src="/images/stanok2.png" alt="Stanoklar" width={433} height={256} fillWrapper />
           <div className={styles.overlay}>
             <div>
               <h3>Stanoklar</h3>

@@ -4,7 +4,7 @@ import { useCallback, useEffect, useState } from "react";
 import styles from "./certificate-preview.module.scss";
 import { ArrowRightIcon } from "../icons";
 import type { CertificateItem } from "./certificates-carousel";
-import Image from "next/image";
+import { ImageWithLoader } from "@/shared/ui/image-with-loader";
 
 type Props = {
   open: boolean;
@@ -70,13 +70,6 @@ export function CertificatePreview({ open, items, currentIndex, onClose, onPrev,
     [onClose]
   );
 
-  const handleOverlayClick = useCallback(
-    (e: React.MouseEvent) => {
-      if (e.target === e.currentTarget) onClose();
-    },
-    [onClose]
-  );
-
   useEffect(() => {
     if (open) {
       setZoom(1);
@@ -106,7 +99,7 @@ export function CertificatePreview({ open, items, currentIndex, onClose, onPrev,
   return (
     <div
       className={`${styles.overlay} ${styles.visible}`}
-      onClick={handleOverlayClick}
+      onClick={onClose}
       role="dialog"
       aria-modal="true"
       aria-label="Image preview"
@@ -165,7 +158,7 @@ export function CertificatePreview({ open, items, currentIndex, onClose, onPrev,
             if (zoom < MAX_ZOOM) setZoom((z) => Math.min(MAX_ZOOM, z + ZOOM_STEP));
           }}
         >
-          <Image src={currentItem.image} alt={currentItem.alt ?? "Certificate"} draggable={false} width={514} height={320} />
+          <ImageWithLoader src={currentItem.image} alt={currentItem.alt ?? "Certificate"} draggable={false} width={514} height={320} fillWrapper />
         </div>
       </div>
 
