@@ -22,7 +22,7 @@ import styles from "./main-navbar.module.scss";
 
 const MOBILE_BREAKPOINT = 1200;
 
-export default function MainNavbar() {
+export function MainNavbar() {
   const pathname = usePathname();
   const locale = getLocaleFromPath(pathname);
   const pathnameWithoutLocale = pathname.replace(`/${locale}`, '').replace('/', '') as string;
