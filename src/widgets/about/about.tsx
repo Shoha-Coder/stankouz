@@ -54,12 +54,10 @@ export function About() {
         <div className={styles.imageWrapper}>
           <ImageWithLoader
             src="/images/about-image.png"
-            // fill
-            width={665}
-            height={437}
+            fill
             sizes="(max-width: 768px) 100vw, 50vw"
             alt="Gidro Stanko Servis"
-            // wrapperClassName={styles.imageFill}
+            wrapperClassName={styles.imageFill}
           />
         </div>
       </div>
