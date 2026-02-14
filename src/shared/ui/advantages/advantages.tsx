@@ -1,5 +1,6 @@
 import styles from "./advantages.module.scss";
 import { advantages } from "./model/advantages";
+import { AnimatedItem } from "@/shared/ui/animated-item";
 
 const Advantages = ({ title, text }: { title?: string; text?: string }) => {
   return (
@@ -9,9 +10,9 @@ const Advantages = ({ title, text }: { title?: string; text?: string }) => {
         {text && <p className={styles.subtitle}>{text}</p>}
       </header>
       <div className={styles.cards}>
-        {advantages.map((item) => (
+        {advantages.map((item, index) => (
+          <AnimatedItem key={item.id} index={index}>
           <div
-            key={item.id}
             className={`${styles.card}`}
           >
             <div className={styles.cardTop}>
@@ -21,6 +22,7 @@ const Advantages = ({ title, text }: { title?: string; text?: string }) => {
 
             <span className={`${styles.cardIndex} inter`}>{item.id}</span>
           </div>
+          </AnimatedItem>
         ))}
       </div>
     </div>

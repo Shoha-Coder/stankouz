@@ -1,5 +1,6 @@
 import { ArrowRightIcon, ShareIcon } from "@/shared/ui/icons";
 import styles from "../news-article.module.scss";
+import Link from "next/link";
 
 export function NewsNavigation() {
   return (
@@ -17,15 +18,15 @@ export function NewsNavigation() {
       </div>
 
       <div className={styles.navButtons}>
-        <a href="#" className={styles.navBtn}>
+        <Link href="#" className={styles.navBtn}>
           <ArrowRightIcon className={styles.circle} />
           Oldingi xabar
-        </a>
+        </Link>
 
-        <a href="#" className={styles.navBtn}>
+        <Link href="#" className={styles.navBtn}>
           Keyingi xabar
           <ArrowRightIcon className={styles.circle} />
-        </a>
+        </Link>
       </div>
     </div>
   );

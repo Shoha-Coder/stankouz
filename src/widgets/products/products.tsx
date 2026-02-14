@@ -1,6 +1,7 @@
 "use client";
 import styles from "./products.module.scss";
 import { products } from "./model/products";
+import { AnimatedItem } from "@/shared/ui/animated-item";
 import ArrowRight from "@/shared/ui/icons/arrow-right";
 import Link from "next/link";
 import { getLocaleFromPath } from "@/shared/lib/i18n/get-locale-from-path";
@@ -25,8 +26,9 @@ export function Products({ isLab }: { isLab?: boolean }) {
 
       {/* GRID */}
       <div className={styles.grid}>
-        {products.map((item) => (
-          <Link key={item.id} href={`/${locale}/${isLab ? 'labs' : 'machines'}/${item.id}`} className={styles.card}>
+        {products.map((item, index) => (
+          <AnimatedItem key={item.id} index={index}>
+          <Link href={`/${locale}/${isLab ? 'labs' : 'machines'}/${item.id}`} className={styles.card}>
             <div className={styles.imageWrapper}>
               <span className={styles.badge}>{item.category}</span>
               <Image src={item.image} alt={item.title} width={433} height={256} />
@@ -40,6 +42,7 @@ export function Products({ isLab }: { isLab?: boolean }) {
               Batafsil
             </Link>
           </Link>
+          </AnimatedItem>
         ))}
       </div>
 

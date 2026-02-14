@@ -8,6 +8,7 @@ import "swiper/css/pagination";
 
 import styles from "./news.module.scss";
 import ArrowRight from "@/shared/ui/icons/arrow-right";
+import { AnimatedItem } from "@/shared/ui/animated-item";
 import { news } from "./model/news";
 import Image from "next/image";
 import Link from "next/link";
@@ -48,8 +49,9 @@ export function News() {
             el: ".news-pagination",
           }}
         >
-          {news.map((item) => (
+          {news.map((item, index) => (
             <SwiperSlide key={item.id}>
+              <AnimatedItem index={index}>
               <article className={styles.card}>
                 <div className={styles.imageWrap}>
                   <Image src={item.image} alt={item.title} width={433} height={256} />
@@ -61,6 +63,7 @@ export function News() {
 
                 <Link href={{ pathname: `/${locale}/news/${item.id}` }} className={styles.link}>Batafsil</Link>
               </article>
+              </AnimatedItem>
             </SwiperSlide>
           ))}
         </Swiper>

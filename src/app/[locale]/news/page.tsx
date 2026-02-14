@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Breadcrumb } from "@/shared/ui/breadcrumb/breadcrumb";
+import { AnimatedItem } from "@/shared/ui/animated-item";
 import styles from "./news.module.scss";
 import { news } from "@/widgets/news/model/news";
 import Image from "next/image";
@@ -31,8 +32,9 @@ const Page = () => {
     <div className={styles.page}>
       <Breadcrumb items={items} />
       <div className={styles.cards}>
-        {displayNews.map((item) => (
-          <article className={styles.card} key={item.id}>
+        {displayNews.map((item, index) => (
+          <AnimatedItem key={item.id} index={index}>
+            <article className={styles.card}>
             <div className={styles.imageWrap}>
               <Image src={item.image} alt={item.title} width={433} height={256} className={styles.image} />
             </div>
@@ -43,6 +45,7 @@ const Page = () => {
 
             <Link href={{ pathname: `/${locale}/news/${item.id}` }} className={styles.link}>Batafsil</Link>
           </article>
+          </AnimatedItem>
         ))}
       </div>
 

@@ -11,11 +11,11 @@ $nav-active: #0863ad;
 
 .nav {
     position: relative;
-    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.06);
     width: 100%;
     max-width: clamp(21.875rem, -0.73rem + 96.45vw, 81.25rem);
     margin: 0 auto;
     margin-top: 10px;
+    background: transparent;
 }
 
 .container {
@@ -28,7 +28,7 @@ $nav-active: #0863ad;
     min-height: 84px;
     background: $nav-bg;
     border-radius: 15px;
-    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.06);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
 }
 
 /* ========== LOGO ========== */
@@ -292,6 +292,7 @@ $nav-active: #0863ad;
     border-radius: 15px;
     max-height: 70vh;
     overflow-y: auto;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
 }
 
 .mobileContent {

@@ -6,6 +6,7 @@ import {
   TelegramIcon,
   YouTubeIcon,
 } from "@/shared/ui/icons";
+import Link from "next/link";
 
 export function Footer() {
   return (
@@ -21,17 +22,17 @@ export function Footer() {
           </p>
 
           <span className={styles.label}>Elektron pochta manzili</span>
-          <a href="mailto:info@stanko.uz" className={styles.email}>
+          <Link href="mailto:info@stanko.uz" className={styles.email}>
             info@stanko.uz
-          </a>
+          </Link>
 
           <span className={styles.label}>Ishonch telefoni</span>
-          <a href="tel:+998792220077" className={styles.phone}>
+          <Link href="tel:+998792220077" className={styles.phone}>
             +998 79 222 00 77
-          </a>
-          <a href="tel:+998906467277" className={styles.phone}>
+          </Link>
+          <Link href="tel:+998906467277" className={styles.phone}>
             +998 90 646 72 77
-          </a>
+          </Link>
         </div>
 
         {/* MAP */}
@@ -77,18 +78,18 @@ export function Footer() {
         </div>
 
         <div className={styles.socials}>
-          <a className={styles.social}>
+          <Link href="https://www.instagram.com/gidrostanko/" className={styles.social}>
             <InstagramIcon />
-          </a>
-          <a className={`${styles.social}`}>
+          </Link>
+          <Link href="https://t.me/gidrostanko" className={`${styles.social}`}>
             <TelegramIcon />
-          </a>
-          <a className={styles.social}>
+          </Link>
+          <Link href="https://www.facebook.com/gidrostanko/" className={styles.social}>
             <FacebookIcon />
-          </a>
-          <a className={styles.social}>
+          </Link>
+          <Link href="https://www.youtube.com/channel/UC1A3R9_Tv49K_U0X9j9p9IQ" className={styles.social}>
             <YouTubeIcon />
-          </a>
+          </Link>
         </div>
       </div>
       <div className={styles.bottom}>

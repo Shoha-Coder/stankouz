@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Product } from "@/entities/product/model/types";
 import { ProductCard } from "@/entities/product/ui/product-card";
+import { AnimatedItem } from "@/shared/ui/animated-item";
 import { CatalogFilter } from "@/widgets/catalog-filter/catalog-filter";
 import styles from "./products.module.scss";
 import { Breadcrumb } from "@/shared/ui/breadcrumb/breadcrumb";
@@ -41,8 +42,10 @@ export default function CatalogPage() {
       <div className={styles.layout}>
         <div className={styles.content}>
           <div className={styles.grid}>
-            {displayProducts.map((p) => (
-              <ProductCard key={p.id} product={p} isProductPage={true} />
+            {displayProducts.map((p, index) => (
+              <AnimatedItem key={p.id} index={index}>
+                <ProductCard product={p} isProductPage={true} />
+              </AnimatedItem>
             ))}
           </div>
 

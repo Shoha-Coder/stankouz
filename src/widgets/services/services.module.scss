@@ -47,12 +47,11 @@
     column-gap: clamp(20px, 3vw, 40px);
     row-gap: clamp(20px, 3vw, 24px);
     padding: clamp(24px, 4vw, 40px) 0;
-    border-bottom: 1px solid #f0f0f0;
+    padding-top: 10px;
+    // border-bottom: 1px solid #f0f0f0;
     align-items: start;
-
-    &:last-child {
-        border-bottom: none;
-    }
+    background: #fff;
+    border-radius: 15px;
 }
 
 /* IMAGE */

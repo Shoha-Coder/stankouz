@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { FacebookIcon, InstagramIcon, TelegramIcon, YouTubeIcon } from "../icons";
 import styles from "./contact-section.module.scss";
 import ArrowRight from "@/shared/ui/icons/arrow-right";
@@ -21,14 +22,14 @@ export function ContactSection() {
 
           <div className={styles.block}>
             <span className={styles.label}>Ishonch telefoni</span>
-            <a href="tel:+998792220077">+998 79 222 00 77</a>
-            <a href="tel:+998906467277">+998 90 646 72 77</a>
+            <Link href="tel:+998792220077">+998 79 222 00 77</Link>
+            <Link href="tel:+998906467277">+998 90 646 72 77</Link>
           </div>
 
           <div className={styles.socialBlock}>
             <div className={styles.block}>
               <span className={styles.label}>Elektron pochta manzili</span>
-              <a href="mailto:info@stanko.uz">info@stanko.uz</a>
+              <Link href="mailto:info@stanko.uz">info@stanko.uz</Link>
             </div>
 
             <div>

@@ -2,6 +2,7 @@
 
 import styles from "./team-grid.module.scss";
 import { TeamCard } from "./team-card";
+import { AnimatedItem } from "@/shared/ui/animated-item";
 import Heading from "../heading/heading";
 import { Button } from "../button";
 
@@ -24,13 +25,14 @@ export function TeamGrid({ members }: Props) {
         text="Biz yuqori sifatli xizmatlar, tezkor yordam va har bir mijozga individual yondashuvni taklif etamiz."
       />
       <section className={styles.grid}>
-        {members.map((m) => (
-          <TeamCard
-            key={m.id}
-            image={m.image}
-            name={m.name}
-            position={m.position}
-          />
+        {members.map((m, index) => (
+          <AnimatedItem key={m.id} index={index}>
+            <TeamCard
+              image={m.image}
+              name={m.name}
+              position={m.position}
+            />
+          </AnimatedItem>
         ))}
       </section>
       <div className={styles.buttonWrap}>

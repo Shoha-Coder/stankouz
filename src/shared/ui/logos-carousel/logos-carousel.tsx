@@ -6,6 +6,7 @@ import "swiper/css";
 
 import styles from "./logos-carousel.module.scss";
 import Image from "next/image";
+import { AnimatedItem } from "@/shared/ui/animated-item";
 
 type Props = {
   title?: string;
@@ -38,11 +39,13 @@ export function LogosCarousel({ title, subtitle, items }: Props) {
           delay: 0,
         }}
       >
-        {items.map((item) => (
+        {items.map((item, index) => (
           <SwiperSlide key={item.id}>
-            <div className={styles.card}>
-              <Image src={item.logo} alt={item.alt ?? ""} width={433} height={256} />
-            </div>
+            <AnimatedItem index={index}>
+              <div className={styles.card}>
+                <Image src={item.logo} alt={item.alt ?? ""} width={433} height={256} />
+              </div>
+            </AnimatedItem>
           </SwiperSlide>
         ))}
       </Swiper>
@@ -64,11 +67,13 @@ export function LogosCarousel({ title, subtitle, items }: Props) {
         }}
         style={{marginTop: "clamp(14px, 3vw, 20px)"}}
       >
-        {items.map((item) => (
+        {items.map((item, index) => (
           <SwiperSlide key={item.id}>
-            <div className={styles.card}>
-              <Image src={item.logo} alt={item.alt ?? ""} width={433} height={256} />
-            </div>
+            <AnimatedItem index={index + items.length}>
+              <div className={styles.card}>
+                <Image src={item.logo} alt={item.alt ?? ""} width={433} height={256} />
+              </div>
+            </AnimatedItem>
           </SwiperSlide>
         ))}
       </Swiper>

@@ -4,6 +4,7 @@ import { ReactNode } from "react";
 import { Providers } from "@/shared/config/providers";
 import { Header } from "@/widgets/header";
 import { Footer } from "@/widgets/footer/footer";
+import { PageTransition } from "@/shared/ui/page-transition";
 
 export default async function LocaleLayout({
   children,
@@ -19,7 +20,9 @@ export default async function LocaleLayout({
     <NextIntlClientProvider messages={messages}>
       <div>
         <Header />
-        <Providers>{children}</Providers>
+        <Providers>
+          <PageTransition>{children}</PageTransition>
+        </Providers>
       </div>
       <Footer />
     </NextIntlClientProvider>

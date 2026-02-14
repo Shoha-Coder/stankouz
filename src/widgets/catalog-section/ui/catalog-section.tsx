@@ -4,6 +4,7 @@ import styles from "./catalog-section.module.scss";
 import { useState, useMemo } from "react";
 import { products, categories } from "@/shared/mock/catalog";
 import { ProductCard } from "@/entities/product/ui/product-card";
+import { AnimatedItem } from "@/shared/ui/animated-item";
 import { CatalogFilters } from "@/widgets/catalog-filters/ui/catalog-filters";
 import { useProducts } from "@/entities/product/model/useProducts";
 
@@ -54,8 +55,10 @@ export function CatalogSection() {
         </div>
 
         <div className={styles.grid}>
-          {filtered.map((p) => (
-            <ProductCard key={p.id} product={p} />
+          {filtered.map((p, index) => (
+            <AnimatedItem key={p.id} index={index}>
+              <ProductCard product={p} />
+            </AnimatedItem>
           ))}
         </div>
 

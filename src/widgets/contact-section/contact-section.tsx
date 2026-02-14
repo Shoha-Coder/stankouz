@@ -7,6 +7,7 @@ import {
   YouTubeIcon,
 } from "@/shared/ui/icons";
 import styles from "./contact-section.module.scss";
+import Link from "next/link";
 
 export function ContactSection() {
   return (
@@ -25,13 +26,13 @@ export function ContactSection() {
 
           <div className={styles.block}>
             <span className={`${styles.label}`}>Elektron pochta manzili</span>
-            <a href="mailto:info@stanko.uz" className={styles.email}>info@stanko.uz</a>
+            <Link href="mailto:info@stanko.uz" className={styles.email}>info@stanko.uz</Link>
           </div>
 
           <div className={styles.block}>
             <span className={styles.label}>Ishonch telefoni</span>
-            <a href="tel:+998792220077" className={styles.number}>+998 79 222 00 77</a>
-            <a href="tel:+998906467277" className={styles.number}>+998 90 646 72 77</a>
+            <Link href="tel:+998792220077" className={styles.number}>+998 79 222 00 77</Link>
+            <Link href="tel:+998906467277" className={styles.number}>+998 90 646 72 77</Link>
           </div>
 
           <div className={styles.socialBlock}>

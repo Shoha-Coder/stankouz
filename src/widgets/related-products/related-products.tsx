@@ -7,6 +7,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import { Product } from "@/entities/product/model/types";
 import { ProductCard } from "@/entities/product/ui/product-card";
+import { AnimatedItem } from "@/shared/ui/animated-item";
 import { getProducts } from "@/entities/product/api/product.service";
 import ArrowRight from "@/shared/ui/icons/arrow-right";
 import { KoproqButton } from "@/shared/ui/koproq-button";
@@ -71,9 +72,11 @@ export function RelatedProducts({ excludeId, isLab }: Props) {
           {...relatedProductsSwiperConfig}
           className={styles.swiper}
         >
-          {products.map((product) => (
+          {products.map((product, index) => (
             <SwiperSlide key={product.id} className={styles.slide}>
-              <ProductCard product={product} />
+              <AnimatedItem index={index}>
+                <ProductCard product={product} />
+              </AnimatedItem>
             </SwiperSlide>
           ))}
         </Swiper>
