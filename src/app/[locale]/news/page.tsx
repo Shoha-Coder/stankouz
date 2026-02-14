@@ -28,7 +28,7 @@ const Page = () => {
   const displayNews = news.slice(startIndex, startIndex + PER_PAGE);
 
   return (
-    <div>
+    <div className={styles.page}>
       <Breadcrumb items={items} />
       <div className={styles.cards}>
         {displayNews.map((item) => (

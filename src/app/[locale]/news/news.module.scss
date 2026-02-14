@@ -1,19 +1,23 @@
+.page {
+    padding: 40px 0;
+}
 .cards {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(433px, 1fr));
-    gap: 20px 0;
+    grid-template-columns: repeat(auto-fill, minmax(clamp(19.188rem, 17.777rem + 6.02vw, 25rem), 1fr));
+    gap: 20px;
     max-width: 1360px;
     margin: 0 auto;
     margin-top: 40px;
     padding-bottom: 50px;
+    padding: 0 clamp(20px, 4vw, 40px);
 }
 
 .card {
-    width: 433px;
+    width: 100%;
 }
 
 .imageWrap {
-    width: 433px;
+    width: 100%;
     height: 256px;
     border-radius: 25px;
     overflow: hidden;

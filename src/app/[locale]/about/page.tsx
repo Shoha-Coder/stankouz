@@ -78,15 +78,15 @@ const page = () => {
         title="Bizning afzalliklar"
         text="Biz yuqori sifatli xizmatlar, tezkor yordam va har bir mijozga individual yondashuvni taklif etamiz."
       />
-      {/* <CompanyHistory title="Kompaniyamiz tarixi" items={history} /> */}
-      {/* <TeamGrid members={members} /> */}
-      {/* <CertificatesCarousel
+      <CompanyHistory title="Kompaniyamiz tarixi" items={history} />
+      <TeamGrid members={members} />
+      <CertificatesCarousel
         items={[
           { id: 1, image: "/images/certs/1.png" },
           { id: 2, image: "/images/certs/2.png" },
           { id: 3, image: "/images/certs/3.png" },
         ]}
-      /> */}
+      />
       <News />
       <Partners />
       <ContactSection />

@@ -1,5 +1,6 @@
 .header {
-    width: 600px;
+    width: 100%;
+    max-width: 600px;
     margin: 0 auto;
     text-align: center;
 }
@@ -7,15 +8,15 @@
 .title {
     font-family: "Unbounded";
     font-weight: 600;
-    font-size: 32px;
-    line-height: 100%;
+    font-size: clamp(20px, 5vw, 32px);
+    line-height: 120%;
     color: #282828;
 }
 
 .subtitle {
     margin-top: 12px;
     font-family: "Inter";
-    font-size: 18px;
-    line-height: 100%;
+    font-size: clamp(14px, 2vw, 18px);
+    line-height: 140%;
     color: #6c6c6c;
 }

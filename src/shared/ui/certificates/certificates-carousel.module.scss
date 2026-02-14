@@ -1,20 +1,31 @@
 .root {
+    width: 100%;
     max-width: 1360px;
-    margin: 180px auto 0;
+    margin: clamp(60px, 12vw, 180px) auto 0;
+    padding: 0 clamp(16px, 4vw, 24px);
+    box-sizing: border-box;
 }
 
 .sliderWrap {
     position: relative;
-    margin-top: 30px;
+    margin-top: clamp(20px, 3vw, 30px);
+    padding: 0 clamp(36px, 6vw, 60px);
+}
+
+.swiper {
+    width: 100%;
+    max-width: 1360px;
+    overflow: hidden;
 }
 
 .card {
     width: 100%;
-    margin: 0 auto;
-    border-radius: 25px;
+    aspect-ratio: 514 / 320;
+    border-radius: clamp(12px, 3vw, 25px);
     border: 1px solid #e4e4e4;
     background: #fff;
     overflow: hidden;
+    cursor: pointer;
 
     img {
         width: 100%;
@@ -29,8 +40,8 @@
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    width: 50px;
-    height: 50px;
+    width: clamp(36px, 8vw, 50px);
+    height: clamp(36px, 8vw, 50px);
     border-radius: 50%;
     background: #ffd427;
     border: none;
@@ -42,26 +53,30 @@
     justify-content: center;
 
     &:global(.swiper-button-disabled) {
-        angle: 0 deg;
         opacity: 0.7;
         background: white;
         pointer-events: none;
     }
+
+    @media (max-width: 480px) {
+        width: 36px;
+        height: 36px;
+    }
 }
 
 .prev {
-    left: 15px;
+    left: 0;
     transform: translateY(-50%) rotate(180deg);
 }
 
 .next {
-    right: 15px;
+    right: 0;
 }
 
 /* PAGINATION */
 
 .pagination {
-    margin-top: 24px;
+    margin-top: clamp(16px, 3vw, 24px);
     display: flex;
     justify-content: center;
 

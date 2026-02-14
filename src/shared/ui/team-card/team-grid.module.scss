@@ -1,21 +1,29 @@
 .wrapper {
+    width: 100%;
     max-width: 1360px;
-    margin: 30px auto;
-    justify-content: center;
+    margin: clamp(24px, 4vw, 30px) auto;
+    padding: 0 clamp(20px, 4vw, 40px);
+    box-sizing: border-box;
 }
 
 .grid {
+    width: 100%;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-    gap: clamp(20px, 2vw, 40px);
-    justify-items: center;
-    max-width: 1360px;
-    margin: 60px auto;
+    grid-template-columns: repeat(4, 1fr);
+    gap: clamp(16px, 3vw, 40px);
+    margin: clamp(32px, 5vw, 60px) auto;
+    @media (max-width: 910px) {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    @media (max-width: 600px) {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 
 .buttonWrap {
     display: flex;
     justify-content: center;
+    padding: 0 clamp(16px, 4vw, 24px);
 }
 
 .buttonIcon {
@@ -28,6 +36,6 @@
     gap: 10px;
     font-family: "Inter", sans-serif;
     font-weight: 500;
-    font-size: 16px;
+    font-size: clamp(14px, 2vw, 16px);
     color: #0863ad;
 }

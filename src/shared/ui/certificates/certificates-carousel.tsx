@@ -12,7 +12,7 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { CertificatePreview } from "./certificate-preview";
 
-export type CertificateItem = {
+export type CertificateItem = { 
   id: number;
   image: string;
   alt?: string;
@@ -36,8 +36,8 @@ export function CertificatesCarousel({ items }: Props) {
       <div className={styles.sliderWrap}>
         <Swiper
           modules={[Navigation, Pagination]}
-          spaceBetween={40}
-          slidesPerView={3}
+          spaceBetween={16}
+          slidesPerView={1.1}
           pagination={{
             clickable: true,
             el: ".certs-pagination",
@@ -46,7 +46,12 @@ export function CertificatesCarousel({ items }: Props) {
             prevEl: ".certs-prev",
             nextEl: ".certs-next",
           }}
-          style={{ maxWidth: "1360px", width: "100%" }}
+          breakpoints={{
+            320: { spaceBetween: 16, slidesPerView: 1.1 },
+            640: { spaceBetween: 20, slidesPerView: 2 },
+            1024: { spaceBetween: 40, slidesPerView: 3 },
+          }}
+          className={styles.swiper}
         >
           {items.map((item) => (
             <SwiperSlide
@@ -57,7 +62,7 @@ export function CertificatesCarousel({ items }: Props) {
                 setSelectedIndex(idx >= 0 ? idx : 0);
                 setOpen(true);
               }}
-              style={{ backgroundImage: `url(${item.image})`, width: "514px", height: "320px", backgroundPosition: "center", backgroundSize: "cover" }}
+              style={{ backgroundImage: `url(${item.image})`, backgroundPosition: "center", backgroundSize: "cover" }}
             >
               {/* <img src={item.image} alt={item.alt ?? ""} /> */}
             </SwiperSlide>

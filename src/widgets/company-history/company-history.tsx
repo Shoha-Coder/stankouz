@@ -1,9 +1,13 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import styles from "./company-history.module.scss";
 import type { HistoryItem } from "./model/history";
 import Image from "next/image";
+import { Swiper, SwiperSlide } from "swiper/react";
+import type { Swiper as SwiperType } from "swiper";
+
+import "swiper/css";
 
 type Props = {
   title: string;
@@ -12,16 +16,54 @@ type Props = {
 
 export function CompanyHistory({ title, items }: Props) {
   const [activeYear, setActiveYear] = useState(items[0].year);
+  const [mainSwiper, setMainSwiper] = useState<SwiperType | null>(null);
   const activeItem = items.find((i) => i.year === activeYear)!;
+
+  const goToIndex = useCallback(
+    (index: number) => {
+      const item = items[index];
+      if (item) {
+        setActiveYear(item.year);
+        mainSwiper?.slideTo(index);
+      }
+    },
+    [mainSwiper, items]
+  );
+
+  const handleSlideChange = useCallback(
+    (swiper: SwiperType) => {
+      const item = items[swiper.activeIndex];
+      if (item) setActiveYear(item.year);
+    },
+    [items]
+  );
 
   return (
     <section className={styles.root}>
       <h2 className={styles.sectionTitle}>{title}</h2>
 
       <div className={styles.layout}>
-        {/* MAIN IMAGE */}
+        {/* MAIN IMAGE SWIPER */}
         <div className={styles.mainImage}>
-          <Image src={activeItem.image} alt={activeItem.title} width={433} height={256} />
+          <Swiper
+            onSwiper={setMainSwiper}
+            onSlideChange={handleSlideChange}
+            slidesPerView={1}
+            spaceBetween={0}
+            initialSlide={0}
+            pagination={
+              items.length > 1
+                ? { clickable: true, el: ".history-main-pagination" }
+                : false
+            }
+            className={styles.mainSwiper}
+          >
+            {items.map((item) => (
+              <SwiperSlide key={item.year}>
+                <Image src={item.image} alt={item.title} width={433} height={256} />
+              </SwiperSlide>
+            ))}
+          </Swiper>
         </div>
 
         {/* CONTENT */}
@@ -34,7 +76,7 @@ export function CompanyHistory({ title, items }: Props) {
                 className={`${styles.thumb} ${
                   item.year === activeYear ? styles.activeThumb : ""
                 }`}
-                onClick={() => setActiveYear(item.year)}
+                onClick={() => goToIndex(items.findIndex((i) => i.year === item.year))}
                 aria-label={`Show year ${item.year}`}
               >
                 <Image src={item.image} alt="" width={433} height={256} />
@@ -50,7 +92,7 @@ export function CompanyHistory({ title, items }: Props) {
                 className={`${styles.year} ${
                   item.year === activeYear ? styles.activeYear : ""
                 }`}
-                onClick={() => setActiveYear(item.year)}
+                onClick={() => goToIndex(items.findIndex((i) => i.year === item.year))}
               >
                 {item.year}
               </button>
