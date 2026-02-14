@@ -1,0 +1,84 @@
+.singleContent {
+    margin-top: 24px;
+    padding: 20px;
+    background: #ffffff;
+    border-radius: 20px;
+    font-family: Inter, sans-serif;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 160%;
+    letter-spacing: 0;
+    color: #6c6c6c;
+}
+
+.featuresContainer {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px;
+}
+
+.descriptionList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    li {
+        position: relative;
+        padding-left: 16px;
+        margin-bottom: 8px;
+
+        &::before {
+            content: "–";
+            position: absolute;
+            left: 0;
+            color: #6c6c6c;
+        }
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+}
+
+.features {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.featureRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 16px;
+    min-height: 25px;
+}
+
+.featureLabel {
+    font-family: Inter, sans-serif;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 140%;
+    letter-spacing: 0;
+    color: #6c6c6c;
+    flex-shrink: 0;
+}
+
+.featureDots {
+    flex: 1;
+    min-width: 12px;
+    border-bottom: 1px dotted #d0d0d0;
+    align-self: flex-end;
+    margin-bottom: 4px;
+}
+
+.featureValue {
+    font-family: Inter, sans-serif;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 140%;
+    letter-spacing: 0;
+    color: #282828;
+    flex-shrink: 0;
+    text-align: right;
+}

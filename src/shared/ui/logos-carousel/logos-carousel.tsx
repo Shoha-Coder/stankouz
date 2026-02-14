@@ -1,9 +1,8 @@
 "use client";
 
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Grid } from "swiper/modules";
+import { Autoplay } from "swiper/modules";
 import "swiper/css";
-import "swiper/css/grid";
 
 import styles from "./logos-carousel.module.scss";
 
@@ -25,8 +24,12 @@ export function LogosCarousel({ title, subtitle, items }: Props) {
 
       <Swiper
         modules={[Autoplay]}
-        slidesPerView={3}
-        spaceBetween={40}
+        slidesPerView={2}
+        spaceBetween={16}
+        breakpoints={{
+          640: { slidesPerView: 2, spaceBetween: 24 },
+          1024: { slidesPerView: 3, spaceBetween: 40 },
+        }}
         loop
         freeMode
         speed={6000}
@@ -45,8 +48,12 @@ export function LogosCarousel({ title, subtitle, items }: Props) {
 
       <Swiper
         modules={[Autoplay]}
-        slidesPerView={3}
-        spaceBetween={40}
+        slidesPerView={2}
+        spaceBetween={16}
+        breakpoints={{
+          640: { slidesPerView: 2, spaceBetween: 24 },
+          1024: { slidesPerView: 3, spaceBetween: 40 },
+        }}
         loop
         freeMode
         speed={6000}
@@ -54,7 +61,7 @@ export function LogosCarousel({ title, subtitle, items }: Props) {
           delay: 0,
           reverseDirection: true,
         }}
-        style={{ marginTop: "30px" }}
+        style={{ marginTop: "clamp(20px, 3vw, 30px)" }}
       >
         {items.map((item) => (
           <SwiperSlide key={item.id}>

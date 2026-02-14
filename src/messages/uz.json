@@ -9,7 +9,6 @@
     "nav": {
       "home": "BOSH SAHIFA",
       "about": "KOMPANIYA HAQIDA",
-      "brand": "O`QQUZA",
       "catalog": "KATALOG",
       "searchPlaceholder": "Qidirish...",
       "labs": "LABORATORIYA",
@@ -20,7 +19,6 @@
       "services": "XIZMATLAR",
       "contacts": "KONTAKTLAR"
     },
-    "logoAlt": "O`QQUZA logotipi",
     "aria": {
       "toggleMenu": "Menyuni ochish"
     },
@@ -28,21 +26,11 @@
       "ru": "Ru",
       "en": "En",
       "uz": "Uz"
-    },
-    "catalog": {
-      "shaftsRotors": "Vallar va rotorlar",
-      "chassisTransmission": "Shassi va transmissiya",
-      "gears": "Tishli g'ildiraklar",
-      "blanks": "Yarim tayyor mahsulotlar",
-      "electroplating": "Galvanika",
-      "categoryP": "Kategoriya P"
     }
   },
   "common": {
-    "brandName": "O`QQUZA",
     "breadcrumbs": {
-      "home": "Bosh sahifa",
-      "brand": "O`QQUZA"
+      "home": "Bosh sahifa"
     },
     "loading": "Yuklanmoqda...",
     "aria": {

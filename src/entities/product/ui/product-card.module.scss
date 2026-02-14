@@ -1,0 +1,47 @@
+.card {
+    width: 100%;
+    cursor: pointer;
+}
+
+.image {
+    position: relative;
+    width: 100%;
+    height: 256px;
+    background: #fff;
+    border-radius: 20px;
+    overflow: hidden;
+    margin-bottom: 12px;
+    padding: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+
+    &:hover {
+        box-shadow: 0px 0px 20px 0px #0864AB26;
+    }
+
+    img {
+        max-width: 70%;
+        max-height: 70%;
+        object-fit: contain;
+        margin: auto;
+        object-position: center;
+    }
+}
+
+.title {
+    font-family: Inter;
+    font-weight: 600;
+    font-size: 20px;
+    color: #282828;
+    line-height: 100%;
+    margin-bottom: 6px;
+}
+
+.ts {
+    font-family: Inter;
+    font-weight: 400;
+    font-size: 18px;
+    color: #9d9d9d;
+}

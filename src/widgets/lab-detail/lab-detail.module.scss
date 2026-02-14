@@ -1,0 +1,22 @@
+.root {
+    max-width: 1360px;
+    margin: 40px auto 0;
+    padding: 0 40px;
+}
+
+.layout {
+    display: flex;
+    gap: 40px;
+    align-items: flex-start;
+}
+
+@media (max-width: 768px) {
+    .root {
+        padding: 0 20px;
+    }
+
+    .layout {
+        flex-direction: column;
+        gap: 24px;
+    }
+}

@@ -1,14 +1,28 @@
 .advantages {
-    margin-top: 60px;
+    margin-top: clamp(40px, 6vw, 60px);
+    max-width: 1360px;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    flex-direction: column;
+    gap: clamp(20px, 3vw, 30px);
+    padding: 0 clamp(20px, 4vw, 40px);
 }
 
 .cards {
-    display: flex;
-    gap: 40px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(20px, 3vw, 40px);
+    justify-content: center;
+
+    @media (max-width: 1024px) {
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    }
 }
 
 .header {
-    width: 600px;
+    width: 100%;
+    max-width: 600px;
     margin: 0 auto;
     text-align: center;
 }
@@ -16,76 +30,81 @@
 .title {
     font-family: "Unbounded";
     font-weight: 600;
-    font-size: 32px;
-    line-height: 100%;
+    font-size: clamp(1.5rem, 4vw, 32px);
+    line-height: 120%;
     color: #282828;
 }
 
 .subtitle {
     margin-top: 12px;
     font-family: "Inter";
-    font-size: 18px;
-    line-height: 100%;
+    font-size: clamp(14px, 1.5vw, 18px);
+    line-height: 140%;
     color: #6c6c6c;
 }
 
 .card {
-    width: 433px;
-    height: 280px;
-    border-radius: 25px;
-    padding: 20px;
+    flex: 1 1 min(100%, 433px);
+    min-width: 280px;
+    min-height: 220px;
+    height: auto;
+    border-radius: clamp(16px, 3vw, 25px);
+    padding: clamp(16px, 2vw, 20px);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     position: relative;
-}
-
-.light {
     background: #f6f6f6;
-}
+    transition: all 0.3s ease;
 
-.accent {
-    background: #0863ad;
-    box-shadow: 0 0 30px rgba(8, 100, 171, 0.2);
+    @media (max-width: 976px) {
+        &:last-child {
+            column-span: 2;
+            grid-column: span 2;
+        }
+    }
+
+    @media (max-width: 620px) {
+        &:last-child {
+            grid-column: span 1;
+        }
+    }
+
+    &:hover {
+        background: #0863ad;
+        box-shadow: 0 0 30px rgba(8, 100, 171, 0.2);
+        color: #ffffff;
+
+        .cardTitle {
+            color: #ffffff;
+        }
+
+        .cardText {
+            color: #62adea;
+        }
+
+        .cardIndex {
+            color: #ffffff;
+        }
+    }
 }
 
 .cardTitle {
     font-family: "Inter";
     font-weight: 600;
-    font-size: 24px;
-}
-
-.light .cardTitle {
+    font-size: clamp(18px, 2vw, 24px);
     color: #282828;
-}
-
-.accent .cardTitle {
-    color: #ffffff;
 }
 
 .cardText {
     font-family: "Inter";
-    font-size: 18px;
-}
-
-.light .cardText {
+    font-size: clamp(14px, 1.5vw, 18px);
     color: #6c6c6c;
-}
-
-.accent .cardText {
-    color: #62adea;
 }
 
 .cardIndex {
     font-weight: 900;
-    font-size: 42px;
+    font-size: clamp(28px, 4vw, 42px);
     opacity: 0.1;
-}
-
-.light .cardIndex {
     color: #282828;
-}
-
-.accent .cardIndex {
-    color: #ffffff;
 }

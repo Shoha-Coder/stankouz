@@ -1,0 +1,16 @@
+.wrapper {
+    max-width: 1360px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 317px;
+    gap: 40px;
+    align-items: flex-start;
+    margin-top: 60px;
+    margin-bottom: 50px !important;
+}
+
+@media (max-width: 1024px) {
+    .wrapper {
+        grid-template-columns: 1fr;
+    } 
+}

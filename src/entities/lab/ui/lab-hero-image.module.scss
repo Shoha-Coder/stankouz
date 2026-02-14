@@ -1,0 +1,23 @@
+.wrap {
+    width: 100%;
+    max-width: 1360px;
+    margin: 0 auto;
+    border-radius: 30px;
+    overflow: hidden;
+    box-shadow: 0 0 50px 20px rgba(8, 100, 171, 0.1);
+}
+
+.image {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1029 / 370;
+    object-fit: cover;
+    display: block;
+}
+
+@media (max-width: 768px) {
+    .wrap {
+        border-radius: 20px;
+        box-shadow: 0 0 30px 10px rgba(8, 100, 171, 0.08);
+    }
+}

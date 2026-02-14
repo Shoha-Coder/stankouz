@@ -12,9 +12,7 @@ const Advantages = ({ title, text }: { title?: string; text?: string }) => {
         {advantages.map((item) => (
           <div
             key={item.id}
-            className={`${styles.card} ${
-              item.variant === "accent" ? styles.accent : styles.light
-            }`}
+            className={`${styles.card}`}
           >
             <div className={styles.cardTop}>
               <h3 className={`${styles.cardTitle} inter`}>{item.title}</h3>

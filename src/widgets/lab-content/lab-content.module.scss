@@ -1,0 +1,26 @@
+.root {
+    background: #f6f6f6;
+    min-height: 100%;
+    padding: 40px 0 80px;
+}
+
+.content {
+    max-width: 1360px;
+    width: 100%;
+    margin: 0 auto;
+    // padding: 0 40px;
+}
+
+@media (max-width: 768px) {
+    .content {
+        // padding: 0 20px;
+    }
+}
+
+.description {
+    margin-top: 40px;
+}
+
+.root :global(section) {
+    margin-top: 80px;
+}

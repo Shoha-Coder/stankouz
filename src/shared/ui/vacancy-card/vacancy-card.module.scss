@@ -1,0 +1,83 @@
+.card {
+    width: 433px;
+    min-height: 263px;
+
+    padding: 20px;
+    border-radius: 25px;
+    background: #f6f6f6;
+
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* DATE */
+
+.date {
+    font-family: Inter, sans-serif;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 100%;
+    color: #6c6c6c;
+    opacity: 0.4;
+}
+
+/* TITLE */
+
+.title {
+    font-family: Inter, sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 100%;
+    color: #282828;
+}
+
+/* DESCRIPTION */
+
+.description {
+    font-family: Inter, sans-serif;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 100%;
+    color: #282828;
+    opacity: 0.4;
+
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* BUTTON */
+
+.button {
+    margin-top: auto;
+
+    width: 100%;
+    height: 49px;
+
+    border-radius: 50px;
+    border: 1px solid #3882e3;
+    background: transparent;
+
+    font-family: Inter, sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    color: #3882e3;
+
+    cursor: pointer;
+    transition: background 0.2s ease, color 0.2s ease;
+
+    &:hover {
+        background: #3882e3;
+        color: #ffffff;
+    }
+}
+
+/* RESPONSIVE (STRICT – NO UPSCALING) */
+
+@media (max-width: 480px) {
+    .card {
+        width: 100%;
+    }
+}

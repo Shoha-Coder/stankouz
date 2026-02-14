@@ -22,27 +22,27 @@ export function Hero() {
         {heroSlides.map((slide, _) => (
           <SwiperSlide key={slide.id} className={styles.swiperSlide}>
             <div className={styles.slide}>
-              <div className={styles.overlay} />
+              <div className={styles.overlay}>
+                <div className={styles.content}>
+                  <p className={`${styles.subtitle} inter`}>{slide.subtitle}</p>
 
-              <div className={styles.content}>
-                <p className={`${styles.subtitle} inter`}>{slide.subtitle}</p>
+                  <h1 className={`${styles.title} inter`}>{slide.title}</h1>
 
-                <h1 className={`${styles.title} inter`}>{slide.title}</h1>
+                  <div className={styles.actions}>
+                    <button className={`${styles.primaryBtn} inter`}>
+                      <span className={styles.btnText}>{slide.primaryCta}</span>
+                      <span className={styles.iconCircle}>
+                        <ArrowRightIcon className={styles.icon} />
+                      </span>
+                    </button>
 
-                <div className={styles.actions}>
-                  <button className={`${styles.primaryBtn} inter`}>
-                    <span>{slide.primaryCta}</span>
-                    <span className={styles.iconCircle}>
-                      <ArrowRightIcon className={styles.icon} />
-                    </span>
-                  </button>
-
-                  <button className={styles.secondaryBtn}>
-                    <span>{slide.secondaryCta}</span>
-                    <span className={styles.iconCircle}>
-                      <DownloadIcon />
-                    </span>
-                  </button>
+                    <button className={styles.secondaryBtn}>
+                      <span className={styles.btnText}>{slide.secondaryCta}</span>
+                      <span className={styles.iconCircle}>
+                        <DownloadIcon />
+                      </span>
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>

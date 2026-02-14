@@ -1,0 +1,30 @@
+import Link from "next/link";
+import { Product } from "../model/types";
+import styles from "./product-card.module.scss";
+import Image from "next/image";
+import { getLocaleFromPath } from "@/shared/lib/i18n/get-locale-from-path";
+import { usePathname } from "next/navigation";
+
+interface Props {
+  product: Product;
+}
+
+export const ProductCard = ({ product }: Props) => {
+  const pathname = usePathname();
+  const locale = getLocaleFromPath(pathname);
+  return (
+    <Link href={{ pathname: `/${locale}/machines/${product.id}` }} className={styles.card}>
+      <div className={styles.image}>
+        <Image
+          src={product.image}
+          alt={product.title}
+          fill
+          sizes={"168"}
+        />
+      </div>
+
+      <h3 className={styles.title}>{product.title}</h3>
+      <p className={styles.ts}>{product.ts}</p>
+    </Link>
+  );
+};

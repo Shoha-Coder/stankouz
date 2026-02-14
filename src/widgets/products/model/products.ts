@@ -6,6 +6,7 @@ export const products = [
       "Biz ilg'or texnologiyalar yordamida ishlab chiqarilgan, eng yuqori sifat standartlariga",
     image: "/images/product1.png",
     category: "Kategoriya",
+    ts: "Ts 21611802-017:2017",
   },
   {
     id: 2,
@@ -14,6 +15,7 @@ export const products = [
       "Biz ilg'or texnologiyalar yordamida ishlab chiqarilgan, eng yuqori sifat standartlariga",
     image: "/images/product2.png",
     category: "Kategoriya",
+    ts: "Ts 21611802-017:2017",
   },
   {
     id: 3,
@@ -22,6 +24,7 @@ export const products = [
       "Biz ilg'or texnologiyalar yordamida ishlab chiqarilgan, eng yuqori sifat standartlariga",
     image: "/images/product1.png",
     category: "Kategoriya",
+    ts: "Ts 21611802-017:2017",
   },
   {
     id: 4,
@@ -30,6 +33,7 @@ export const products = [
       "Biz ilg'or texnologiyalar yordamida ishlab chiqarilgan, eng yuqori sifat standartlariga",
     image: "/images/product2.png",
     category: "Kategoriya",
+    ts: "Ts 21611802-017:2017",
   },
   {
     id: 5,
@@ -38,6 +42,7 @@ export const products = [
       "Biz ilg'or texnologiyalar yordamida ishlab chiqarilgan, eng yuqori sifat standartlariga",
     image: "/images/product1.png",
     category: "Kategoriya",
+    ts: "Ts 21611802-017:2017",
   },
   {
     id: 6,
@@ -46,5 +51,6 @@ export const products = [
       "Biz ilg'or texnologiyalar yordamida ishlab chiqarilgan, eng yuqori sifat standartlariga",
     image: "/images/product2.png",
     category: "Kategoriya",
+    ts: "Ts 21611802-017:2017",
   },
 ];

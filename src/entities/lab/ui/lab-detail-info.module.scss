@@ -1,0 +1,43 @@
+.root {
+    flex: 1;
+    min-width: 0;
+}
+
+.title {
+    font-family: "Unbounded", sans-serif;
+    font-weight: 600;
+    font-size: 32px;
+    line-height: 100%;
+    letter-spacing: 0;
+    color: #282828;
+    margin: 0 0 24px;
+}
+
+.description {
+    max-width: 726px;
+}
+
+.paragraph {
+    font-family: Inter, sans-serif;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 140%;
+    letter-spacing: 0;
+    color: #282828;
+    text-align: justify;
+    margin: 0 0 1em;
+
+    &:last-child {
+        margin-bottom: 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .title {
+        font-size: 24px;
+    }
+
+    .paragraph {
+        font-size: 16px;
+    }
+}

@@ -1,0 +1,70 @@
+.gallery {
+    display: flex;
+    gap: 12px;
+    flex-shrink: 0;
+}
+
+.thumbnails {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.thumbnail {
+    width: 108px;
+    height: 78px;
+    border-radius: 15px;
+    border: 1px solid transparent;
+    background: #ffffff;
+    padding: 0;
+    cursor: pointer;
+    overflow: hidden;
+    transition: border-color 0.2s ease;
+
+    &:hover {
+        border-color: rgba(8, 99, 173, 0.3);
+    }
+}
+
+.thumbnailActive {
+    border: 1px solid #0863ad;
+}
+
+.thumbnailImage {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+}
+
+.mainImageWrap {
+    width: 537px;
+    height: 384px;
+    border-radius: 15px;
+    background: #ffffff;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.mainSwiper {
+    width: 100%;
+    height: 100%;
+    border-radius: 15px;
+
+    :global(.swiper-wrapper) {
+        align-items: center;
+    }
+
+    :global(.swiper-slide) {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+.mainImage {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+}

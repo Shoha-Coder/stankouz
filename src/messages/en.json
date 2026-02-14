@@ -2,14 +2,12 @@
   "header": {
     "topBar": {
       "address": "Tashkent city, Chilonzor district, Bunyodkor avenue, 24",
-      "workingHours": "Working hours: Mon-Sun 9:00 - 17:00",
       "phone": "+998 90 646 72 77",
       "email": "info@stanko.uz"
     },
     "nav": {
       "home": "HOME",
       "about": "ABOUT US",
-      "brand": "O`QQUZA",
       "catalog": "CATALOG",
       "searchPlaceholder": "Search...",
       "labs": "LABORATORY",
@@ -20,7 +18,6 @@
       "services": "SERVICES",
       "contacts": "CONTACTS"
     },
-    "logoAlt": "O`QQUZA logo",
     "aria": {
       "toggleMenu": "Toggle menu"
     },
@@ -28,21 +25,11 @@
       "ru": "Ru",
       "en": "En",
       "uz": "Uz"
-    },
-    "catalog": {
-      "shaftsRotors": "Shafts and Rotors",
-      "chassisTransmission": "Chassis and Transmission",
-      "gears": "Gears",
-      "blanks": "Blanks",
-      "electroplating": "Electroplating",
-      "categoryP": "Category P"
     }
   },
   "common": {
-    "brandName": "O`QQUZA",
     "breadcrumbs": {
-      "home": "Home",
-      "brand": "O`QQUZA"
+      "home": "Home"
     },
     "loading": "Loading...",
     "aria": {

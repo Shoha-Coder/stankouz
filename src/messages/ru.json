@@ -9,7 +9,6 @@
     "nav": {
       "home": "ГЛАВНАЯ",
       "about": "О КОМПАНИИ",
-      "brand": "O`QQUZA",
       "catalog": "КАТАЛОГ",
       "searchPlaceholder": "Поиск...",
       "labs": "ЛАБОРАТОРИЯ",
@@ -20,7 +19,6 @@
       "services": "УСЛУГИ",
       "contacts": "КОНТАКТЫ"
     },
-    "logoAlt": "Логотип O`QQUZA",
     "aria": {
       "toggleMenu": "Открыть меню"
     },
@@ -28,21 +26,11 @@
       "ru": "Ru",
       "en": "En",
       "uz": "Uz"
-    },
-    "catalog": {
-      "shaftsRotors": "Валы и роторы",
-      "chassisTransmission": "Шасси и трансмиссия",
-      "gears": "Шестерни",
-      "blanks": "Заготовки",
-      "electroplating": "Гальваника",
-      "categoryP": "Категория п"
     }
   },
   "common": {
-    "brandName": "O`QQUZA",
     "breadcrumbs": {
-      "home": "Главная",
-      "brand": "O`QQUZA"
+      "home": "Главная"
     },
     "loading": "Загрузка...",
     "aria": {

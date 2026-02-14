@@ -2,8 +2,8 @@ import Advantages from "@/shared/ui/advantages/advantages";
 import styles from "./about.module.scss";
 import { stats } from "./model/stats";
 import Image from "next/image";
-import { ArrowRightIcon } from "@/shared/ui/icons";
 import { Button } from "@/shared/ui/button";
+import { AnimatedCounter } from "@/shared/ui/animated-counter";
 
 export function About() {
   return (
@@ -28,9 +28,11 @@ export function About() {
           <div className={styles.stats}>
             {stats.map((item) => (
               <div key={item.value} className={styles.stat}>
-                <span className={`${styles.statValue} inter`}>
-                  {item.value}
-                </span>
+                <AnimatedCounter
+                  value={item.value}
+                  duration={1800}
+                  className={`${styles.statValue} inter`}
+                />
                 <span className={`${styles.statLabel} inter`}>
                   {item.label}
                 </span>
@@ -39,10 +41,10 @@ export function About() {
           </div>
 
           <div className={styles.actions}>
-            <Button outlineButton textClassName={styles.btnText}>
+            <Button outlinebutton textClassName={styles.btnText} circleClassName={styles.iconCircle}>
               Biz haqimizda batafsil
             </Button>
-            <Button outlineButton textClassName={styles.btnText}>
+            <Button outlinebutton textClassName={styles.btnText} circleClassName={styles.iconCircle}>
               Sertifikatlar
             </Button>
           </div>
@@ -52,8 +54,8 @@ export function About() {
         <div className={styles.imageWrapper}>
           <Image
             src="/images/about-image.png"
-            width={665}
-            height={437}
+            fill
+            sizes="(max-width: 768px) 100vw, 50vw"
             alt="Gidro Stanko Servis"
           />
         </div>

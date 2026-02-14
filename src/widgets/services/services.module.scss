@@ -1,25 +1,25 @@
 .services {
     width: 100%;
-    padding: 0 40px;
-    margin-top: 180px;
     max-width: 1360px;
     margin: 0 auto;
-    margin-top: 180px;
+    margin-top: clamp(60px, 12vw, 180px);
+    padding: 0 clamp(20px, 4vw, 40px);
 }
 
 /* HEADER */
 
 .header {
-    width: 805px;
-    margin: 0 auto 40px;
+    width: 100%;
+    max-width: 805px;
+    margin: 0 auto clamp(24px, 4vw, 40px);
     text-align: center;
 }
 
 .title {
     font-family: "Unbounded";
     font-weight: 600;
-    font-size: 32px;
-    line-height: 100%;
+    font-size: clamp(1.5rem, 4vw, 32px);
+    line-height: 120%;
     color: #282828;
 }
 
@@ -27,8 +27,8 @@
     margin-top: 12px;
     font-family: "Inter";
     font-weight: 400;
-    font-size: 18px;
-    line-height: 100%;
+    font-size: clamp(14px, 1.5vw, 18px);
+    line-height: 140%;
     color: #6c6c6c;
 }
 
@@ -43,10 +43,13 @@
 
 .row {
     display: grid;
-    grid-template-columns: 433px 433px 433px;
-    column-gap: 40px;
-    padding: 40px 0;
+    grid-template-columns: 1fr 1fr 1fr;
+    column-gap: clamp(20px, 3vw, 40px);
+    row-gap: clamp(20px, 3vw, 24px);
+    padding: clamp(24px, 4vw, 40px) 0;
     border-bottom: 1px solid #f0f0f0;
+    align-items: start;
+
     &:last-child {
         border-bottom: none;
     }
@@ -55,16 +58,18 @@
 /* IMAGE */
 
 .image {
-    width: 433px;
-    height: 275px;
-    border-radius: 20px;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 433 / 275;
+    max-width: 433px;
+    border-radius: clamp(12px, 2vw, 20px);
     object-fit: cover;
 }
 
 /* TEXT BLOCK (TITLE + SHORT) */
 
 .textBlock {
-    width: 433px;
+    min-width: 0;
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -73,26 +78,60 @@
 .rowTitle {
     font-family: "Unbounded";
     font-weight: 700;
-    font-size: 24px;
-    line-height: 100%;
+    font-size: clamp(1.125rem, 2vw, 24px);
+    line-height: 120%;
     color: #282828;
 }
 
 .rowShort {
     font-family: "Inter";
     font-weight: 400;
-    font-size: 18px;
-    line-height: 100%;
+    font-size: clamp(14px, 1.5vw, 18px);
+    line-height: 140%;
     color: #6c6c6c;
 }
 
 /* LONG TEXT */
 
 .rowText {
-    width: 433px;
+    min-width: 0;
     font-family: "Inter";
     font-weight: 400;
-    font-size: 18px;
+    font-size: clamp(14px, 1.5vw, 18px);
     line-height: 140%;
     color: #6c6c6c;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 1024px) {
+    .row {
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas:
+            "image image"
+            "textBlock rowText";
+    }
+
+    .image {
+        grid-area: image;
+        max-width: 100%;
+    }
+
+    .textBlock {
+        grid-area: textBlock;
+    }
+
+    .rowText {
+        grid-area: rowText;
+    }
+}
+
+@media (max-width: 640px) {
+    .row {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "image"
+            "textBlock"
+            "rowText";
+    }
 }

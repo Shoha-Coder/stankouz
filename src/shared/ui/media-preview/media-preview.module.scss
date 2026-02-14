@@ -1,0 +1,38 @@
+.root {
+    width: 100%;
+    max-width: 1360px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    border: none;
+    aspect-ratio: 16 / 9;
+    min-height: 200px;
+    margin-top: 0;
+    border-radius: clamp(16px, 2.5vw, 24px);
+    cursor: pointer;
+    position: relative;
+}
+
+.image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.play {
+    color: #ffffff;
+    width: clamp(60px, 12vw, 90px);
+    height: clamp(60px, 12vw, 90px);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}

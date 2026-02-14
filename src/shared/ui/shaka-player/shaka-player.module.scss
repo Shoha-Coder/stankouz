@@ -1,0 +1,21 @@
+.wrapper {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    min-height: 200px;
+    border-radius: clamp(16px, 2.5vw, 24px);
+    overflow: hidden;
+    background: #000;
+    max-width: 1360px;
+    margin: 0 auto;
+    margin-top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.video {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    height: 100%;
+    object-fit: cover;
+}

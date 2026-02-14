@@ -1,0 +1,40 @@
+.root {
+    display: grid;
+    grid-template-columns: 317px 1fr;
+    gap: 40px;
+    max-width: 1360px;
+    margin: 0 auto;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.search {
+    width: 665px;
+    height: 54px;
+    border-radius: 50px;
+    border: 1px solid #d0d0d0;
+    padding: 0 20px;
+}
+
+.grid {
+    margin-top: 32px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px;
+}
+
+.pagination {
+    margin-top: 40px;
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+}
+
+.pageActive {
+    background: #0863ad;
+    color: #ffffff;
+}

@@ -1,0 +1,33 @@
+.wrapper {
+    max-width: 1360px;
+    margin: 30px auto;
+    justify-content: center;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: clamp(20px, 2vw, 40px);
+    justify-items: center;
+    max-width: 1360px;
+    margin: 60px auto;
+}
+
+.buttonWrap {
+    display: flex;
+    justify-content: center;
+}
+
+.buttonIcon {
+    transform: rotate(90deg);
+}
+
+.button {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: "Inter", sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    color: #0863ad;
+}

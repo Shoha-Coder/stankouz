@@ -10,11 +10,11 @@ const partners = [
   { id: 7, logo: "/images/partners/uzmetkombinat.png" },
 ];
 
-export function Partners() {
+export function Partners({ isLab }: { isLab?: boolean }) {
   return (
     <LogosCarousel
-      title="Hamkorlarimiz"
-      subtitle="Biz yuqori sifatli xizmatlar, tezkor yordam va har bir mijozga individual yondashuvni taklif etamiz."
+      title={isLab ? 'Brendlar' : 'Hamkorlarimiz'}
+      subtitle={isLab ? 'Biz yuqori sifatli xizmatlar, tezkor yordam va har bir mijozga individual yondashuvni taklif etamiz.' : 'Biz yuqori sifatli xizmatlar, tezkor yordam va har bir mijozga individual yondashuvni taklif etamiz.'}
       items={partners}
     />
   );

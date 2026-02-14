@@ -1,0 +1,26 @@
+.root {
+    width: 100%;
+    max-width: 1360px;
+    margin: 0 auto;
+}
+
+.paragraph {
+    font-family: Inter, sans-serif;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 140%;
+    letter-spacing: 0;
+    color: #282828;
+    text-align: justify;
+    margin: 0 0 1em;
+
+    &:last-child {
+        margin-bottom: 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .paragraph {
+        font-size: 16px;
+    }
+}

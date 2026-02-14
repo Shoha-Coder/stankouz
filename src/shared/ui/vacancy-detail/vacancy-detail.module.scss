@@ -1,0 +1,48 @@
+.title {
+    font-family: "Unbounded";
+    font-size: 32px;
+    font-weight: 600;
+    color: #282828;
+    margin-bottom: 20px;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    background: #f6f6f6;
+    border-radius: 25px;
+    padding: 24px;
+}
+
+.blockTitle {
+    font-weight: 700;
+    line-height: 160%;
+    margin-bottom: 8px;
+    color: #282828;
+    font-family: Inter;
+    font-weight: 700;
+    font-style: Bold;
+    font-size: 18px;
+    line-height: 160%;
+}
+
+.list {
+    padding-left: 18px;
+    margin: 0;
+
+    li {
+        font-size: 18px;
+        line-height: 160%;
+        color: #282828;
+        font-family: Inter;
+        font-weight: 400;
+        font-style: Regular;
+    }
+}
+
+.updated {
+    margin-top: 16px;
+    font-size: 16px;
+    color: #6c6c6c;
+}

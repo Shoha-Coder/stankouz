@@ -1,6 +1,5 @@
 import Logo from "@/shared/ui/icons/logo";
 import styles from "./footer.module.scss";
-import ArrowRight from "@/shared/ui/icons/arrow-right";
 import {
   FacebookIcon,
   InstagramIcon,
@@ -45,7 +44,8 @@ export function Footer() {
               height="262"
               allowFullScreen
               loading="lazy"
-            ></iframe>
+              title="Ofis joylashuvi xaritasi"
+            />
           </div>
         </div>
 
@@ -80,7 +80,7 @@ export function Footer() {
           <a className={styles.social}>
             <InstagramIcon />
           </a>
-          <a className={`${styles.social} ${styles.yellow}`}>
+          <a className={`${styles.social}`}>
             <TelegramIcon />
           </a>
           <a className={styles.social}>

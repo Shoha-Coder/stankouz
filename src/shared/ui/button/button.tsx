@@ -3,17 +3,25 @@ import styles from "./button.module.scss";
 import { ArrowRightIcon } from "../icons";
 
 type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
-  outlineButton?: boolean;
+  outlinebutton?: boolean;
   circleClassName?: string;
   textClassName?: string;
 };
 
-export function Button({ className, ...props }: ButtonProps) {
-  if (props.outlineButton) {
+export function Button({
+  className,
+  outlinebutton,
+  circleClassName,
+  textClassName,
+  ...props
+}: ButtonProps) {
+  if (outlinebutton) {
     return (
       <button className={`${styles.outlineBtn} ${className}`} {...props}>
-        <span className={`${styles.text} ${props.textClassName || 'inter'}`}>{props.children}</span>
-        <span className={`${styles.iconCircle} ${props.circleClassName}`}>
+        <span className={`${styles.text} ${textClassName || "inter"}`}>
+          {props.children}
+        </span>
+        <span className={`${styles.iconCircle} ${circleClassName}`}>
           <ArrowRightIcon />
         </span>
       </button>

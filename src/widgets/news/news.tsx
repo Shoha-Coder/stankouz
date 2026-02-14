@@ -26,8 +26,13 @@ export function News() {
       <div className={styles.sliderWrap}>
         <Swiper
           modules={[Navigation, Pagination]}
-          slidesPerView={3}
-          spaceBetween={40}
+          slidesPerView={1}
+          centeredSlides={true}
+          spaceBetween={16}
+          breakpoints={{
+            640: { slidesPerView: 2, spaceBetween: 24, centeredSlides: false },
+            1024: { slidesPerView: 3, spaceBetween: 40, centeredSlides: false },
+          }}
           navigation={{
             prevEl: ".news-prev",
             nextEl: ".news-next",

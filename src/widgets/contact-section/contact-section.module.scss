@@ -1,0 +1,202 @@
+.root {
+    margin-top: clamp(80px, 8vw, 140px);
+}
+
+.container {
+    max-width: 1360px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(40px, 6vw, 80px);
+
+    @media (max-width: 900px) {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* LEFT */
+
+.info {
+    h2 {
+        font-family: "Unbounded";
+        font-size: clamp(24px, 3vw, 32px);
+        margin-bottom: 32px;
+        color: #282828;
+    }
+}
+
+.label {
+    font-family: Inter;
+    font-weight: 400;
+    font-style: Regular;
+    font-size: 16px;
+}
+
+.email {
+    font-family: Unbounded;
+    font-weight: 500;
+    font-style: Medium;
+    font-size: 24px;
+}
+
+.number {
+    font-family: Unbounded;
+    font-weight: 500;
+    font-style: Medium;
+    font-size: 24px;
+}
+
+.socialsLabel {
+    font-family: Inter;
+    font-weight: 400;
+    font-style: Regular;
+    font-size: 16px;
+    color: #6c6c6c;
+}
+
+.text {
+    font-family: Unbounded;
+    font-weight: 500;
+    font-style: Medium;
+    font-size: 24px;
+}
+
+.block {
+    margin-bottom: 24px;
+
+    span {
+        display: block;
+        font-size: 14px;
+        color: #9d9d9d;
+        margin-bottom: 6px;
+    }
+
+    p,
+    a {
+        font-size: clamp(16px, 2vw, 18px);
+        font-weight: 500;
+        color: #282828;
+        text-decoration: none;
+        display: block;
+    }
+}
+
+.socials {
+    margin-top: 32px;
+    display: flex;
+    gap: 12px;
+
+    .icon {
+        width: 40px;
+        height: 40px;
+        padding: 8px;
+        border-radius: 50%;
+        border: none;
+        background: #f2f2f2;
+        cursor: pointer;
+        font-size: 16px;
+        path {
+            fill: #282828;
+        }
+    }
+}
+
+/* RIGHT CARD */
+
+.formCard {
+    position: relative;
+    background: #0b63ad;
+    border-radius: 25px;
+    padding: clamp(24px, 4vw, 40px);
+    color: #fff;
+    overflow: hidden;
+
+    /* watermark */
+    &::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: url("/logo-mark.svg") no-repeat right center;
+        opacity: 0.08;
+        pointer-events: none;
+    }
+
+    h3 {
+        font-family: "Unbounded";
+        font-size: clamp(22px, 3vw, 28px);
+        margin-bottom: 24px;
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+    }
+}
+
+.row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+
+    @media (max-width: 600px) {
+        grid-template-columns: 1fr;
+    }
+}
+
+.formCard {
+    position: relative;
+    background: #0b63ad;
+    border-radius: 25px;
+    padding: clamp(24px, 4vw, 40px);
+    color: #fff;
+
+    form {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    input,
+    textarea {
+        background: transparent;
+        border: 1px solid rgba(255, 255, 255, 0.35);
+        border-radius: 999px;
+        padding: 16px 20px;
+        font-size: 14px;
+        color: #fff;
+        outline: none;
+
+        &::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+    }
+
+    textarea {
+        border-radius: 20px;
+        min-height: 120px;
+        resize: none;
+    }
+
+    button[type="submit"] {
+        margin-top: 8px;
+        background: #ffd427;
+        border-radius: 999px;
+        height: 56px;
+        border: none;
+        font-size: 16px;
+        font-weight: 500;
+        cursor: pointer;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+
+        transition: background 0.2s ease;
+
+        &:hover {
+            background: #ffcc00;
+        }
+    }
+}
