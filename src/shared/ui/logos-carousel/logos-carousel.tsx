@@ -26,14 +26,14 @@ export function LogosCarousel({ title, subtitle, items }: Props) {
       <Swiper
         modules={[Autoplay]}
         slidesPerView={2}
-        spaceBetween={16}
+        spaceBetween={6}
         breakpoints={{
-          640: { slidesPerView: 2, spaceBetween: 24 },
-          1024: { slidesPerView: 3, spaceBetween: 40 },
+          640: { slidesPerView: 2, spaceBetween: 14 },
+          1024: { slidesPerView: 3, spaceBetween: 20 },
         }}
         loop
         freeMode
-        speed={6000}
+        speed={15000}
         autoplay={{
           delay: 0,
         }}
@@ -50,19 +50,19 @@ export function LogosCarousel({ title, subtitle, items }: Props) {
       <Swiper
         modules={[Autoplay]}
         slidesPerView={2}
-        spaceBetween={16}
+        spaceBetween={6}
         breakpoints={{
-          640: { slidesPerView: 2, spaceBetween: 24 },
-          1024: { slidesPerView: 3, spaceBetween: 40 },
+          640: { slidesPerView: 2, spaceBetween: 14 },
+          1024: { slidesPerView: 3, spaceBetween: 20 },
         }}
         loop
         freeMode
-        speed={6000}
+        speed={15000}
         autoplay={{
           delay: 0,
           reverseDirection: true,
         }}
-        style={{ marginTop: "clamp(20px, 3vw, 30px)" }}
+        style={{marginTop: "clamp(14px, 3vw, 20px)"}}
       >
         {items.map((item) => (
           <SwiperSlide key={item.id}>

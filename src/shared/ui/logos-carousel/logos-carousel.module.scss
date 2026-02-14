@@ -4,7 +4,6 @@
     max-width: 1360px;
     margin: 0 auto;
     margin-top: clamp(60px, 12vw, 180px);
-
     :global(.swiper-wrapper) {
         transition-timing-function: linear !important;
     }
