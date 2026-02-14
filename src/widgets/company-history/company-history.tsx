@@ -3,6 +3,7 @@
 import { useState } from "react";
 import styles from "./company-history.module.scss";
 import type { HistoryItem } from "./model/history";
+import Image from "next/image";
 
 type Props = {
   title: string;
@@ -20,7 +21,7 @@ export function CompanyHistory({ title, items }: Props) {
       <div className={styles.layout}>
         {/* MAIN IMAGE */}
         <div className={styles.mainImage}>
-          <img src={activeItem.image} alt={activeItem.title} />
+          <Image src={activeItem.image} alt={activeItem.title} width={433} height={256} />
         </div>
 
         {/* CONTENT */}
@@ -36,7 +37,7 @@ export function CompanyHistory({ title, items }: Props) {
                 onClick={() => setActiveYear(item.year)}
                 aria-label={`Show year ${item.year}`}
               >
-                <img src={item.image} alt="" />
+                <Image src={item.image} alt="" width={433} height={256} />
               </button>
             ))}
           </div>

@@ -1,5 +1,6 @@
 import styles from "./services.module.scss";
 import { services } from "./model/services";
+import Image from "next/image";
 
 export function Services() {
   return (
@@ -8,7 +9,7 @@ export function Services() {
       <div className={styles.header}>
         <h2 className={styles.title}>Bizning xizmatlar</h2>
         <p className={styles.subtitle}>
-          Biz ilg'or texnologiyalar yordamida ishlab chiqarilgan, eng yuqori
+          Biz ilg&apos;or texnologiyalar yordamida ishlab chiqarilgan, eng yuqori
           sifat standartlariga javob beradigan keng turdagi mahsulotlarni taklif
           etamiz.
         </p>
@@ -18,7 +19,7 @@ export function Services() {
       <div className={styles.list}>
         {services.map((item) => (
           <div key={item.id} className={styles.row}>
-            <img src={item.image} alt={item.title} className={styles.image} />
+            <Image src={item.image} alt={item.title} className={styles.image} width={433} height={256} />
 
             <div className={styles.textBlock}>
               <h3 className={styles.rowTitle}>{item.title}</h3>

@@ -20,7 +20,7 @@ export function CatalogFilters({
     <aside className={styles.root}>
       <h3 className={styles.title}>Kategoriyalar</h3>
 
-      {categories.map((cat) => (
+      {categories.map((cat: any) => (
         <div key={cat.id} className={styles.category}>
           <button
             className={`${styles.categoryBtn} ${
@@ -33,7 +33,7 @@ export function CatalogFilters({
 
           {cat.id === activeCategoryId && cat.subcategories && (
             <ul className={styles.subList}>
-              {cat.subcategories.map((sub) => (
+              {cat.subcategories.map((sub: any) => (
                 <li key={sub.id}>
                   <label className={styles.checkbox}>
                     <input

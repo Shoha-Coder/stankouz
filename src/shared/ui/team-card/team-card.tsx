@@ -1,6 +1,7 @@
 "use client";
 
 import styles from "./team-card.module.scss";
+import Image from "next/image";
 
 type TeamCardProps = {
   image: string;
@@ -12,7 +13,7 @@ export function TeamCard({ image, name, position }: TeamCardProps) {
   return (
     <article className={styles.card}>
       <div className={styles.imageWrap}>
-        <img src={image} alt={name} />
+        <Image src={image} alt={name} width={433} height={256} />
       </div>
 
       <h3 className={styles.name}>{name}</h3>

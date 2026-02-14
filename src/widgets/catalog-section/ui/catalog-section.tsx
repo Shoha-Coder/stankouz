@@ -17,7 +17,7 @@ export function CatalogSection() {
     search: query,
   });
   const filtered = useMemo(() => {
-    return data?.data.filter((p) => {
+    return data?.data.filter((p: any) => {
       if (categoryId && p.category_id !== categoryId) return false;
       if (subId && p.category_id !== subId) return false;
       if (query && !p.name.toLowerCase().includes(query.toLowerCase()))

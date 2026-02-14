@@ -9,8 +9,14 @@ import "swiper/css/pagination";
 import styles from "./news.module.scss";
 import ArrowRight from "@/shared/ui/icons/arrow-right";
 import { news } from "./model/news";
+import Image from "next/image";
+import Link from "next/link";
+import { getLocaleFromPath } from "@/shared/lib/i18n/get-locale-from-path";
+import { usePathname } from "next/navigation";
 
 export function News() {
+  const pathname = usePathname();
+  const locale = getLocaleFromPath(pathname);
   return (
     <section className={styles.news}>
       {/* HEADER */}
@@ -46,14 +52,14 @@ export function News() {
             <SwiperSlide key={item.id}>
               <article className={styles.card}>
                 <div className={styles.imageWrap}>
-                  <img src={item.image} alt={item.title} />
+                  <Image src={item.image} alt={item.title} width={433} height={256} />
                 </div>
 
                 <span className={styles.date}>{item.date}</span>
 
                 <h3 className={styles.cardTitle}>{item.title}</h3>
 
-                <a className={styles.link}>Batafsil</a>
+                <Link href={{ pathname: `/${locale}/news/${item.id}` }} className={styles.link}>Batafsil</Link>
               </article>
             </SwiperSlide>
           ))}
@@ -74,12 +80,12 @@ export function News() {
 
       {/* ACTION */}
       <div className={styles.actions}>
-        <button className={styles.outlineBtn}>
+        <Link href={{ pathname: `/${locale}/news` }} className={styles.outlineBtn}>
           <span>Barchasini o‘qish</span>
           <span className={styles.iconCircle}>
             <ArrowRight />
           </span>
-        </button>
+        </Link>
       </div>
     </section>
   );

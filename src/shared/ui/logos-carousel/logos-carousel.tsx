@@ -5,6 +5,7 @@ import { Autoplay } from "swiper/modules";
 import "swiper/css";
 
 import styles from "./logos-carousel.module.scss";
+import Image from "next/image";
 
 type Props = {
   title?: string;
@@ -40,7 +41,7 @@ export function LogosCarousel({ title, subtitle, items }: Props) {
         {items.map((item) => (
           <SwiperSlide key={item.id}>
             <div className={styles.card}>
-              <img src={item.logo} alt={item.alt ?? ""} />
+              <Image src={item.logo} alt={item.alt ?? ""} width={433} height={256} />
             </div>
           </SwiperSlide>
         ))}
@@ -66,7 +67,7 @@ export function LogosCarousel({ title, subtitle, items }: Props) {
         {items.map((item) => (
           <SwiperSlide key={item.id}>
             <div className={styles.card}>
-              <img src={item.logo} alt={item.alt ?? ""} />
+              <Image src={item.logo} alt={item.alt ?? ""} width={433} height={256} />
             </div>
           </SwiperSlide>
         ))}

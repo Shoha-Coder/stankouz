@@ -34,7 +34,7 @@ export function LabProductsSection({ title }: Props) {
     getProducts()
       .then((res) => {
         const list = res.data ?? [];
-        const mapped = list.slice(0, 12).map((p) => ({
+        const mapped = list.slice(0, 12).map((p: any) => ({
           id: p.id,
           title: p.title,
           ts: p.ts ?? "Ts 21611802-017:2017",
@@ -59,7 +59,7 @@ export function LabProductsSection({ title }: Props) {
           {...labProductsSwiperConfig}
           className={styles.swiper}
         >
-          {products.map((product) => (
+          {products.map((product: any) => (
             <SwiperSlide key={product.id} className={styles.slide}>
               <ProductCard product={product} />
             </SwiperSlide>

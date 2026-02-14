@@ -4,6 +4,7 @@ import { useCallback, useEffect, useState } from "react";
 import styles from "./certificate-preview.module.scss";
 import { ArrowRightIcon } from "../icons";
 import type { CertificateItem } from "./certificates-carousel";
+import Image from "next/image";
 
 type Props = {
   open: boolean;
@@ -164,7 +165,7 @@ export function CertificatePreview({ open, items, currentIndex, onClose, onPrev,
             if (zoom < MAX_ZOOM) setZoom((z) => Math.min(MAX_ZOOM, z + ZOOM_STEP));
           }}
         >
-          <img src={currentItem.image} alt={currentItem.alt ?? "Certificate"} draggable={false} />
+          <Image src={currentItem.image} alt={currentItem.alt ?? "Certificate"} draggable={false} width={514} height={320} />
         </div>
       </div>
 

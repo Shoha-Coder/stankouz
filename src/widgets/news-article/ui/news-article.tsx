@@ -4,6 +4,7 @@ import styles from "../news-article.module.scss";
 import { NewsArticle, NewsItem } from "../model/types";
 import { NewsSidebar } from "./news-sidebar";
 import { NewsNavigation } from "./news-navigation";
+import Image from "next/image";
 
 type Props = {
   article: NewsArticle;
@@ -16,10 +17,12 @@ export function NewsArticleView({ article, sidebar }: Props) {
       <div className={styles.container}>
         {/* MAIN */}
         <article className={styles.article}>
-          <img
+          <Image
             src={article.image}
             alt={article.title}
             className={styles.cover}
+            width={433}
+            height={256}
           />
 
           <time className={styles.date}>{article.date}</time>

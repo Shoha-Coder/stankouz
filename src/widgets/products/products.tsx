@@ -5,6 +5,7 @@ import ArrowRight from "@/shared/ui/icons/arrow-right";
 import Link from "next/link";
 import { getLocaleFromPath } from "@/shared/lib/i18n/get-locale-from-path";
 import { usePathname } from "next/navigation";
+import Image from "next/image";
 
 export function Products({ isLab }: { isLab?: boolean }) {
   const pathname = usePathname()
@@ -28,28 +29,28 @@ export function Products({ isLab }: { isLab?: boolean }) {
           <Link key={item.id} href={`/${locale}/${isLab ? 'labs' : 'machines'}/${item.id}`} className={styles.card}>
             <div className={styles.imageWrapper}>
               <span className={styles.badge}>{item.category}</span>
-              <img src={item.image} alt={item.title} />
+              <Image src={item.image} alt={item.title} width={433} height={256} />
             </div>
 
             <h3 className={styles.cardTitle}>{item.title}</h3>
 
             <p className={styles.cardText}>{item.description}</p>
 
-            <a href="#" className={styles.details}>
+            <Link href={{ pathname: `/${locale}/${isLab ? 'labs' : 'machines'}/${item.id}` }} className={styles.details}>
               Batafsil
-            </a>
+            </Link>
           </Link>
         ))}
       </div>
 
       {/* ACTION */}
       <div className={styles.action}>
-        <button className={styles.outlineBtn}>
+        <Link href={{ pathname: `/${locale}/${isLab ? 'labs' : 'machines'}` }} className={styles.outlineBtn}>
           {isLab ? 'Ko‘proq' : 'Katalogni ko‘rish'}
           <div className={styles.iconCircle} style={{ transform: isLab ? 'rotate(90deg)' : 'none' }}>
             <ArrowRight />
           </div>
-        </button>
+        </Link>
       </div>
     </section>
   );
