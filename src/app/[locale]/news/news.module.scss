@@ -5,6 +5,7 @@
     max-width: 1360px;
     margin: 0 auto;
     margin-top: 40px;
+    padding-bottom: 50px;
 }
 
 .card {
@@ -40,4 +41,10 @@
 .link {
     font-size: 18px;
     color: #3882e3;
+}
+
+.paginationWrapper {
+    margin-top: clamp(24px, 4vw, 40px);
+    display: flex;
+    justify-content: center;
 }

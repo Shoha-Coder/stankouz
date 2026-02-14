@@ -1,14 +1,14 @@
 .root {
     background: #f6f6f6;
     min-height: 100%;
-    padding: 40px 0 80px;
+    margin-top: 50px;
 }
 
 .content {
     max-width: 1360px;
     width: 100%;
     margin: 0 auto;
-    // padding: 0 40px;
+    padding: 0 clamp(20px, 4vw, 40px);
 }
 
 @media (max-width: 768px) {

@@ -7,20 +7,21 @@
 .tabList {
     display: flex;
     flex-direction: row;
-    gap: 10px;
+    flex-wrap: wrap;
+    gap: clamp(8px, 1vw, 10px);
 }
 
 .tab {
     font-family: Inter, sans-serif;
     font-weight: 500;
-    font-size: 16px;
-    line-height: 100%;
+    font-size: clamp(14px, 1.2vw, 16px);
+    line-height: 120%;
     letter-spacing: 0;
     color: #6c6c6c;
     background: #ffffff;
     border: none;
-    border-radius: 30px;
-    padding: 15px 30px;
+    border-radius: clamp(20px, 4vw, 30px);
+    padding: clamp(12px, 2vw, 15px) clamp(20px, 3vw, 30px);
     cursor: pointer;
     transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
 
@@ -41,13 +42,13 @@
 }
 
 .tabPanel {
-    margin-top: 24px;
-    padding: 20px;
+    margin-top: clamp(16px, 2vw, 24px);
+    padding: clamp(16px, 2vw, 20px);
     background: #ffffff;
-    border-radius: 20px;
+    border-radius: clamp(16px, 2.5vw, 20px);
     font-family: Inter, sans-serif;
     font-weight: 400;
-    font-size: 18px;
+    font-size: clamp(14px, 1.5vw, 18px);
     line-height: 160%;
     letter-spacing: 0;
     color: #6c6c6c;

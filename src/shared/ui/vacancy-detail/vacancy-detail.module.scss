@@ -1,6 +1,6 @@
 .title {
     font-family: "Unbounded";
-    font-size: 32px;
+    font-size: clamp(1.5rem, 1.379rem + 0.52vw, 2rem);
     font-weight: 600;
     color: #282828;
     margin-bottom: 20px;

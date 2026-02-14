@@ -21,7 +21,7 @@ export default function NotFound() {
         <h1 className={styles.code}>404</h1>
         <p className={styles.text}>Sahifa topilmadi!</p>
 
-        <Link href="/" className={styles.button}>
+        <Link href={`/${locale}`} className={styles.button}>
           <span className={styles.icon}>
             <ArrowRightIcon />
           </span>

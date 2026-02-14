@@ -1,11 +1,11 @@
 .singleContent {
-    margin-top: 24px;
-    padding: 20px;
+    margin-top: clamp(16px, 2vw, 24px);
+    padding: clamp(16px, 2vw, 20px);
     background: #ffffff;
-    border-radius: 20px;
+    border-radius: clamp(16px, 2.5vw, 20px);
     font-family: Inter, sans-serif;
     font-weight: 400;
-    font-size: 18px;
+    font-size: clamp(14px, 1.5vw, 18px);
     line-height: 160%;
     letter-spacing: 0;
     color: #6c6c6c;
@@ -14,7 +14,11 @@
 .featuresContainer {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 25px;
+    gap: clamp(16px, 2vw, 25px);
+    @media (max-width: 660px) {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
 }
 
 .descriptionList {
@@ -24,8 +28,8 @@
 
     li {
         position: relative;
-        padding-left: 16px;
-        margin-bottom: 8px;
+        padding-left: clamp(12px, 1.5vw, 16px);
+        margin-bottom: clamp(6px, 1vw, 8px);
 
         &::before {
             content: "–";
@@ -43,21 +47,21 @@
 .features {
     display: flex;
     flex-direction: column;
-    gap: 25px;
+    gap: clamp(16px, 2vw, 25px);
 }
 
 .featureRow {
     display: flex;
     justify-content: space-between;
     align-items: baseline;
-    gap: 16px;
+    gap: clamp(12px, 1.5vw, 16px);
     min-height: 25px;
 }
 
 .featureLabel {
     font-family: Inter, sans-serif;
     font-weight: 400;
-    font-size: 18px;
+    font-size: clamp(14px, 1.5vw, 18px);
     line-height: 140%;
     letter-spacing: 0;
     color: #6c6c6c;
@@ -75,7 +79,7 @@
 .featureValue {
     font-family: Inter, sans-serif;
     font-weight: 600;
-    font-size: 18px;
+    font-size: clamp(14px, 1.5vw, 18px);
     line-height: 140%;
     letter-spacing: 0;
     color: #282828;

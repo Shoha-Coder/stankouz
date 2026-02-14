@@ -1,11 +1,234 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Desktop sidebar - hidden on mobile */
 .sidebar {
-    width: 317px;
-    background: #ffffff;
+    display: none;
+}
+
+@media (min-width: 1025px) {
+    .sidebar {
+        display: block;
+        width: 100%;
+        max-width: 317px;
+        background: #ffffff;
+        border-radius: 20px;
+        padding: 24px;
+        padding-top: 0;
+        border: 1px solid #f0f0f0;
+        height: fit-content;
+    }
+}
+
+/* Mobile trigger - visible only on mobile */
+.mobileTrigger {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    padding: 14px 20px;
+    background: #fff;
+    border: none;
+    border-radius: 14px;
+    font-family: Inter, sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    color: #282828;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+@media (min-width: 1025px) {
+    .mobileTrigger {
+        display: none;
+    }
+}
+
+/* Mobile filter chips */
+.chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+
+@media (min-width: 1025px) {
+    .chips {
+        display: none;
+    }
+}
+
+.chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    background: #0863ad;
     border-radius: 20px;
+    font-family: Inter, sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: #fff;
+}
+
+.chipRemove {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    padding: 0;
+    border: none;
+    background: transparent;
+    color: #fff;
+    cursor: pointer;
+    opacity: 0.9;
+}
+
+.chipRemove:hover {
+    opacity: 1;
+}
+
+.filterIcon {
+    width: 20px;
+    height: 20px;
+    color: #6c6c6c;
+}
+
+.triggerChevron {
+    width: 20px;
+    height: 20px;
+    margin-left: auto;
+    transform: rotate(-90deg);
+    color: #6c6c6c;
+}
+
+/* Bottom sheet */
+.overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 999;
+    animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.sheet {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    max-height: 85vh;
+    background: #fff;
+    border-radius: 20px 20px 0 0;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    animation: slideUp 0.3s ease;
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.15);
+}
+
+@keyframes slideUp {
+    from { transform: translateY(100%); }
+    to { transform: translateY(0); }
+}
+
+.sheetHandle {
+    width: 40px;
+    height: 4px;
+    background: #d0d0d0;
+    border-radius: 2px;
+    margin: 12px auto 8px;
+}
+
+.sheetHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 24px 16px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.sheetTitle {
+    font-family: Inter, sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+    color: #282828;
+    margin: 0;
+}
+
+.sheetClose {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    border: none;
+    background: transparent;
+    color: #6c6c6c;
+    cursor: pointer;
+}
+
+.sheetContent {
+    flex: 1;
+    overflow-y: auto;
     padding: 24px;
-    padding-top: 0;
-    border: 1px solid #f0f0f0;
-    height: fit-content;
+}
+
+.sheetContent .category {
+    margin-bottom: 0;
+}
+
+.sheetContent .categoryTitle {
+    padding: 14px 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.sheetContent .subs {
+    padding: 10px 0 14px;
+}
+
+.sheetActions {
+    display: flex;
+    gap: 12px;
+    padding: 20px;
+    border-top: 1px solid #f0f0f0;
+    flex-shrink: 0;
+}
+
+.btnClear {
+    flex: 1;
+    height: 48px;
+    padding: 0 20px;
+    border: none;
+    border-radius: 30px;
+    background: #f6f6f6;
+    font-family: Inter, sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    color: #282828;
+    cursor: pointer;
+}
+
+.btnApply {
+    flex: 1;
+    height: 48px;
+    padding: 0 20px;
+    border: none;
+    border-radius: 30px;
+    background: #0863ad;
+    font-family: Inter, sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    color: #fff;
+    cursor: pointer;
 }
 
 .sidebar h2 {

@@ -1,25 +1,55 @@
 .gallery {
     display: flex;
-    gap: 12px;
+    flex-direction: row;
+    gap: clamp(10px, 1.5vw, 12px);
     flex-shrink: 0;
+}
+
+@media (max-width: 1024px) {
+    .gallery {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .thumbnails {
+        order: 2;
+    }
+
+    .mainImageWrap {
+        order: 1;
+    }
 }
 
 .thumbnails {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: clamp(8px, 1vw, 12px);
+}
+
+@media (max-width: 1024px) {
+    .thumbnails {
+        flex-direction: row;
+        overflow-x: auto;
+        overflow-y: hidden;
+        padding-bottom: 4px;
+        gap: 8px;
+        -webkit-overflow-scrolling: touch;
+    }
 }
 
 .thumbnail {
-    width: 108px;
-    height: 78px;
-    border-radius: 15px;
+    width: clamp(72px, 10vw, 108px);
+    height: clamp(52px, 7vw, 78px);
+    min-width: 72px;
+    min-height: 52px;
+    border-radius: clamp(10px, 1.5vw, 15px);
     border: 1px solid transparent;
     background: #ffffff;
     padding: 0;
     cursor: pointer;
     overflow: hidden;
     transition: border-color 0.2s ease;
+    flex-shrink: 0;
 
     &:hover {
         border-color: rgba(8, 99, 173, 0.3);
@@ -38,12 +68,20 @@
 }
 
 .mainImageWrap {
-    width: 537px;
-    height: 384px;
-    border-radius: 15px;
+    width: 100%;
+    max-width: clamp(19.188rem, 10.881rem + 35.44vw, 33.563rem);
+    aspect-ratio: 537 / 384;
+    min-height: 200px;
+    border-radius: clamp(12px, 1.5vw, 15px);
     background: #ffffff;
     overflow: hidden;
     flex-shrink: 0;
+}
+
+@media (max-width: 850px) {
+    .mainImageWrap {
+        max-width: 100%;
+    }
 }
 
 .mainSwiper {

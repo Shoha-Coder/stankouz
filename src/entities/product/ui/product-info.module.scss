@@ -2,60 +2,61 @@
     flex: 1;
     min-width: 0;
     max-width: 665px;
+    width: 100%;
 }
 
 .title {
     font-family: "Unbounded", sans-serif;
     font-weight: 600;
-    font-size: 32px;
-    line-height: 100%;
+    font-size: clamp(1.25rem, 3vw, 32px);
+    line-height: 120%;
     letter-spacing: 0;
     color: #282828;
-    margin: 0 0 20px;
+    margin: 0 0 clamp(16px, 2vw, 20px);
 }
 
 .description {
     font-family: Inter, sans-serif;
     font-weight: 400;
-    font-size: 18px;
+    font-size: clamp(14px, 1.5vw, 18px);
     line-height: 140%;
     letter-spacing: 0;
     color: #6c6c6c;
-    margin: 0 0 0;
+    margin: 0;
     white-space: pre-line;
     border-bottom: 1px solid #D9D9D9;
-    padding-bottom: 15px;
+    padding-bottom: clamp(12px, 1.5vw, 15px);
 }
 
 .features {
     display: flex;
     flex-direction: column;
-    gap: 25px;
-    margin-top: 15px;
+    gap: clamp(16px, 2vw, 25px);
+    margin-top: clamp(12px, 1.5vw, 15px);
 }
 
 .featuresTitle {
     font-family: Inter, sans-serif;
     font-weight: 600;
-    font-size: 20px;
-    line-height: 100%;
+    font-size: clamp(16px, 1.5vw, 20px);
+    line-height: 120%;
     letter-spacing: 0;
     color: #282828;
-    margin: 0 0 20px;
+    margin: 0 0 clamp(16px, 2vw, 20px);
 }
 
 .featureRow {
     display: flex;
     justify-content: space-between;
     align-items: baseline;
-    gap: 16px;
+    gap: clamp(12px, 1.5vw, 16px);
     min-height: 25px;
 }
 
 .featureLabel {
     font-family: Inter, sans-serif;
     font-weight: 400;
-    font-size: 18px;
+    font-size: clamp(14px, 1.5vw, 18px);
     line-height: 140%;
     letter-spacing: 0;
     color: #6c6c6c;
@@ -73,7 +74,7 @@
 .featureValue {
     font-family: Inter, sans-serif;
     font-weight: 600;
-    font-size: 18px;
+    font-size: clamp(14px, 1.5vw, 18px);
     line-height: 140%;
     letter-spacing: 0;
     color: #282828;

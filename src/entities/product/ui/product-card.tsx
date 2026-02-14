@@ -7,9 +7,10 @@ import { usePathname } from "next/navigation";
 
 interface Props {
   product: Product;
+  isProductPage?: boolean;
 }
 
-export const ProductCard = ({ product }: Props) => {
+export const ProductCard = ({ product, isProductPage }: Props) => {
   const pathname = usePathname();
   const locale = getLocaleFromPath(pathname);
   return (

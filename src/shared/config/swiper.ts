@@ -6,8 +6,22 @@ export const relatedProductsSwiperConfig = {
   spaceBetween: 40,
   slidesPerView: 3,
   navigation: {
-    prevEl: document.querySelector(".related-products-prev") as HTMLElement,
-    nextEl: document.querySelector(".related-products-next") as HTMLElement,
+    prevEl: ".related-products-prev",
+    nextEl: ".related-products-next",
+  },
+  breakpoints: {
+    320: {
+      spaceBetween: 16,
+      slidesPerView: 1.1,
+    },
+    640: {
+      spaceBetween: 20,
+      slidesPerView: 2,
+    },
+    1024: {
+      spaceBetween: 40,
+      slidesPerView: 3,
+    },
   },
 };
 
@@ -18,7 +32,7 @@ export const labProductsSwiperConfig = {
   spaceBetween: 40,
   slidesPerView: 3,
   navigation: {
-    prevEl: document.querySelector(".lab-products-prev") as HTMLElement,
-    nextEl: document.querySelector(".lab-products-next") as HTMLElement,
+    prevEl: ".lab-products-prev",
+    nextEl: ".lab-products-next",
   },
 };

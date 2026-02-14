@@ -6,11 +6,13 @@
     align-items: center;
     flex-direction: column;
     margin-bottom: 50px;
+    padding: 0 clamp(20px, 4vw, 40px);
+    padding-bottom: 50px;
 }
 
 .vacancies {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(433px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(clamp(19.188rem, 17.777rem + 6.02vw, 25rem), 1fr));
     margin-top: 40px;
     width: 100%;
     gap: 30px;
