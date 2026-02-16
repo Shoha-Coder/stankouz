@@ -3,12 +3,10 @@
 import styles from "./services.module.scss";
 import { services } from "./model/services";
 import { ImageWithLoader } from "@/shared/ui/image-with-loader";
-import ScrollStack, { ScrollStackItem } from "@/shared/ui/scroll-stack/scroll-stack";
 
 export function Services() {
   return (
     <section className={styles.services}>
-      {/* HEADER */}
       <div className={styles.header}>
         <h2 className={styles.title}>Bizning xizmatlar</h2>
         <p className={styles.subtitle}>
@@ -18,17 +16,9 @@ export function Services() {
         </p>
       </div>
 
-      {/* LIST - ScrollStack: cards pin and stack as you scroll */}
-      <ScrollStack
-        itemDistance={0}
-        itemStackDistance={70}
-        baseScale={1}
-        stackPosition="25%"
-        scaleEndPosition="15%"
-      >
         <div className={styles.list}>
           {services.map((item) => (
-            <ScrollStackItem itemClassName={styles.row} key={item.id}>
+            <div className={styles.row} key={item.id}>
               <ImageWithLoader src={item.image} alt={item.title} className={styles.image} width={433} height={256} fillWrapper />
 
               <div className={styles.textBlock}>
@@ -37,10 +27,9 @@ export function Services() {
               </div>
 
               <p className={styles.rowText}>{item.text}</p>
-            </ScrollStackItem>
+            </div>
           ))}
         </div>
-      </ScrollStack>
     </section>
   );
 }

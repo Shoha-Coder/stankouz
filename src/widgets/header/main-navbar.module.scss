@@ -266,8 +266,9 @@ $nav-active: #0863ad;
 .productGrid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    column-gap: 24px;
-    row-gap: 12px;
+    column-gap: 60px;
+    row-gap: 40px;
+    margin-top: 24px;
 }
 
 .productItem {
@@ -275,7 +276,7 @@ $nav-active: #0863ad;
     font-size: 16px;
     font-weight: 400;
     line-height: 140%;
-    color: $nav-text-secondary;
+    color: $nav-text;
     text-decoration: none;
 
     &:hover {
