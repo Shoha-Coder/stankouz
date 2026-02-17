@@ -1,21 +1,28 @@
+"use client";
+
 import { LogosCarousel } from "@/shared/ui/logos-carousel";
+import { useTranslations } from "next-intl";
+import { usePartners } from "@/entities/partner/model/usePartners";
+import { toCarouselItems } from "@/entities/partner/model/mappers";
 
-const partners = [
-  { id: 1, logo: "/images/partners/osta.png" },
-  { id: 2, logo: "/images/partners/uzkimyosanoat.png" },
-  { id: 3, logo: "/images/partners/ies.png" },
-  { id: 4, logo: "/images/partners/qizilqumkompleksi.png" },
-  { id: 5, logo: "/images/partners/sanoatqurilishmater.png" },
-  { id: 6, logo: "/images/partners/nkmk.png" },
-  { id: 7, logo: "/images/partners/uzmetkombinat.png" },
-];
+interface PartnersProps {
+  isLab?: boolean;
+}
 
-export function Partners({ isLab }: { isLab?: boolean }) {
+export function Partners({ isLab }: PartnersProps) {
+  const t = useTranslations("home");
+  const { data: partners = [], isPending, isError } = usePartners();
+  const items = toCarouselItems(partners);
+
+  if (isPending || isError || items.length === 0) {
+    return null;
+  }
+
   return (
     <LogosCarousel
-      title={isLab ? 'Brendlar' : 'Hamkorlarimiz'}
-      subtitle={isLab ? 'Biz yuqori sifatli xizmatlar, tezkor yordam va har bir mijozga individual yondashuvni taklif etamiz.' : 'Biz yuqori sifatli xizmatlar, tezkor yordam va har bir mijozga individual yondashuvni taklif etamiz.'}
-      items={partners}
+      title={t("partners")}
+      subtitle={t("partners-title")}
+      items={items}
     />
   );
 }

@@ -32,6 +32,14 @@
     color: #6c6c6c;
 }
 
+.loading {
+    padding: clamp(40px, 8vw, 80px);
+    text-align: center;
+    font-family: Inter, sans-serif;
+    font-size: clamp(16px, 1.5vw, 18px);
+    color: #6c6c6c;
+}
+
 /* LIST */
 
 .list {

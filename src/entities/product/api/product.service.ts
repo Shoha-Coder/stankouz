@@ -1,30 +1,30 @@
 import { api } from "@/shared/lib/api/api-client";
-import { ProductResponse, ProductParams, ProductDetail, Product } from "../model/types";
+import type {
+    ProductApiItem,
+    ProductResponse,
+    ProductParams,
+    Product,
+    ProductDetail,
+} from "../model/types";
+import { toProduct, toProductDetail } from "../model/mappers";
 
-export const getProducts = async (params?: ProductParams) => {
-    const { data } = await api.get<ProductResponse>("/products", { params });
+const PRODUCTS_ENDPOINT = "/products";
 
-    return data;
-};
+export async function getProducts(params?: ProductParams) {
+    const { data } = await api.get<ProductResponse>(PRODUCTS_ENDPOINT, { params });
+    const items = (data?.data ?? []).map(toProduct);
+    return {
+        data: items,
+        meta: data?.meta ?? { current_page: 1, last_page: 1, per_page: 12, total: 0 },
+        links: data?.links ?? { first: "", last: "", prev: null, next: null },
+    };
+}
 
-export const getProductById = async (id: string | number): Promise<ProductDetail> => {
-    const { data } = await api.get<{ data: ProductDetail } | ProductDetail>(`/products/${id}`);
-    const raw = "data" in data ? data.data : data;
-
-    if ("images" in raw && Array.isArray(raw.images)) {
-        return raw as ProductDetail;
-    }
-
-    if ("image" in raw && typeof raw.image === "string") {
-        const p = raw as unknown as Product;
-        return {
-            id: p.id,
-            title: p.title,
-            description: "",
-            images: [p.image],
-            features: [],
-        };
-    }
-
-    return raw as ProductDetail;
-};
+export async function getProductBySlug(slug: string, locale?: string): Promise<ProductDetail> {
+    const { data } = await api.get<{ data: ProductApiItem } | ProductApiItem>(
+        `${PRODUCTS_ENDPOINT}/${slug}`
+    );
+    const raw = data && typeof data === "object" && "data" in data ? data.data : data;
+    if (!raw || typeof raw !== "object") throw new Error("Product not found");
+    return toProductDetail(raw as ProductApiItem, locale);
+}

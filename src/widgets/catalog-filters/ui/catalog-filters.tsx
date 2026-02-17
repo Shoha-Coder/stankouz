@@ -2,6 +2,7 @@
 
 import styles from "./catalog-filters.module.scss";
 import { Category } from "@/entities/category/model/types";
+import { useTranslations } from "next-intl";
 
 type Props = {
   categories: any;
@@ -16,9 +17,10 @@ export function CatalogFilters({
   activeSubId,
   onChange,
 }: Props) {
+  const t = useTranslations("catalog");
   return (
     <aside className={styles.root}>
-      <h3 className={styles.title}>Kategoriyalar</h3>
+      <h3 className={styles.title}>{t("categories")}</h3>
 
       {categories.map((cat: any) => (
         <div key={cat.id} className={styles.category}>

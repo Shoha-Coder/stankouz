@@ -27,6 +27,25 @@
       "uz": "Uz"
     }
   },
+  "footer": {
+    "address": "Office address",
+    "email": "Email address",
+    "phones": "Phone numbers",
+    "location-text": "Office location",
+    "copyright": "© 2026 \"Hydro Stanko Service\" LLC All rights reserved.",
+    "by": "Developed by - NDC",
+    "by-link": "https://ndc.uz"
+  },
+  "form": {
+    "title1": "Contact information",
+    "title2": "Got a question or idea? Send us a message!",
+    "social": "Social media",
+    "name-surname": "Your name and surname",
+    "phone": "+998 (00) 000-00-00",
+    "email": "Email address (optional)",
+    "message": "Message",
+    "send": "Send a message"
+  },
   "common": {
     "breadcrumbs": {
       "home": "Home"
@@ -38,8 +57,7 @@
       "productCatalog": "Product catalog",
       "productCard": "{category} - {title}"
     }
-  }
-  ,
+  },
   "hero": {
     "aria": "Hero banner",
     "eyebrow": "Tajriba bilan ish mummosiz hal bo'ladi.",
@@ -50,5 +68,46 @@
     "primaryAria": "Open request form",
     "secondary": "Katalogni yuklash",
     "secondaryAria": "Download catalog"
+  },
+  "home": {
+    "certificates": "Certificates",
+    "more": "More informations",
+    "adv-title1": "Professionals team",
+    "adv-title2": "Advanced technologies",
+    "adv-title3": "Support service 24/7",
+    "adv-des1": "We carefully select employees with many years of experience.",
+    "adv-des2": "Each product is manufactured using advanced technologies.",
+    "adv-des3": "GIDRO STANKO SERVIS support service is always ready to help.",
+    "service": "Our services",
+    "service-title": "We offer a wide range of products manufactured using advanced technologies and meeting the highest quality standards.",
+    "products": "Our products",
+    "products-title": "We offer high-quality services, prompt assistance, and an individual approach to each client.",
+    "more-button": "More",
+    "see-catalog": "View catalog",
+    "stanok-block-title": "Our machines",
+    "stanok-block-des": "You can learn more about our high-quality and modern machine tools.",
+    "stanok-card-text": "Get to know our laboratory and the equipment located there!",
+    "stanok-card-text-2": "Get to know our main equipment!",
+    "news-title": "Our news",
+    "news-des": "Stay up-to-date with the latest news from our company.",
+    "partners": "Our partners",
+    "partners-title": "Meet our official partners!",
+    "history": "History of our company",
+    "team": "Our team",
+    "team-text": "Meet the members of our company.",
+    "certificates-text": "Check out our company certificates!",
+    "contact": "Our location on the map",
+    "about": "About us",
+    "about-more": "Learn more about us",
+    "details": "Details"
+  },
+  "catalog": {
+    "categories": "Categories",
+    "filter": "Filter",
+    "all": "All",
+    "clear": "Clear",
+    "apply": "Apply",
+    "close": "Close",
+    "removeFilter": "Remove {name} filter"
   }
 }

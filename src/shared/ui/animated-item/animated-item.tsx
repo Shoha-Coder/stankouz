@@ -1,7 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { ReactNode } from "react";
+import { AnimateOnScroll } from "@/shared/ui/animate-on-scroll";
 
 type AnimatedItemProps = {
   children: ReactNode;
@@ -27,18 +27,13 @@ export function AnimatedItem({
   const resolvedDelay = delay ?? index * STAGGER_DELAY;
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 10 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.15 }}
-      transition={{
-        duration: 0.35,
-        delay: resolvedDelay,
-        ease: [0.25, 0.46, 0.45, 0.94],
-      }}
+    <AnimateOnScroll
       className={className}
+      rootMargin="-30px"
+      threshold={0.01}
+      animationDelay={resolvedDelay}
     >
       {children}
-    </motion.div>
+    </AnimateOnScroll>
   );
 }

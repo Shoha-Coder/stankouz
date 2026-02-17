@@ -1,18 +1,13 @@
-import { getRequestConfig } from 'next-intl/server';
-import { defaultLocale, locales } from './i18n';
+import { getRequestConfig } from "next-intl/server";
+import { getLocales } from "./translations";
 
 export default getRequestConfig(async ({ requestLocale }) => {
-  // Get locale from middleware using requestLocale (recommended approach)
   const locale = await requestLocale;
-  
-  // Validate locale
-  const validLocale = locale && locales.includes(locale as (typeof locales)[number])
-    ? locale
-    : defaultLocale;
-
+  const { locales, defaultLocale } = await getLocales();
+  const validLocale =
+    locale && locales.includes(locale) ? locale : defaultLocale;
   return {
     locale: validLocale,
-    messages: (await import(`../../messages/${validLocale}.json`)).default,
+    messages: {},
   };
 });
-

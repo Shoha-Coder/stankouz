@@ -10,7 +10,7 @@ import { Services } from '@/widgets/services/services';
 
 const STAGGER = 0.06;
 
-export default async function HomePage() {
+export default function HomePage() {
   return (
     <main>
       <AnimatedSection delay={0}>

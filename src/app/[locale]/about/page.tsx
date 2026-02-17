@@ -11,6 +11,7 @@ import { Stats } from "@/widgets/stats/stats";
 import { News } from "@/widgets/news/news";
 import { Partners } from "@/widgets/partners/partners";
 import { ContactSection } from "@/shared/ui/contact-section/contact-section";
+import styles from "./about.module.scss";
 
 const items = [
   { label: "Home", href: "" },
@@ -74,10 +75,13 @@ const page = () => {
       <Breadcrumb items={items} />
       <Player />
       <Stats items={statsData} />
-      <Advantages
-        title="Bizning afzalliklar"
-        text="Biz yuqori sifatli xizmatlar, tezkor yordam va har bir mijozga individual yondashuvni taklif etamiz."
-      />
+      <div className={styles.advantages}>
+        <Advantages
+          title="Bizning afzalliklar"
+          text="Biz yuqori sifatli xizmatlar, tezkor yordam va har bir mijozga individual yondashuvni taklif etamiz."
+          className={styles.advantagesContent}
+        />
+      </div>
       <CompanyHistory title="Kompaniyamiz tarixi" items={history} />
       <TeamGrid members={members} />
       <CertificatesCarousel

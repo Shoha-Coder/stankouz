@@ -1,11 +1,12 @@
 "use client";
 
 import { useEffect, useState, useCallback } from "react";
-import { getCategories } from "@/entities/category/api/category.service";
 import ChevronRight from "@/shared/ui/icons/chevron-right";
 import FilterIcon from "@/shared/ui/icons/filter";
 import styles from "./catalog-filter.module.scss";
 import { Category, SubCategory } from "@/entities/category/model/types";
+import { useTranslations } from "next-intl";
+import { useCategories } from "@/entities/category/model/useCategories";
 
 export type Selection = { categoryId: number; subcategoryId: number };
 
@@ -20,6 +21,7 @@ function FilterContent({
     activeSubs,
     setActiveSubs,
     onChange,
+    tAll,
 }: {
     categories: Category[];
     openIds: Set<number>;
@@ -27,6 +29,7 @@ function FilterContent({
     activeSubs: Set<string>;
     setActiveSubs: React.Dispatch<React.SetStateAction<Set<string>>>;
     onChange: (selections: Selection[]) => void;
+    tAll: string;
 }) {
     const handleSubChange = useCallback(
         (key: string) => {
@@ -43,7 +46,7 @@ function FilterContent({
                 return next;
             });
         },
-        [onChange]
+        [onChange, setActiveSubs]
     );
 
     const handleBarchasi = useCallback(
@@ -61,7 +64,7 @@ function FilterContent({
                 return next;
             });
         },
-        [onChange]
+        [onChange, setActiveSubs]
     );
 
     return (
@@ -95,7 +98,7 @@ function FilterContent({
                                     checked={!cat.children.some((s) => activeSubs.has(`${cat.id}-${s.id}`))}
                                     onChange={() => handleBarchasi(cat.id)}
                                 />
-                                Barchasi
+                                {tAll}
                             </label>
                             {cat.children.map((sub: SubCategory) => {
                                 const key = `${cat.id}-${sub.id}`;
@@ -121,24 +124,17 @@ function FilterContent({
 }
 
 export const CatalogFilter = ({ onChange }: Props) => {
-    const [categories, setCategories] = useState<Category[]>([
-        { id: 1, name: "Kategoriya 1", children: [{ id: 1, name: "Subkategoriya 1" }, { id: 2, name: "Subkategoriya 2" }, { id: 3, name: "Subkategoriya 3" }] },
-        { id: 2, name: "Kategoriya 2", children: [{ id: 2, name: "Subkategoriya 2" }] },
-        { id: 3, name: "Kategoriya 3", children: [{ id: 3, name: "Subkategoriya 3" }] },
-        { id: 4, name: "Kategoriya 4", children: [] },
-        { id: 5, name: "Kategoriya 5", children: [] },
-        { id: 6, name: "Kategoriya 6", children: [] },
-        { id: 7, name: "Kategoriya 7", children: [] },
-    ]);
-    const [openIds, setOpenIds] = useState<Set<number>>(new Set([1]));
+    const t = useTranslations("catalog");
+    const { data: categories = [] } = useCategories();
+    const [openIds, setOpenIds] = useState<Set<number>>(new Set());
     const [activeSubs, setActiveSubs] = useState<Set<string>>(new Set());
     const [mobileOpen, setMobileOpen] = useState(false);
 
     useEffect(() => {
-        getCategories()
-            .then(setCategories)
-            .catch(() => {});
-    }, []);
+        if (categories.length > 0 && openIds.size === 0) {
+            setOpenIds(new Set([categories[0].id]));
+        }
+    }, [categories, openIds.size]);
 
     useEffect(() => {
         if (mobileOpen) {
@@ -188,7 +184,7 @@ export const CatalogFilter = ({ onChange }: Props) => {
         <div className={styles.wrapper}>
             {/* Desktop sidebar */}
             <aside className={styles.sidebar}>
-                <h2>Kategoriyalar</h2>
+                <h2>{t("categories")}</h2>
                 <FilterContent
                     categories={categories}
                     openIds={openIds}
@@ -196,6 +192,7 @@ export const CatalogFilter = ({ onChange }: Props) => {
                     activeSubs={activeSubs}
                     setActiveSubs={setActiveSubs}
                     onChange={onChange}
+                    tAll={t("all")}
                 />
             </aside>
 
@@ -204,10 +201,10 @@ export const CatalogFilter = ({ onChange }: Props) => {
                 type="button"
                 className={styles.mobileTrigger}
                 onClick={() => setMobileOpen(true)}
-                aria-label="Filtrlash"
+                aria-label={t("filter")}
             >
                 <FilterIcon className={styles.filterIcon} />
-                <span>Filtrlash</span>
+                <span>{t("filter")}</span>
                 <ChevronRight className={styles.triggerChevron} />
             </button>
 
@@ -221,7 +218,7 @@ export const CatalogFilter = ({ onChange }: Props) => {
                                 type="button"
                                 className={styles.chipRemove}
                                 onClick={() => handleRemoveChip(cat.id)}
-                                aria-label={`${cat.name} filtrini olib tashlash`}
+                                aria-label={t("removeFilter", { name: cat.name })}
                             >
                                 <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
                                     <path d="M9 3L3 9M3 3l6 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
@@ -240,15 +237,15 @@ export const CatalogFilter = ({ onChange }: Props) => {
                         onClick={() => setMobileOpen(false)}
                         aria-hidden
                     />
-                    <div className={styles.sheet} role="dialog" aria-modal="true" aria-label="Filtrlash">
+                    <div className={styles.sheet} role="dialog" aria-modal="true" aria-label={t("filter")}>
                         <div className={styles.sheetHandle} />
                         <div className={styles.sheetHeader}>
-                            <h2 className={styles.sheetTitle}>Filtrlash</h2>
+                            <h2 className={styles.sheetTitle}>{t("filter")}</h2>
                             <button
                                 type="button"
                                 className={styles.sheetClose}
                                 onClick={() => setMobileOpen(false)}
-                                aria-label="Yopish"
+                                aria-label={t("close")}
                             >
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
                                     <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
@@ -263,14 +260,15 @@ export const CatalogFilter = ({ onChange }: Props) => {
                                 activeSubs={activeSubs}
                                 setActiveSubs={setActiveSubs}
                                 onChange={onChange}
+                                tAll={t("all")}
                             />
                         </div>
                         <div className={styles.sheetActions}>
                             <button type="button" className={styles.btnClear} onClick={handleClear}>
-                                Tozalash
+                                {t("clear")}
                             </button>
                             <button type="button" className={styles.btnApply} onClick={handleApply}>
-                                Ko&apos;rsatish
+                                {t("apply")}
                             </button>
                         </div>
                     </div>

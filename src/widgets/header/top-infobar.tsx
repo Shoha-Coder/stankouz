@@ -6,12 +6,12 @@ import { useEffect, useRef, useState } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 import { getLocaleFromPath } from '@/shared/lib/i18n/get-locale-from-path';
 import { handleLocaleChange } from '@/shared/lib/i18n/handle-locale-change';
-import { locales } from '@/shared/config/i18n';
 import ChevronDown from '@/shared/ui/icons/chevron-down';
 import Link from 'next/link';
 
 export function TopInfoBar() {
   const [open, setOpen] = useState(false);
+  const [locales, setLocales] = useState<string[]>([]);
 
   const wrapperRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
@@ -23,10 +23,16 @@ export function TopInfoBar() {
   const tHeader = useTranslations('header');
   const t = useTranslations('header.topBar');
 
-  const labels: Record<string, string> = {
-    ru: tHeader('localeLabels.ru'),
-    en: tHeader('localeLabels.en'),
-    uz: tHeader('localeLabels.uz'),
+  useEffect(() => {
+    fetch('/api/locales')
+      .then((res) => res.json())
+      .then((data) => setLocales(data.locales ?? []))
+      .catch(() => setLocales(['en', 'ru', 'uz']));
+  }, []);
+
+  const getLabel = (loc: string) => {
+    const label = tHeader(`localeLabels.${loc}` as 'localeLabels.ru');
+    return label?.startsWith('localeLabels') ? loc.toUpperCase() : (label ?? loc.toUpperCase());
   };
 
   /* ===== Click outside ===== */
@@ -84,7 +90,7 @@ export function TopInfoBar() {
 
             {open && (
               <div className={styles.langDropdown} role="menu">
-                {locales.map((loc) => (
+                {(locales.length ? locales : ['en', 'ru', 'uz']).map((loc) => (
                   <button
                     key={loc}
                     role="menuitem"
@@ -95,7 +101,7 @@ export function TopInfoBar() {
                       setOpen(false);
                     }}
                   >
-                    {labels[loc]}
+                    {getLabel(loc)}
                   </button>
                 ))}
               </div>

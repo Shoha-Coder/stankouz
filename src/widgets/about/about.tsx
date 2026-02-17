@@ -1,17 +1,21 @@
+"use client";
+
 import Advantages from "@/shared/ui/advantages/advantages";
 import styles from "./about.module.scss";
 import { stats } from "./model/stats";
 import { ImageWithLoader } from "@/shared/ui/image-with-loader";
 import { Button } from "@/shared/ui/button";
 import { AnimatedCounter } from "@/shared/ui/animated-counter";
+import { useTranslations } from "next-intl";
 
 export function About() {
+  const t = useTranslations("home");
   return (
     <section className={styles.about}>
       <div className={styles.top}>
         {/* LEFT */}
         <div className={styles.content}>
-          <h2 className={`${styles.title} inter`}>Biz haqimizda</h2>
+          <h2 className={`${styles.title} inter`}>{t("about")}</h2>
 
           <p className={`${styles.textPrimary} inter`}>
             Общество с Ограниченной Ответственностью «GIDRO STANKO SERVIS»
@@ -42,10 +46,10 @@ export function About() {
 
           <div className={styles.actions}>
             <Button outlinebutton textClassName={styles.btnText} circleClassName={styles.iconCircle}>
-              Biz haqimizda batafsil
+              {t("about-more")}
             </Button>
             <Button outlinebutton textClassName={styles.btnText} circleClassName={styles.iconCircle}>
-              Sertifikatlar
+              {t("certificates")}
             </Button>
           </div>
         </div>
@@ -63,7 +67,10 @@ export function About() {
       </div>
 
       {/* ADVANTAGES */}
-      <Advantages />
+      <Advantages
+        title={t("team")}
+        text={t("team-text")}
+      />
     </section>
   );
 }

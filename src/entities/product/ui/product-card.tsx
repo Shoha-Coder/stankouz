@@ -13,8 +13,10 @@ interface Props {
 export const ProductCard = ({ product, isProductPage }: Props) => {
   const pathname = usePathname();
   const locale = getLocaleFromPath(pathname);
+  const basePath = isProductPage ? "products" : "machines";
+  const href = `/${locale}/${basePath}/${product.slug}`;
   return (
-    <Link href={{ pathname: `/${locale}/machines/${product.id}` }} className={styles.card}>
+    <Link href={href} className={styles.card}>
       <div className={styles.image}>
         <ImageWithLoader
           src={product.image}
@@ -25,7 +27,9 @@ export const ProductCard = ({ product, isProductPage }: Props) => {
       </div>
 
       <h3 className={styles.title}>{product.title}</h3>
-      <p className={styles.ts}>{product.ts}</p>
+      {product.categoryLabel && (
+        <p className={styles.ts}>{product.categoryLabel}</p>
+      )}
     </Link>
   );
 };

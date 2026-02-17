@@ -5,13 +5,17 @@ import { NewsArticle, NewsItem } from "../model/types";
 import { NewsSidebar } from "./news-sidebar";
 import { NewsNavigation } from "./news-navigation";
 import { ImageWithLoader } from "@/shared/ui/image-with-loader";
+import { HtmlContent } from "@/shared/ui/html-content";
 
 type Props = {
   article: NewsArticle;
   sidebar: NewsItem[];
+  prevArticle?: { title: string; slug: string } | null;
+  nextArticle?: { title: string; slug: string } | null;
+  currentSlug?: string;
 };
 
-export function NewsArticleView({ article, sidebar }: Props) {
+export function NewsArticleView({ article, sidebar, prevArticle, nextArticle, currentSlug }: Props) {
   return (
     <section className={styles.root}>
       <div className={styles.container}>
@@ -24,17 +28,19 @@ export function NewsArticleView({ article, sidebar }: Props) {
             width={433}
             height={256}
             fillWrapper
+            srcSet={article.imageSrcSet}
+            sizes={article.imageSizes}
           />
 
           <time className={styles.date}>{article.date}</time>
 
-          {article.content.map((p, i) => (
-            <p key={i} className={styles.text}>
-              {p}
-            </p>
-          ))}
+          <HtmlContent content={article.content} className={styles.text} />
 
-          <NewsNavigation />
+          <NewsNavigation
+            prevArticle={prevArticle}
+            nextArticle={nextArticle}
+            currentSlug={currentSlug}
+          />
         </article>
 
         {/* SIDEBAR */}

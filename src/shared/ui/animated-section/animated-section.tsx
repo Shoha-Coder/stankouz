@@ -1,7 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { ReactNode } from "react";
+import { AnimateOnScroll } from "@/shared/ui/animate-on-scroll";
 
 type AnimatedSectionProps = {
   children: ReactNode;
@@ -21,18 +21,13 @@ export function AnimatedSection({
   className,
 }: AnimatedSectionProps) {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 12 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.15 }}
-      transition={{
-        duration: 0.4,
-        delay,
-        ease: [0.25, 0.46, 0.45, 0.94],
-      }}
+    <AnimateOnScroll
       className={className}
+      rootMargin="-30px"
+      threshold={0.01}
+      animationDelay={delay}
     >
       {children}
-    </motion.div>
+    </AnimateOnScroll>
   );
 }

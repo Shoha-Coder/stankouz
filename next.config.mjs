@@ -4,12 +4,11 @@ const withNextIntl = createNextIntlPlugin('./src/shared/config/i18n-request.ts')
 
 const nextConfig = {
   reactStrictMode: true,
-  experimental: {
-    typedRoutes: true,
-  },
+  typedRoutes: true,
   images: {
     unoptimized: true,
-  }
+  },
+  transpilePackages: ['framer-motion'],
 };
 
 export default withNextIntl(nextConfig);

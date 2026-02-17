@@ -2,35 +2,31 @@
 
 import styles from "./catalog-section.module.scss";
 import { useState, useMemo } from "react";
-import { products, categories } from "@/shared/mock/catalog";
 import { ProductCard } from "@/entities/product/ui/product-card";
 import { AnimatedItem } from "@/shared/ui/animated-item";
 import { CatalogFilters } from "@/widgets/catalog-filters/ui/catalog-filters";
 import { useProducts } from "@/entities/product/model/useProducts";
+import { useCategories } from "@/entities/category/model/useCategories";
+import { toCatalogFiltersFormat } from "@/entities/category/model/mappers";
 
 export function CatalogSection() {
   const [categoryId, setCategoryId] = useState<number>();
   const [subId, setSubId] = useState<number>();
   const [query, setQuery] = useState("");
-  const { data, isLoading } = useProducts({
-    category: categoryId,
+  const { data: categories = [] } = useCategories();
+  const filterCategories = toCatalogFiltersFormat(categories);
+  const { data } = useProducts({
+    category_id: categoryId,
+    subcategory_id: subId,
     page: 1,
-    search: query,
+    search: query || undefined,
   });
-  const filtered = useMemo(() => {
-    return data?.data.filter((p: any) => {
-      if (categoryId && p.category_id !== categoryId) return false;
-      if (subId && p.category_id !== subId) return false;
-      if (query && !p.name.toLowerCase().includes(query.toLowerCase()))
-        return false;
-      return true;
-    }) || [];
-  }, [categoryId, subId, query, data]);
+  const filtered = data?.data ?? [];
 
   return (
     <section className={styles.root}>
       <CatalogFilters
-        categories={categories}
+        categories={filterCategories}
         activeCategoryId={categoryId}
         activeSubId={subId}
         onChange={(c, s) => {

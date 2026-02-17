@@ -25,3 +25,9 @@
     margin-top: 50px;
     margin-bottom: 50px;
 }
+
+.paginationWrapper {
+    margin-top: clamp(24px, 4vw, 40px);
+    display: flex;
+    justify-content: center;
+}

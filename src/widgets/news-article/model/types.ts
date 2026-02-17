@@ -1,15 +1,17 @@
-export type NewsItem = {
-  id: number;
-  title: string;
-  date: string;
-  href: string;
-};
+export interface NewsItem {
+    id: number;
+    title: string;
+    date: string;
+    slug: string;
+}
 
-export type NewsArticle = {
-  id: number;
-  title: string;
-  date: string;
-  image: string;
-  content: string[];
-  tags?: string[];
-};
+export interface NewsArticle {
+    id: number;
+    title: string;
+    date: string;
+    image: string;
+    imageSrcSet?: string;
+    imageSizes?: string;
+    content: string[];
+    tags?: string[];
+}

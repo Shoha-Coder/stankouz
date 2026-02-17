@@ -1,7 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { ReactNode } from "react";
+import { AnimateOnScroll } from "@/shared/ui/animate-on-scroll";
 
 type PageTransitionProps = {
   children: ReactNode;
@@ -13,16 +13,8 @@ type PageTransitionProps = {
  */
 export function PageTransition({ children }: PageTransitionProps) {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 10 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.1 }}
-      transition={{
-        duration: 0.45,
-        ease: [0.25, 0.46, 0.45, 0.94],
-      }}
-    >
+    <AnimateOnScroll rootMargin="-30px" threshold={0.01}>
       {children}
-    </motion.div>
+    </AnimateOnScroll>
   );
 }

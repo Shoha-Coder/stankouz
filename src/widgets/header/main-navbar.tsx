@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 import Logo from "@/shared/ui/icons/logo";
 import { SearchIcon, HamburgerIcon } from "@/shared/ui/icons";
@@ -12,11 +13,12 @@ import ChevronRight from "@/shared/ui/icons/chevron-right";
 import { getLocaleFromPath } from "@/shared/lib/i18n/get-locale-from-path";
 
 import {
-  CATALOG_DATA,
   NAV_ITEMS,
   type CatalogCategory,
   type CatalogSubcategory,
 } from "./model/nav-config";
+import { useCategories } from "@/entities/category/model/useCategories";
+import { toCatalogCategories } from "@/entities/category/model/mappers";
 
 import styles from "./main-navbar.module.scss";
 
@@ -26,6 +28,7 @@ export function MainNavbar() {
   const pathname = usePathname();
   const locale = getLocaleFromPath(pathname);
   const pathnameWithoutLocale = pathname.replace(`/${locale}`, '').replace('/', '') as string;
+  const tNav = useTranslations("header.nav");
 
   const [catalogOpen, setCatalogOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -134,11 +137,14 @@ export function MainNavbar() {
   const buildHref = (path: string) =>
     path ? `/${locale}/${path}` : `/${locale}`;
 
+  const { data: categories = [] } = useCategories();
+  const catalogCategories = toCatalogCategories(categories);
+
   const filteredCategories = searchQuery
-    ? CATALOG_DATA.filter((c) =>
+    ? catalogCategories.filter((c) =>
         c.title.toLowerCase().includes(searchQuery.toLowerCase())
       )
-    : CATALOG_DATA;
+    : catalogCategories;
 
   const displayCategory = selectedCategory ?? filteredCategories[0];
 
@@ -153,7 +159,7 @@ export function MainNavbar() {
         <div className={styles.desktopNav}>
           <ul className={styles.navList}>
             {NAV_ITEMS.map((item) => (
-              <li key={item.label} className={styles.navItem}>
+              <li key={item.labelKey} className={styles.navItem}>
                 {item.hasDropdown ? (
                   <button
                     type="button"
@@ -162,7 +168,7 @@ export function MainNavbar() {
                     aria-expanded={catalogOpen}
                     aria-haspopup="true"
                   >
-                    {item.label}
+                    {tNav(item.labelKey)}
                     <ChevronDownSvg
                       className={`${styles.caret} ${catalogOpen ? styles.caretOpen : ""}`}
                     />
@@ -173,7 +179,7 @@ export function MainNavbar() {
                       className={`${styles.navLink} ${item.href === pathnameWithoutLocale ? styles.navLinkActive : ""}`}
                     onClick={() => isMobile && closeMobile()}
                   >
-                    {item.label}
+                    {tNav(item.labelKey)}
                   </Link>
                 )}
               </li>
@@ -206,7 +212,7 @@ export function MainNavbar() {
               <div className={styles.searchWrap}>
                 <input
                   type="search"
-                  placeholder="Qidirish..."
+                  placeholder={tNav("searchPlaceholder")}
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   className={styles.searchInput}
@@ -236,7 +242,7 @@ export function MainNavbar() {
             <div className={styles.catalogRight}>
               <h3 className={styles.catalogTitle}>{displayCategory?.title}</h3>
               <div className={styles.productGrid}>
-                {displayCategory?.subcategories.flatMap((sub) =>
+                {(displayCategory?.subcategories ?? []).flatMap((sub) =>
                   sub.products.map((p) => (
                     <Link
                       key={p.id}
@@ -269,23 +275,24 @@ export function MainNavbar() {
                     className={`${styles.mobileNavItem} ${catalogOpen && styles.mobileNavItemActive}`}
                     onClick={() => setMobileCatalogStack((s) => [...s, "catalog"])}
                   >
-                    Katalog
+                    {tNav("catalog")}
                     <ChevronRight className={styles.mobileChevron} />
                   </button>
                   {NAV_ITEMS.filter((i) => !i.hasDropdown).map((item) => (
                     <Link
-                      key={item.label}
+                      key={item.labelKey}
                       href={buildHref(item.href) as any}
                       className={`${styles.mobileNavItem} ${item.href === pathnameWithoutLocale ? styles.navLinkActive : ""}`}
                       onClick={closeMobile}
                     >
-                      {item.label}
+                      {tNav(item.labelKey)}
                     </Link>
                   ))}
                 </>
               ) : currentMobileView === "catalog" ? (
                 <MobileCatalogView
-                  title="Katalog"
+                  title={tNav("catalog")}
+                  searchPlaceholder={tNav("searchPlaceholder")}
                   searchQuery={searchQuery}
                   onSearchChange={setSearchQuery}
                   onBack={handleMobileBack}
@@ -309,6 +316,7 @@ export function MainNavbar() {
                   onBack={handleMobileBack}
                   buildHref={buildHref}
                   closeMobile={closeMobile}
+                  searchPlaceholder={tNav("searchPlaceholder")}
                   searchQuery={searchQuery}
                   onSearchChange={setSearchQuery}
                   SearchIcon={SearchIcon}
@@ -325,6 +333,7 @@ export function MainNavbar() {
 
 function MobileCatalogView({
   title,
+  searchPlaceholder,
   searchQuery,
   onSearchChange,
   onBack,
@@ -335,6 +344,7 @@ function MobileCatalogView({
   styles: s,
 }: {
   title: string;
+  searchPlaceholder: string;
   searchQuery: string;
   onSearchChange: (v: string) => void;
   onBack: () => void;
@@ -355,7 +365,7 @@ function MobileCatalogView({
       <div className={s.searchWrap}>
         <input
           type="search"
-          placeholder="Qidirish..."
+          placeholder={searchPlaceholder}
           value={searchQuery}
           onChange={(e) => onSearchChange(e.target.value)}
           className={s.searchInput}
@@ -425,6 +435,7 @@ function MobileProductView({
   onBack,
   buildHref,
   closeMobile,
+  searchPlaceholder,
   searchQuery,
   onSearchChange,
   SearchIcon,
@@ -435,6 +446,7 @@ function MobileProductView({
   onBack: () => void;
   buildHref: (path: string) => string;
   closeMobile: () => void;
+  searchPlaceholder: string;
   searchQuery: string;
   onSearchChange: (v: string) => void;
   SearchIcon: React.ComponentType<{ className?: string }>;
@@ -458,7 +470,7 @@ function MobileProductView({
       <div className={s.searchWrap}>
         <input
           type="search"
-          placeholder="Qidirish..."
+          placeholder={searchPlaceholder}
           value={searchQuery}
           onChange={(e) => onSearchChange(e.target.value)}
           className={s.searchInput}

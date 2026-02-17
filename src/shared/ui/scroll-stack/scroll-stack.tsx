@@ -207,7 +207,6 @@ const ScrollStack: React.FC<ScrollStackProps> = ({
         isUpdatingRef.current = false;
     }, [
         itemScale,
-        itemStackDistance,
         stackPosition,
         scaleEndPosition,
         baseScale,

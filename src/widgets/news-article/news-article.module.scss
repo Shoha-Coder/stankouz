@@ -40,9 +40,6 @@
 
 .text {
     margin-top: clamp(16px, 2vw, 20px);
-    font-size: clamp(16px, 1.5vw, 18px);
-    line-height: 140%;
-    color: #282828;
 }
 
 /* NAVIGATION */
@@ -120,6 +117,12 @@
     &:last-child {
         padding-left: clamp(12px, 2vw, 20px);
     }
+}
+
+.navBtnDisabled {
+    opacity: 0.5;
+    cursor: default;
+    pointer-events: none;
 }
 
 .circle {

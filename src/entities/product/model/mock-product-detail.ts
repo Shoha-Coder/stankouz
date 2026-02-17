@@ -7,9 +7,9 @@ const DEFAULT_IMAGES = [
   "/images/product1.png",
 ];
 
-export function createFallbackProductDetail(id: string): ProductDetail {
+export function createFallbackProductDetail(slug: string): ProductDetail {
   return {
-    id: Number(id),
+    id: 0,
     title: "Nasos agregati Uz SE 2500-180",
     description: `Максимальный момент силы, не менее, Нm - 4350;
 Частота вращения водила (без нагрузки) с-1 - 1,4;
