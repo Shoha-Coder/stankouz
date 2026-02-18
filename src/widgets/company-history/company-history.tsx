@@ -51,8 +51,6 @@ export function CompanyHistory({ title, items }: Props) {
     yearsRef.current?.releasePointerCapture(e.pointerId);
   }, []);
 
-  if (!items.length) return null;
-
   const goToIndex = useCallback(
     (index: number) => {
       const item = items[index];
@@ -77,6 +75,8 @@ export function CompanyHistory({ title, items }: Props) {
       setActiveYear(items[0].year);
     }
   }, [items]);
+
+  if (!items.length) return null;
 
   return (
     <section className={styles.root}>

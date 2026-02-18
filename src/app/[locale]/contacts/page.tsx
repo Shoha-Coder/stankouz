@@ -4,7 +4,7 @@ import MapSection from "@/widgets/map-section/map-section";
 import { useTranslations } from "next-intl";
 import React from "react";
 
-const page = () => {
+const Page = () => {
   const tBreadcrumb = useTranslations("breadcrumbs");
   const BREADCRUMB_ITEMS = [
     { label: tBreadcrumb("home"), href: "" },
@@ -19,4 +19,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

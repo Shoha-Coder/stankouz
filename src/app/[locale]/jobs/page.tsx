@@ -3,7 +3,7 @@ import Vacancies from '@/widgets/vacancies/vacancies'
 import React from 'react'
 import { useTranslations } from 'next-intl'
 
-const page = () => {
+const Page = () => {
   const tBreadcrumb = useTranslations("breadcrumbs");
   const BREADCRUMB_ITEMS = [
     { label: tBreadcrumb("home"), href: "" },
@@ -17,4 +17,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Page

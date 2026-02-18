@@ -6,7 +6,7 @@ import styles from './labs.module.scss'
 import { Partners } from '@/widgets/partners/partners'
 import { useTranslations } from 'next-intl'
 
-const page = () => {
+const Page = () => {
   const tBreadcrumb = useTranslations("breadcrumbs");
   const BREADCRUMB_ITEMS = [
     { label: tBreadcrumb("home"), href: "" },
@@ -22,4 +22,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Page
