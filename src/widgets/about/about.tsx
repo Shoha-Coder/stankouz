@@ -81,7 +81,7 @@ export function About() {
       >
         <Advantages
           title={t("team")}
-          isStack
+          isStack 
           text={t("team-text")}
         />
       </AnimateOnScroll>
