@@ -35,3 +35,8 @@ ul {
 .inter {
   font-family: 'Inter', sans-serif;
 }
+
+/* Swiper pagination: max 3 dots visible */
+.swiper-pagination-bullet:nth-child(n + 4) {
+  display: none !important;
+}

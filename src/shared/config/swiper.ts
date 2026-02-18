@@ -1,4 +1,9 @@
 /**
+ * Global pagination config.
+ */
+export const swiperPaginationConfig = {};
+
+/**
  * Swiper config for RelatedProducts carousel.
  * Customize here for project-wide consistency.
  */
@@ -12,7 +17,11 @@ export const relatedProductsSwiperConfig = {
   breakpoints: {
     320: {
       spaceBetween: 16,
-      slidesPerView: 1.1,
+      slidesPerView: 1,
+    },
+    500: {
+      spaceBetween: 16,
+      slidesPerView: 2,
     },
     640: {
       spaceBetween: 20,

@@ -22,6 +22,20 @@
   font-family: "Inter";
   font-size: 16px;
   cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background: #0863ad;
+    color: #ffffff;
+    .text {
+      color: #ffffff;
+    }
+    .iconCircle {
+      svg {
+        fill: #0863ad;
+      }
+    }
+  }
 }
 
 .iconCircle {

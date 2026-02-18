@@ -8,12 +8,14 @@ import styles from "./products.module.scss";
 import { Breadcrumb } from "@/shared/ui/breadcrumb/breadcrumb";
 import { Pagination } from "@/shared/ui/pagination";
 import { useProducts } from "@/entities/product/model/useProducts";
-const BREADCRUMB_ITEMS = [
-    { label: "Bosh sahifa", href: "" },
-    { label: "Mahsulotlar", href: "machines" },
-];
+import { useTranslations } from "next-intl";
 
 export default function MachinesPage() {
+    const tBreadcrumb = useTranslations("breadcrumbs");
+    const BREADCRUMB_ITEMS = [
+        { label: tBreadcrumb("home"), href: "" },
+        { label: tBreadcrumb("products"), href: "products" },
+    ];
     const [category, setCategory] = useState<number>();
     const [subcategory, setSubcategory] = useState<number>();
     const [search, setSearch] = useState("");
@@ -93,7 +95,7 @@ export default function MachinesPage() {
                     ) : (
                         <>
                             <div className={styles.grid}>
-                                {products.map((p, index) => (
+                                {products.slice(0, 6).map((p, index) => (
                                     <AnimatedItem key={p.id} index={index}>
                                         <ProductCard product={p} />
                                     </AnimatedItem>

@@ -7,13 +7,15 @@ import styles from "./products.module.scss";
 import { Breadcrumb } from "@/shared/ui/breadcrumb/breadcrumb";
 import { Pagination } from "@/shared/ui/pagination";
 import { useProducts } from "@/entities/product/model/useProducts";
+import { useTranslations } from "next-intl";
 
-const BREADCRUMB_ITEMS = [
-    { label: "Bosh sahifa", href: "" },
-    { label: "Mahsulotlar", href: "products" },
-];
 
 export default function ProductsPage() {
+    const tBreadcrumb = useTranslations("breadcrumbs");
+    const BREADCRUMB_ITEMS = [
+        { label: tBreadcrumb("home"), href: "" },
+        { label: tBreadcrumb("machines"), href: "machines" },
+    ];
     const [page, setPage] = useState(1);
 
     const { data, isPending } = useProducts({ page });

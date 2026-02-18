@@ -7,6 +7,7 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 
 import styles from "./news.module.scss";
+import { swiperPaginationConfig } from "@/shared/config/swiper";
 import ArrowRight from "@/shared/ui/icons/arrow-right";
 import { AnimatedItem } from "@/shared/ui/animated-item";
 import { usePosts } from "@/entities/post";
@@ -48,6 +49,7 @@ export function News() {
                         nextEl: ".news-next",
                     }}
                     pagination={{
+                        ...swiperPaginationConfig,
                         clickable: true,
                         el: ".news-pagination",
                     }}

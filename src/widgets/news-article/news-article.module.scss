@@ -42,6 +42,13 @@
     margin-top: clamp(16px, 2vw, 20px);
 }
 
+.title {
+    font-family: "Unbounded";
+    font-weight: 600;
+    font-size: clamp(28px, 2vw, 32px);
+    margin-bottom: 20px;
+}
+
 /* NAVIGATION */
 
 .nav {

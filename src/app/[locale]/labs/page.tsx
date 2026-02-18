@@ -4,16 +4,17 @@ import { LabContent } from '@/widgets/lab-content/lab-content'
 import { Products } from '@/widgets/products/products'
 import styles from './labs.module.scss'
 import { Partners } from '@/widgets/partners/partners'
-
-const items = [
-    { label: 'Home', href: '/' },
-    { label: 'Lab', href: '/lab' },
-]
+import { useTranslations } from 'next-intl'
 
 const page = () => {
+  const tBreadcrumb = useTranslations("breadcrumbs");
+  const BREADCRUMB_ITEMS = [
+    { label: tBreadcrumb("home"), href: "" },
+    { label: tBreadcrumb("labs"), href: "labs" },
+  ];
   return (
     <div className={styles.root}>
-      <Breadcrumb items={items} />
+      <Breadcrumb items={BREADCRUMB_ITEMS} />
       <LabContent />
       <Products isLab={true} />
       <Partners isLab={true} />

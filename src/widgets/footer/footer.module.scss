@@ -1,7 +1,6 @@
 .footer {
     border-top: 1px solid #e4e4e4;
     background: #f6f6f6;
-    padding: clamp(40px, 4vw, 60px) clamp(20px, 4vw, 40px);
 }
 
 /* TOP */
@@ -12,6 +11,7 @@
     display: grid;
     grid-template-columns: minmax(0, 433px) minmax(0, 433px) 1fr 1fr;
     gap: 40px;
+    padding: clamp(40px, 4vw, 60px) clamp(20px, 4vw, 40px);
 }
 
 /* COLUMN */
@@ -110,11 +110,11 @@
 .subBottom {
     max-width: 1360px;
     margin: 40px auto 0;
+    padding: 0 clamp(20px, 4vw, 40px);
     padding-top: 20px;
     padding-bottom: 20px;
     border-top: 1px solid #e4e4e4;
     border-bottom: 1px solid #e4e4e4;
-
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -122,6 +122,8 @@
 
 .bottom {
     display: flex;
+    padding: 0 clamp(20px, 4vw, 40px);
+    padding-bottom: 40px;
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
@@ -130,7 +132,7 @@
     max-width: 1360px;
     margin: 40px auto 0;
 
-    span {
+    span,a {
         font-family: Inter, sans-serif;
         font-weight: 400;
         font-size: clamp(14px, 1.5vw, 16px);
@@ -225,5 +227,9 @@
 
     .label {
         font-size: 16px;
+    }
+    .links {
+        display: none;
+        
     }
 }

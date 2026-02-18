@@ -20,7 +20,7 @@ export function Breadcrumb({ items }: Props) {
   return (
     <nav className={styles.breadcrumb} aria-label="Breadcrumb">
       <div className={styles.container}>
-        <span className={styles.heading}>Biz haqimizda</span>
+        <span className={styles.heading}>{items[1].label}</span>
         <ol className={styles.list}>
           {items.map((item, index) => {
             const isLast = index === items.length - 1;

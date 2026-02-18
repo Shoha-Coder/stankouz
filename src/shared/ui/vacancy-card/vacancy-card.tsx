@@ -19,7 +19,7 @@ export function VacancyCard({ id, date, title, description, slug, onDetails }: P
   const locale = getLocaleFromPath(pathname);
   const href = slug ? `/${locale}/jobs/${slug}` : `/${locale}/jobs/${id}`;
   return (
-    <Link href={href} className={styles.card}>
+    <Link href={href as any} className={styles.card}>
       <time className={styles.date}>{date}</time>
 
       <h3 className={styles.title}>{title}</h3>

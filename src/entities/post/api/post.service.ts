@@ -38,6 +38,6 @@ function extractPostFromResponse(data: unknown): PostApiItem | null {
     const obj = data as Record<string, unknown>;
     if (obj.data && typeof obj.data === "object") return obj.data as PostApiItem;
     if (obj.post && typeof obj.post === "object") return obj.post as PostApiItem;
-    if (obj.id != null && obj.slug != null) return obj as PostApiItem;
+    if (obj.id != null && obj.slug != null) return obj as unknown as PostApiItem;
     return null;
 }

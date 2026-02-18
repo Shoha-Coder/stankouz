@@ -8,13 +8,14 @@ import styles from "./page.module.scss";
 import { Partners } from "@/widgets/partners/partners";
 import { useProduct } from "@/entities/product/model/useProduct";
 import { createFallbackProductDetail } from "@/entities/product/model/mock-product-detail";
-
-const BREADCRUMB_ITEMS = [
-    { label: "Bosh sahifa", href: "" },
-    { label: "Mahsulotlar", href: "machines" },
-];
+import { useTranslations } from "next-intl";
 
 export default function ProductDetailPage() {
+    const tBreadcrumb = useTranslations("breadcrumbs");
+    const BREADCRUMB_ITEMS = [
+        { label: tBreadcrumb("home"), href: "" },
+        { label: tBreadcrumb("machines"), href: "machines" },
+    ];
     const params = useParams();
     const locale = params?.locale as string | undefined;
     const slug = params?.slug as string | undefined;
@@ -23,8 +24,8 @@ export default function ProductDetailPage() {
     const product = data
         ? { ...data, images: data.images?.length ? data.images : ["/images/product1.png"] }
         : isError && slug
-          ? createFallbackProductDetail(slug)
-          : null;
+            ? createFallbackProductDetail(slug)
+            : null;
 
     const error = !slug ? "Mahsulot topilmadi" : null;
     const loading = isPending && !product;

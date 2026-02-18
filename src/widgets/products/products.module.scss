@@ -43,6 +43,9 @@
     grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr));
     gap: clamp(20px, 3vw, 40px);
     justify-content: center;
+    @media (max-width: 720px) {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 
 /* CARD */
@@ -54,6 +57,10 @@
     gap: clamp(8px, 1vw, 10px);
     text-decoration: none;
     color: inherit;
+    transition: all 0.3s ease;
+    &:hover {
+        transform: translateY(-10px);
+    }
 }
 
 /* IMAGE */
@@ -85,7 +92,10 @@
     padding: 5px 10px;
     border-radius: 8px;
     background: #f6f6f6;
-
+    transition: all 0.3s ease;
+    width: fit-content;
+    white-space: nowrap;
+    z-index: 99;
     font-family: "Inter";
     font-weight: 400;
     font-size: clamp(12px, 1.2vw, 14px);

@@ -9,13 +9,14 @@ import styles from "./page.module.scss";
 import { Partners } from "@/widgets/partners/partners";
 import { useProduct } from "@/entities/product/model/useProduct";
 import { createFallbackProductDetail } from "@/entities/product/model/mock-product-detail";
-
-const BREADCRUMB_ITEMS = [
-    { label: "Bosh sahifa", href: "" },
-    { label: "Mahsulotlar", href: "machines" },
-];
+import { useTranslations } from "next-intl";
 
 export default function MachineDetailPage() {
+    const tBreadcrumb = useTranslations("breadcrumbs");
+    const BREADCRUMB_ITEMS = [
+        { label: tBreadcrumb("home"), href: "" },
+        { label: tBreadcrumb("products"), href: "products" },
+    ];
     const params = useParams();
     const locale = params?.locale as string | undefined;
     const slug = params?.slug as string | undefined;

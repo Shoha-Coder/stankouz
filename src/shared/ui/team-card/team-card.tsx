@@ -7,13 +7,21 @@ type TeamCardProps = {
   image: string;
   name: string;
   position: string;
+  srcSet?: string;
 };
 
-export function TeamCard({ image, name, position }: TeamCardProps) {
+export function TeamCard({ image, name, position, srcSet }: TeamCardProps) {
   return (
     <article className={styles.card}>
       <div className={styles.imageWrap}>
-        <ImageWithLoader src={image} alt={name} width={433} height={256} fillWrapper />
+        <ImageWithLoader
+          src={image}
+          alt={name}
+          width={433}
+          height={256}
+          fillWrapper
+          srcSet={srcSet}
+        />
       </div>
 
       <h3 className={styles.name}>{name}</h3>

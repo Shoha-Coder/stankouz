@@ -75,9 +75,9 @@ export function LogosCarousel({ title, subtitle, items }: Props) {
       <Swiper
         modules={[Autoplay]}
         slidesPerView={2}
-        spaceBetween={6}
+        spaceBetween={16}
         breakpoints={{
-          640: { slidesPerView: 2, spaceBetween: 14 },
+          640: { slidesPerView: 3, spaceBetween: 20 },
           1024: { slidesPerView: 3, spaceBetween: 20 },
         }}
         loop
@@ -99,9 +99,9 @@ export function LogosCarousel({ title, subtitle, items }: Props) {
       <Swiper
         modules={[Autoplay]}
         slidesPerView={2}
-        spaceBetween={6}
+        spaceBetween={16}
         breakpoints={{
-          640: { slidesPerView: 2, spaceBetween: 14 },
+          640: { slidesPerView: 3, spaceBetween: 20 },
           1024: { slidesPerView: 3, spaceBetween: 20 },
         }}
         loop

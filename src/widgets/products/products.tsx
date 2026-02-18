@@ -30,7 +30,7 @@ export function Products({ isLab }: { isLab?: boolean }) {
       </div>
 
       <div className={styles.grid}>
-        {products.slice(0, 8).map((item, index) => (
+        {products.slice(0, 6).map((item, index) => (
           <AnimatedItem key={item.id} index={index}>
             <Link href={`/${locale}/${productPath}/${item.slug}`} className={styles.card}>
               <div className={styles.imageWrapper}>

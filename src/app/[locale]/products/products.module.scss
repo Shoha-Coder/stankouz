@@ -1,7 +1,7 @@
 .page {
     padding-top: clamp(24px, 4vw, 40px);
     padding-bottom: clamp(40px, 8vw, 80px);
-    background: #F6F6F6;    
+    background: #F6F6F6;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -24,6 +24,10 @@
     gap: clamp(20px, 3vw, 40px);
     margin-top: 50px;
     margin-bottom: 50px;
+
+    @media (max-width: 720px) {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 
 .paginationWrapper {

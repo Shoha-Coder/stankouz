@@ -13,6 +13,7 @@
     border-radius: clamp(16px, 2.5vw, 24px);
     cursor: pointer;
     position: relative;
+    max-height: calc(100vh - 180px) !important;
 }
 
 .image {

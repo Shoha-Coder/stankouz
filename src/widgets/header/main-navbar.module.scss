@@ -110,6 +110,14 @@ $nav-active: #0863ad;
     transform: rotate(180deg);
 }
 
+/* ========== MOBILE MENU: Lang switcher (after nav links) ========== */
+
+.mobileLangWrap {
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid #eee;
+}
+
 /* ========== HAMBURGER ========== */
 
 .hamburger {

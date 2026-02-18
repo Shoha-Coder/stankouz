@@ -1,13 +1,11 @@
 import { getRequestConfig } from "next-intl/server";
-import { getLocales } from "./translations";
+import { getTranslations } from "./translations";
 
 export default getRequestConfig(async ({ requestLocale }) => {
   const locale = await requestLocale;
-  const { locales, defaultLocale } = await getLocales();
-  const validLocale =
-    locale && locales.includes(locale) ? locale : defaultLocale;
+  const { locale: validLocale, messages } = await getTranslations(locale);
   return {
     locale: validLocale,
-    messages: {},
+    messages,
   };
 });

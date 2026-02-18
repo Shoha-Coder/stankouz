@@ -64,12 +64,18 @@
 
 /* IMAGE */
 
-.image {
+.imageWrapper {
+    position: relative;
     width: 100%;
-    height: auto;
     aspect-ratio: 433 / 275;
     max-width: 433px;
     border-radius: clamp(12px, 2vw, 20px);
+    overflow: hidden;
+}
+
+.image {
+    width: 100%;
+    height: 100%;
     object-fit: cover;
 }
 
@@ -98,15 +104,36 @@
     color: #6c6c6c;
 }
 
-/* LONG TEXT */
+/* DESCRIPTION BLOCK (truncated by character count) */
+
+.descBlock {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
 
 .rowText {
-    min-width: 0;
     font-family: "Inter";
     font-weight: 400;
     font-size: clamp(14px, 1.5vw, 18px);
     line-height: 140%;
     color: #6c6c6c;
+}
+
+.expandBtn {
+    font-family: Inter;
+    font-weight: 500;
+    font-size: inherit;
+    color: #0863AD;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    display: inline;
+
+    &:hover {
+        text-decoration: underline;
+    }
 }
 
 /* RESPONSIVE */
@@ -115,12 +142,12 @@
     .row {
         grid-template-columns: 1fr 1fr;
         grid-template-areas:
-            "image image"
-            "textBlock rowText";
+            "imageWrapper imageWrapper"
+            "textBlock descBlock";
     }
 
-    .image {
-        grid-area: image;
+    .imageWrapper {
+        grid-area: imageWrapper;
         max-width: 100%;
     }
 
@@ -128,8 +155,8 @@
         grid-area: textBlock;
     }
 
-    .rowText {
-        grid-area: rowText;
+    .descBlock {
+        grid-area: descBlock;
     }
 }
 
@@ -137,8 +164,8 @@
     .row {
         grid-template-columns: 1fr;
         grid-template-areas:
-            "image"
+            "imageWrapper"
             "textBlock"
-            "rowText";
+            "descBlock";
     }
 }

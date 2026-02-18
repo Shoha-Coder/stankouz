@@ -34,6 +34,6 @@ function extractVacancyFromResponse(data: unknown): VacancyApiItem | null {
     const obj = data as Record<string, unknown>;
     if (obj.data && typeof obj.data === "object") return obj.data as VacancyApiItem;
     if (obj.vacancy && typeof obj.vacancy === "object") return obj.vacancy as VacancyApiItem;
-    if (obj.id != null && obj.slug != null) return obj as VacancyApiItem;
+    if (obj.id != null && obj.slug != null) return obj as unknown as VacancyApiItem;
     return null;
 }

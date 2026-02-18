@@ -1,3 +1,4 @@
+import { getMessages } from "next-intl/server";
 import { ReactNode } from "react";
 import { Providers } from "@/shared/config/providers";
 import { TranslationProvider } from "@/shared/config/translation-provider";
@@ -13,9 +14,10 @@ export default async function LocaleLayout({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
+  const messages = await getMessages();
 
   return (
-    <TranslationProvider locale={locale}>
+    <TranslationProvider locale={locale} messages={messages}>
       <Providers>
         <div>
           <Header />

@@ -55,7 +55,7 @@ export function Footer() {
         </div>
 
         {/* CATALOG */}
-        <div className={styles.col}>
+        <div className={`${styles.col} ${styles.links}`}>
           <ul className={styles.menu}>
             <li>Katalog</li>
             <li className={styles.active}>Biz haqimizda</li>
@@ -67,7 +67,7 @@ export function Footer() {
         </div>
 
         {/* JOBS */}
-        <div className={styles.col}>
+        <div className={`${styles.col} ${styles.links}`}>
           <ul className={styles.menu}>
             <li>Bo‘sh ish o‘rinlari</li>
             <li>Aloqa</li>

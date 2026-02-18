@@ -21,6 +21,7 @@ export function NewsArticleView({ article, sidebar, prevArticle, nextArticle, cu
       <div className={styles.container}>
         {/* MAIN */}
         <article className={styles.article}>
+          <span className={styles.title}>{article.title}</span>
           <ImageWithLoader
             src={article.image}
             alt={article.title}

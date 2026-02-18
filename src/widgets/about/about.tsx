@@ -7,54 +7,22 @@ import { ImageWithLoader } from "@/shared/ui/image-with-loader";
 import { Button } from "@/shared/ui/button";
 import { AnimatedCounter } from "@/shared/ui/animated-counter";
 import { useTranslations } from "next-intl";
+import { AnimateOnScroll } from "@/shared/ui/animate-on-scroll";
 
 export function About() {
   const t = useTranslations("home");
   return (
     <section className={styles.about}>
-      <div className={styles.top}>
-        {/* LEFT */}
-        <div className={styles.content}>
-          <h2 className={`${styles.title} inter`}>{t("about")}</h2>
+      <AnimateOnScroll
+        stagger
+        rootMargin="0px 0px -60px 0px"
+        threshold={0.5}
+        className={styles.top}
+      >
+        {/* 1. Title */}
+        <h2 className={`${styles.title} inter`}>{t("about")}</h2>
 
-          <p className={`${styles.textPrimary} inter`}>
-            Общество с Ограниченной Ответственностью «GIDRO STANKO SERVIS»
-            создано в марте 2007 года на территории города Навоийской области с
-            Уставным капиталом свыше 166,3 млн. сум.
-          </p>
-
-          <p className={`${styles.textSecondary} inter`}>
-            Общество с Ограниченной Ответственностью «GIDRO STANKO SERVIS»
-            создано в марте 2007 года на территории города Навоийской области с
-            Уставным капиталом свыше 166,3 млн. сум.
-          </p>
-
-          <div className={styles.stats}>
-            {stats.map((item) => (
-              <div key={item.value} className={styles.stat}>
-                <AnimatedCounter
-                  value={item.value}
-                  duration={1800}
-                  className={`${styles.statValue} inter`}
-                />
-                <span className={`${styles.statLabel} inter`}>
-                  {item.label}
-                </span>
-              </div>
-            ))}
-          </div>
-
-          <div className={styles.actions}>
-            <Button outlinebutton textClassName={styles.btnText} circleClassName={styles.iconCircle}>
-              {t("about-more")}
-            </Button>
-            <Button outlinebutton textClassName={styles.btnText} circleClassName={styles.iconCircle}>
-              {t("certificates")}
-            </Button>
-          </div>
-        </div>
-
-        {/* RIGHT IMAGE */}
+        {/* 2. Image */}
         <div className={styles.imageWrapper}>
           <ImageWithLoader
             src="/images/about-image.png"
@@ -64,13 +32,59 @@ export function About() {
             wrapperClassName={styles.imageFill}
           />
         </div>
-      </div>
+
+        {/* 3. Text */}
+        <div className={styles.textContent}>
+          <p className={`${styles.textPrimary} inter`}>
+            Общество с Ограниченной Ответственностью «GIDRO STANKO SERVIS»
+            создано в марте 2007 года на территории города Навоийской области с
+            Уставным капиталом свыше 166,3 млн. сум.
+          </p>
+          <p className={`${styles.textSecondary} inter`}>
+            Общество с Ограниченной Ответственностью «GIDRO STANKO SERVIS»
+            создано в марте 2007 года на территории города Навоийской области с
+            Уставным капиталом свыше 166,3 млн. сум.
+          </p>
+        </div>
+
+        {/* 4. Stats */}
+        <div className={styles.stats}>
+          {stats.map((item) => (
+            <div key={item.value} className={styles.stat}>
+              <AnimatedCounter
+                value={item.value}
+                duration={1800}
+                className={`${styles.statValue} inter`}
+              />
+              <span className={`${styles.statLabel} inter`}>
+                {item.label}
+              </span>
+            </div>
+          ))}
+        </div>
+
+        {/* 5. Actions */}
+        <div className={styles.actions}>
+          <Button outlinebutton textClassName={styles.btnText} circleClassName={styles.iconCircle}>
+            {t("about-more")}
+          </Button>
+          <Button outlinebutton textClassName={styles.btnText} circleClassName={styles.iconCircle}>
+            {t("certificates")}
+          </Button>
+        </div>
+      </AnimateOnScroll>
 
       {/* ADVANTAGES */}
-      <Advantages
-        title={t("team")}
-        text={t("team-text")}
-      />
+      <AnimateOnScroll
+        rootMargin="0px 0px -60px 0px"
+        threshold={0.5}
+      >
+        <Advantages
+          title={t("team")}
+          isStack
+          text={t("team-text")}
+        />
+      </AnimateOnScroll>
     </section>
   );
 }

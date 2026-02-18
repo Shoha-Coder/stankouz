@@ -1,6 +1,7 @@
-// model/data.ts
+// model/data.ts - fallback when API is empty
 export const history = [
   {
+    id: 0,
     year: 2007,
     title: 'Создание компании "Gidro Stanko Service"',
     description:
@@ -8,18 +9,21 @@ export const history = [
     image: "/images/history.png",
   },
   {
+    id: 1,
     year: 2010,
     title: "Развитие производственной базы",
     description: "Компания расширила производственные мощности...",
     image: "/images/history.png",
   },
   {
+    id: 2,
     year: 2011,
     title: "Новые направления",
     description: "Добавлены лабораторные и сервисные услуги...",
     image: "/images/history.png",
   },
   {
+    id: 3,
     year: 2014,
     title: "Международное сотрудничество",
     description: "Выход на международный рынок...",

@@ -5,15 +5,16 @@ import { Breadcrumb } from "@/shared/ui/breadcrumb/breadcrumb";
 import { VacancySection } from "@/widgets/vacancy-section/vacancy-section";
 import { useVacancy } from "@/entities/vacancy";
 import styles from "../jobs.module.scss";
-
-const BREADCRUMB_ITEMS = [
-    { label: "Bosh sahifa", href: "" },
-    { label: "Ish o'rinlari", href: "jobs" },
-];
+import { useTranslations } from "next-intl";
 
 export default function VacancyDetailPage() {
     const params = useParams();
     const slug = params?.slug as string | undefined;
+    const tBreadcrumb = useTranslations("breadcrumbs");
+    const BREADCRUMB_ITEMS = [
+        { label: tBreadcrumb("home"), href: "" },
+        { label: tBreadcrumb("vacancies"), href: "jobs" },
+    ];
     const { data: vacancy, isPending, isError } = useVacancy(slug);
 
     if (!slug) {

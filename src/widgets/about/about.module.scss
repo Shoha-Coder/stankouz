@@ -9,27 +9,31 @@
 /* === TOP BLOCK === */
 
 .top {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto auto auto;
+    grid-template-areas:
+        "title image"
+        "textContent image"
+        "stats image"
+        "actions image";
     gap: clamp(24px, 4vw, 40px);
 }
 
-/* LEFT CONTENT */
-
-.content {
-    flex: 1;
-    min-width: 0;
-    display: flex;
-    flex-direction: column;
-    gap: clamp(16px, 2vw, 20px);
-}
-
 .title {
+    grid-area: title;
     font-family: "Unbounded";
     font-weight: 600;
     font-size: clamp(1.5rem, 4vw, 32px);
     line-height: 120%;
     color: #282828;
+}
+
+.textContent {
+    grid-area: textContent;
+    display: flex;
+    flex-direction: column;
+    gap: clamp(16px, 2vw, 20px);
 }
 
 .textPrimary {
@@ -51,6 +55,7 @@
 /* STATS */
 
 .stats {
+    grid-area: stats;
     display: flex;
     flex-wrap: wrap;
     gap: clamp(16px, 3vw, 30px);
@@ -77,6 +82,7 @@
 /* ACTIONS */
 
 .actions {
+    grid-area: actions;
     display: flex;
     flex-wrap: wrap;
     gap: clamp(10px, 2vw, 15px);
@@ -113,8 +119,7 @@
 /* RIGHT IMAGE */
 
 .imageWrapper {
-    flex: 1;
-    min-width: 0;
+    grid-area: image;
     position: relative;
     width: 100%;
     aspect-ratio: 16 / 9;
@@ -138,7 +143,13 @@
 
 @media (max-width: 1024px) {
     .top {
-        flex-direction: column;
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "title"
+            "image"
+            "textContent"
+            "stats"
+            "actions";
     }
 
     .imageWrapper {
@@ -156,5 +167,25 @@
         justify-content: center;
         height: clamp(48px, 10vw, 60px);
         padding: 5px 16px;
+    }
+}
+
+@media (max-width: 510px) {
+    .actions {
+        flex-direction: column;
+        width: 100%;
+        button {
+            width: 100% !important;
+            min-width: 100% !important;
+            max-width: 100% !important;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+    }
+    .stats {
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
     }
 }

@@ -46,73 +46,10 @@
   }
 }
 
-/* ===== Language ===== */
+/* ===== Language (desktop only - mobile shows in navbar) ===== */
 
-.langWrapper {
-  position: relative;
-}
-
-.langButton {
-  background: none;
-  border: none;
-  color: $text-light;
-  font-size: 0.9375rem;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 0.25rem;
-}
-
-.chevron {
-  transition: transform 0.2s ease;
-}
-
-.chevronOpen {
-  transform: rotate(180deg);
-}
-
-/* ===== Dropdown ===== */
-
-.langDropdown {
-  position: absolute;
-  top: calc(100% + 8px);
-  right: 0;
-  min-width: 96px;
-  background-color: $dropdown-bg;
-  border-radius: 6px;
-  padding: 0.5rem 0;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-  z-index: 2000;
-  animation: fadeIn 0.15s ease-out;
-}
-
-.langOption {
-  width: 100%;
-  padding: 0.5rem 1rem;
-  background: none;
-  border: none;
-  text-align: left;
-  cursor: pointer;
-  font-size: 0.875rem;
-
-  &:hover {
-    background-color: #f3f4f6;
-  }
-}
-
-.active {
-  color: $blue-primary;
-  font-weight: 500;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(-4px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
+.langWrapperDesktop {
+  @media (max-width: 1200px) {
+    display: none;
   }
 }

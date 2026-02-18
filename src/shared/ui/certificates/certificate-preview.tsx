@@ -1,10 +1,10 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import styles from "./certificate-preview.module.scss";
 import { ArrowRightIcon } from "../icons";
 import type { CertificateItem } from "./certificates-carousel";
-import { ImageWithLoader } from "@/shared/ui/image-with-loader";
 
 type Props = {
   open: boolean;
@@ -43,6 +43,16 @@ function ZoomOutIcon() {
 export function CertificatePreview({ open, items, currentIndex, onClose, onPrev, onNext }: Props) {
   const [zoom, setZoom] = useState(1);
   const [position, setPosition] = useState({ x: 0, y: 0 });
+  const [mounted, setMounted] = useState(false);
+  const [imgError, setImgError] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (open && currentIndex >= 0) setImgError(false);
+  }, [open, currentIndex]);
 
   const currentItem = items[currentIndex];
   const hasMultiple = items.length > 1;
@@ -94,9 +104,9 @@ export function CertificatePreview({ open, items, currentIndex, onClose, onPrev,
     };
   }, [open, onClose, canPrev, canNext, onPrev, onNext]);
 
-  if (!open || !currentItem) return null;
+  if (!open || !currentItem || !mounted || typeof document === "undefined") return null;
 
-  return (
+  const content = (
     <div
       className={`${styles.overlay} ${styles.visible}`}
       onClick={onClose}
@@ -158,7 +168,19 @@ export function CertificatePreview({ open, items, currentIndex, onClose, onPrev,
             if (zoom < MAX_ZOOM) setZoom((z) => Math.min(MAX_ZOOM, z + ZOOM_STEP));
           }}
         >
-          <ImageWithLoader src={currentItem.image} alt={currentItem.alt ?? "Certificate"} draggable={false} width={514} height={320} fillWrapper />
+          {imgError ? (
+            <div className={styles.imageError}>
+              <span>Image failed to load</span>
+            </div>
+          ) : (
+            <img
+              src={currentItem.image}
+              alt={currentItem.alt ?? "Certificate"}
+              draggable={false}
+              className={styles.previewImage}
+              onError={() => setImgError(true)}
+            />
+          )}
         </div>
       </div>
 
@@ -190,4 +212,6 @@ export function CertificatePreview({ open, items, currentIndex, onClose, onPrev,
       </div>
     </div>
   );
+
+  return createPortal(content, document.body);
 }

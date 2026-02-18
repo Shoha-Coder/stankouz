@@ -1,4 +1,6 @@
 .wrapper {
+    margin: 0 auto;
+    max-width: 1360px;
     margin-top: clamp(60px, 10vw, 180px);
     padding: 0 clamp(20px, 4vw, 40px);
     margin-bottom: clamp(60px, 10vw, 150px);

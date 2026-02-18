@@ -133,9 +133,23 @@
 
 .years {
     display: flex;
-    flex-wrap: wrap;
     gap: clamp(12px, 3vw, 20px);
     margin-bottom: clamp(16px, 3vw, 20px);
+    max-width: 340px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    user-select: none;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+
+    &[data-grabbing="true"] {
+        cursor: grabbing;
+    }
 }
 
 .year {

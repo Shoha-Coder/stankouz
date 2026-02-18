@@ -16,7 +16,7 @@ export const ProductCard = ({ product, isProductPage }: Props) => {
   const basePath = isProductPage ? "products" : "machines";
   const href = `/${locale}/${basePath}/${product.slug}`;
   return (
-    <Link href={href} className={styles.card}>
+    <Link href={href as any} className={styles.card}>
       <div className={styles.image}>
         <ImageWithLoader
           src={product.image}

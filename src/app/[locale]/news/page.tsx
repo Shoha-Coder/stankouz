@@ -10,13 +10,14 @@ import Link from "next/link";
 import { getLocaleFromPath } from "@/shared/lib/i18n/get-locale-from-path";
 import { usePathname } from "next/navigation";
 import { Pagination } from "@/shared/ui/pagination";
-
-const BREADCRUMB_ITEMS = [
-    { label: "Bosh sahifa", href: "" },
-    { label: "Yangiliklar", href: "news" },
-];
+import { useTranslations } from "next-intl";
 
 export default function NewsPage() {
+    const tBreadcrumb = useTranslations("breadcrumbs");
+    const BREADCRUMB_ITEMS = [
+        { label: tBreadcrumb("home"), href: "" },
+        { label: tBreadcrumb("news"), href: "news" },
+    ];
     const pathname = usePathname();
     const locale = getLocaleFromPath(pathname);
     const [page, setPage] = useState(1);

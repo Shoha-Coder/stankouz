@@ -10,6 +10,7 @@ import { Navigation, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+import { swiperPaginationConfig } from "@/shared/config/swiper";
 import { CertificatePreview } from "./certificate-preview";
 
 export type CertificateItem = { 
@@ -39,6 +40,7 @@ export function CertificatesCarousel({ items }: Props) {
           spaceBetween={16}
           slidesPerView={1.1}
           pagination={{
+            ...swiperPaginationConfig,
             clickable: true,
             el: ".certs-pagination",
           }}

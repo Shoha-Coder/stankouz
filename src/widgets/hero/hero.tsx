@@ -6,6 +6,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 
 import styles from "./hero.module.scss";
+import { swiperPaginationConfig } from "@/shared/config/swiper";
 import { ArrowRightIcon, DownloadIcon } from "@/shared/ui/icons";
 import { heroSlides } from "./model/slides";
 import { useTranslations } from "next-intl";
@@ -33,7 +34,7 @@ export function Hero() {
       ? banners.map((b) => ({
           id: b.id,
           title: b.title,
-          subtitle: stripHtml(b.desc) || t("subtitle"),
+          subtitle: stripHtml(b.desc),
           image: getBannerImage(b),
           images: b.images,
           url: b.url,
@@ -46,7 +47,7 @@ export function Hero() {
     <section className={styles.hero}>
       <Swiper
         modules={[Pagination]}
-        pagination={{ clickable: true }}
+        pagination={{ ...swiperPaginationConfig, clickable: true }}
         loop={slides.length > 1}
         className={styles.swiper}
       >

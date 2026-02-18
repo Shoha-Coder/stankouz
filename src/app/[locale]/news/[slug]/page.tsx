@@ -5,15 +5,16 @@ import { Breadcrumb } from "@/shared/ui/breadcrumb/breadcrumb";
 import { NewsArticleView } from "@/widgets/news-article/ui/news-article";
 import { usePost, usePosts } from "@/entities/post";
 import styles from "../news.module.scss";
-
-const BREADCRUMB_ITEMS = [
-    { label: "Bosh sahifa", href: "" },
-    { label: "Yangiliklar", href: "news" },
-];
+import { useTranslations } from "next-intl";
 
 export default function NewsDetailPage() {
     const params = useParams();
     const slug = params?.slug as string | undefined;
+    const tBreadcrumb = useTranslations("breadcrumbs");
+    const BREADCRUMB_ITEMS = [
+        { label: tBreadcrumb("home"), href: "" },
+        { label: tBreadcrumb("news"), href: "news" },
+    ];
     const { data: post, isPending, isError } = usePost(slug);
     const { data: postsData } = usePosts({ page: 1 });
     const listPosts = postsData?.data ?? [];

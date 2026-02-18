@@ -9,6 +9,7 @@ import Logo from "@/shared/ui/icons/logo";
 import { SearchIcon, HamburgerIcon } from "@/shared/ui/icons";
 import ChevronDownSvg from "@/shared/ui/icons/chevron-down-svg";
 import ChevronRight from "@/shared/ui/icons/chevron-right";
+import { LangSwitcher } from "@/shared/ui/lang-switcher";
 
 import { getLocaleFromPath } from "@/shared/lib/i18n/get-locale-from-path";
 
@@ -187,7 +188,7 @@ export function MainNavbar() {
           </ul>
         </div>
 
-        {/* Mobile hamburger / close toggle */}
+        {/* Mobile hamburger */}
         <button
           type="button"
           className={styles.hamburger}
@@ -288,6 +289,9 @@ export function MainNavbar() {
                       {tNav(item.labelKey)}
                     </Link>
                   ))}
+                  <div className={styles.mobileLangWrap}>
+                    <LangSwitcher />
+                  </div>
                 </>
               ) : currentMobileView === "catalog" ? (
                 <MobileCatalogView

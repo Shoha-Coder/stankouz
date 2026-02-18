@@ -29,6 +29,7 @@ export default function ImageWithLoader({
     const shouldFill = Boolean(props.fill) || fillWrapper || wrapperClassName;
 
     if (srcSet) {
+        const srcStr = typeof props.src === "string" ? props.src : (props.src as { src: string }).src;
         return (
             <div
                 className={`${styles.wrapper} ${shouldFill ? styles.wrapperFill : ""} ${wrapperClassName || ""}`}
@@ -39,7 +40,7 @@ export default function ImageWithLoader({
                     </div>
                 )}
                 <img
-                    src={props.src}
+                    src={srcStr}
                     alt={props.alt ?? ""}
                     srcSet={srcSet}
                     sizes={sizes}
