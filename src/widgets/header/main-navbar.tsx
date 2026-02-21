@@ -2,15 +2,13 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 
 import Logo from "@/shared/ui/icons/logo";
 import { SearchIcon, HamburgerIcon } from "@/shared/ui/icons";
 import ChevronDownSvg from "@/shared/ui/icons/chevron-down-svg";
 import ChevronRight from "@/shared/ui/icons/chevron-right";
-import { LangSwitcher } from "@/shared/ui/lang-switcher";
-
 import { getLocaleFromPath } from "@/shared/lib/i18n/get-locale-from-path";
 
 import {
@@ -18,6 +16,7 @@ import {
   type CatalogCategory,
   type CatalogSubcategory,
 } from "./model/nav-config";
+import { handleLocaleChange } from "@/shared/lib/i18n/handle-locale-change";
 import { useCategories } from "@/entities/category/model/useCategories";
 import { useCategoryProducts } from "@/entities/category/model/useCategoryProducts";
 import { toCatalogCategories } from "@/entities/category/model/mappers";
@@ -29,19 +28,22 @@ const MOBILE_BREAKPOINT = 1200;
 
 export function MainNavbar() {
   const pathname = usePathname();
+  const router = useRouter();
   const locale = getLocaleFromPath(pathname);
   const pathnameWithoutLocale = pathname.replace(`/${locale}`, '').replace('/', '') as string;
   const tNav = useTranslations("header.nav");
+  const tHeader = useTranslations("header");
 
   const [catalogOpen, setCatalogOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-  type MobileView = "root" | "catalog" | CatalogCategory | CatalogSubcategory;
+  type MobileView = "root" | "catalog" | "lang" | CatalogCategory | CatalogSubcategory;
   const [mobileCatalogStack, setMobileCatalogStack] = useState<MobileView[]>(["root"]);
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<CatalogCategory | null>(
     null
   );
   const [isMobile, setIsMobile] = useState(false);
+  const [locales, setLocales] = useState<string[]>([]);
 
   const navRef = useRef<HTMLDivElement>(null);
   const catalogRef = useRef<HTMLDivElement>(null);
@@ -91,6 +93,13 @@ export function MainNavbar() {
     check();
     window.addEventListener("resize", check);
     return () => window.removeEventListener("resize", check);
+  }, []);
+
+  useEffect(() => {
+    fetch("/api/locales")
+      .then((res) => res.json())
+      .then((data) => setLocales(data.locales ?? []))
+      .catch(() => setLocales(["en", "ru", "uz"]));
   }, []);
 
   useEffect(() => {
@@ -344,10 +353,36 @@ export function MainNavbar() {
                     {tNav(item.labelKey)}
                   </Link>
                 ))}
-                <div className={styles.mobileLangWrap}>
-                  <LangSwitcher />
-                </div>
+                <button
+                  type="button"
+                  className={styles.mobileNavItem}
+                  onClick={() => setMobileCatalogStack((s) => [...s, "lang"])}
+                >
+                  {tHeader(`localeLabels.${locale}` as "localeLabels.ru")?.startsWith("localeLabels")
+                    ? locale.toUpperCase()
+                    : tHeader(`localeLabels.${locale}` as "localeLabels.ru") ?? locale.toUpperCase()}
+                  <ChevronRight className={styles.mobileChevron} />
+                </button>
               </>
+            ) : currentMobileView === "lang" ? (
+              <MobileLangView
+                title={tHeader(`localeLabels.${locale}` as "localeLabels.ru")?.startsWith("localeLabels")
+                  ? locale.toUpperCase()
+                  : tHeader(`localeLabels.${locale}` as "localeLabels.ru") ?? locale.toUpperCase()}
+                locales={locales.length ? locales : ["en", "ru", "uz"]}
+                currentLocale={locale}
+                onLocaleSelect={(loc) => {
+                  handleLocaleChange(loc, locale, pathname, router);
+                  closeMobile();
+                }}
+                onBack={handleMobileBack}
+                getLabel={(loc) => {
+                  const label = tHeader(`localeLabels.${loc}` as "localeLabels.ru");
+                  return label?.startsWith("localeLabels") ? loc.toUpperCase() : (label ?? loc.toUpperCase());
+                }}
+                ChevronRight={ChevronRight}
+                styles={styles}
+              />
             ) : currentMobileView === "catalog" ? (
               <MobileCatalogView
                 title={tNav("catalog")}
@@ -388,6 +423,50 @@ export function MainNavbar() {
         </div>
       )}
     </nav>
+  );
+}
+
+function MobileLangView({
+  title,
+  locales,
+  currentLocale,
+  onLocaleSelect,
+  onBack,
+  getLabel,
+  ChevronRight,
+  styles: s,
+}: {
+  title: string;
+  locales: string[];
+  currentLocale: string;
+  onLocaleSelect: (loc: string) => void;
+  onBack: () => void;
+  getLabel: (loc: string) => string;
+  ChevronRight: React.ComponentType<{ className?: string }>;
+  styles: Record<string, string>;
+}) {
+  return (
+    <>
+      <div className={s.mobileNavHeader}>
+        <button type="button" className={s.mobileBack} onClick={onBack} aria-label="Back">
+          <ChevronRight className={s.mobileBackIcon} />
+        </button>
+        <span className={s.mobileNavTitle}>{title}</span>
+      </div>
+      <ul className={s.mobileCategoryList}>
+        {locales.map((loc) => (
+          <li key={loc}>
+            <button
+              type="button"
+              className={`${s.mobileCategoryItem} ${currentLocale === loc ? s.navLinkActive : ""}`}
+              onClick={() => onLocaleSelect(loc)}
+            >
+              {getLabel(loc)}
+            </button>
+          </li>
+        ))}
+      </ul>
+    </>
   );
 }
 

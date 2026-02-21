@@ -14,12 +14,12 @@ import { Skeleton } from "@/shared/ui/skeleton";
 
 const INITIAL_LIMIT = 6;
 
-export function Products({ isLab, isHome }: { isLab?: boolean, isHome?: boolean }) {
+export function Products({ isLab, isHome, isProducts }: { isLab?: boolean, isHome?: boolean, isProducts?: boolean }) {
   const pathname = usePathname();
   const locale = getLocaleFromPath(pathname);
   const t = useTranslations("home");
-  const { data, isPending } = useProducts({ page: 1, ...(isLab ? { category_id: 17 } : {}) });
-  const products = isHome ? data?.data?.filter(p => !p.categories.some(c => c.id === 17)).filter(p => !p.categories.some(c => c.id === 18)) : data?.data;
+  const { data, isPending } = useProducts({ page: 1 });
+  const products = (isHome || isProducts) ? data?.data?.filter(p => !p.categories.some(c => c.id === 17)).filter(p => !p.categories.some(c => c.id === 18)) : isLab ? data?.data?.filter(p => p.categories.some(c => c.id === 17)) : data?.data;
   const [expanded, setExpanded] = useState(false);
 
   const showSkeleton = isPending || !products?.length;

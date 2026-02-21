@@ -5,41 +5,13 @@ import { createPortal } from "react-dom";
 import { useSubmitApplication } from "@/entities/contact";
 import { ArrowRightIcon } from "@/shared/ui/icons";
 import UploadIcon from "@/shared/ui/icons/upload";
+import { formatPhoneUz, parsePhoneForSubmit } from "@/shared/lib/format-phone";
 import styles from "./application-form-modal.module.scss";
 
 const ANIMATION_DURATION_MS = 300;
 
 const RESUME_MAX_SIZE_MB = 10;
 const RESUME_ACCEPT = ".pdf,.doc,.docx,.jpg,.jpeg,.png";
-
-/** Format Uzbek phone: +998 (XX) XXX-XX-XX */
-function formatPhoneUz(value: string): string {
-  const digits = value.replace(/\D/g, "");
-  let clean = digits;
-  if (digits.startsWith("998")) {
-    clean = digits.slice(3);
-  } else if (digits.startsWith("8") && digits.length > 1) {
-    clean = digits.slice(1);
-  }
-  clean = clean.slice(0, 9);
-
-  if (clean.length === 0) return "";
-  if (clean.length <= 2) return `+998 (${clean}`;
-  if (clean.length <= 5)
-    return `+998 (${clean.slice(0, 2)}) ${clean.slice(2)}`;
-  if (clean.length <= 7)
-    return `+998 (${clean.slice(0, 2)}) ${clean.slice(2, 5)}-${clean.slice(5)}`;
-  return `+998 (${clean.slice(0, 2)}) ${clean.slice(2, 5)}-${clean.slice(5, 7)}-${clean.slice(7, 9)}`;
-}
-
-/** Extract digits for API: 998901234567 */
-function parsePhoneForSubmit(value: string): string {
-  const digits = value.replace(/\D/g, "");
-  if (digits.startsWith("998")) return digits;
-  if (digits.startsWith("8") && digits.length >= 10) return "998" + digits.slice(1, 10);
-  if (digits.length >= 9) return "998" + digits.slice(-9);
-  return digits;
-}
 
 export interface ApplicationFormModalProps {
   open: boolean;
@@ -113,6 +85,14 @@ export function ApplicationFormModal({
   const handlePhoneChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     const formatted = formatPhoneUz(e.target.value);
     setPhoneValue(formatted);
+  }, []);
+
+  const handleNameKeyDown = useCallback((e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (/[0-9]/.test(e.key)) e.preventDefault();
+  }, []);
+
+  const handleNameChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    e.target.value = e.target.value.replace(/[0-9]/g, "");
   }, []);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -208,6 +188,8 @@ export function ApplicationFormModal({
                 disabled={isPending}
                 className={styles.input}
                 autoComplete="name"
+                onKeyDown={handleNameKeyDown}
+                onChange={handleNameChange}
               />
             </div>
 

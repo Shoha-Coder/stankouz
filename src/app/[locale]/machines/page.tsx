@@ -29,7 +29,7 @@ export default function MachinesPage() {
         page,
     });
 
-    const products = data?.data
+    const products = data?.data?.filter(p => !p.categories.some(c => c.id === 17)).filter(p => !p.categories.some(c => c.id === 18))
     const meta = data?.meta;
     const totalPages = meta?.last_page ?? 1;
     const total = meta?.total ?? 0;
