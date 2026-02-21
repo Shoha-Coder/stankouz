@@ -5,5 +5,6 @@ const PARTNERS_ENDPOINT = "/partners";
 
 export async function getPartners(): Promise<Partner[]> {
     const { data } = await api.get<PartnersResponse>(PARTNERS_ENDPOINT);
-    return data?.data ?? [];
+    const items = data?.data;
+    return items ? items : [];
 }

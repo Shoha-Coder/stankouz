@@ -25,9 +25,9 @@ export async function getCertificates(
         },
         headers: locale ? { "Accept-Language": locale } : undefined,
     });
-    const raw = data?.data ?? [];
+    const raw = data?.data;
     return {
-        data: raw.map((item: CertificateApiItem) => toCertificate(item)),
-        total: data?.meta?.total ?? raw.length,
+        data: raw ? raw.map((item: CertificateApiItem) => toCertificate(item)) : [],
+        total: data?.meta?.total ?? (raw?.length ?? 0),
     };
 }

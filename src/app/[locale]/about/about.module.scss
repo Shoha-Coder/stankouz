@@ -4,3 +4,68 @@
         padding: 0 clamp(20px, 4vw, 40px);
     }
 }
+
+/* Skeleton */
+.skeletonSection {
+    width: 100%;
+    max-width: 1360px;
+    margin: 0 auto;
+    margin-top: clamp(60px, 12vw, 180px);
+    padding: 0 clamp(20px, 4vw, 40px);
+}
+
+.skeletonTitle {
+    height: clamp(28px, 4vw, 38px);
+    width: 40%;
+    max-width: 280px;
+    margin-bottom: clamp(24px, 4vw, 40px);
+}
+
+.skeletonHistoryLayout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(24px, 4vw, 40px);
+    align-items: start;
+}
+
+.skeletonHistoryImage {
+    width: 100%;
+    aspect-ratio: 433 / 256;
+    border-radius: clamp(16px, 2.5vw, 25px);
+}
+
+.skeletonHistoryContent {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.skeletonHistoryText {
+    height: 18px;
+    width: 100%;
+}
+
+.skeletonHistoryTextShort {
+    height: 18px;
+    width: 70%;
+}
+
+.skeletonCerts {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.skeletonCert {
+    width: clamp(200px, 25vw, 280px);
+    aspect-ratio: 1;
+    border-radius: clamp(12px, 2vw, 20px);
+    flex-shrink: 0;
+    min-width: 180px;
+}
+
+@media (max-width: 768px) {
+    .skeletonHistoryLayout {
+        grid-template-columns: 1fr;
+    }
+}

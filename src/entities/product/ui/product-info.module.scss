@@ -28,6 +28,22 @@
     padding-bottom: clamp(12px, 1.5vw, 15px);
 }
 
+.expandBtn {
+    font-family: Inter, sans-serif;
+    font-weight: 500;
+    font-size: inherit;
+    color: #0863ad;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    display: inline;
+
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
 .features {
     display: flex;
     flex-direction: column;

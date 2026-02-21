@@ -1,4 +1,4 @@
-/** Raw API response item from /categories/products */
+/** Raw API response item from /categories/products or /categories/products/:slug */
 export interface CategoryApiItem {
     id: number;
     name: string | null;
@@ -7,10 +7,11 @@ export interface CategoryApiItem {
     parent_id: number | null;
     in_main: number;
     view: number;
-    images: {
-        lg: string | null;
-        md: string | null;
-        sm: string | null;
+    attributes?: unknown[];
+    images?: {
+        lg?: string | null;
+        md?: string | null;
+        sm?: string | null;
     };
 }
 

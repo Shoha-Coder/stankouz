@@ -11,14 +11,14 @@ export interface VacanciesResult {
 
 export async function getVacancies(): Promise<VacanciesResult> {
     const { data } = await api.get<VacanciesResponse>(VACANCIES_ENDPOINT);
-    const raw = data?.data ?? [];
-    const mapped = raw.map(toVacancy);
+    const raw = data?.data;
+    const mapped = raw ? raw.map(toVacancy) : [];
     const uniqueBySlug = Array.from(
         new Map(mapped.map((v) => [v.slug, v])).values()
     ).sort((a, b) => b.id - a.id);
     return {
-        data: uniqueBySlug,
-        total: data?.meta?.total ?? uniqueBySlug.length,
+        data: mapped,
+        total: data?.meta?.total,
     };
 }
 

@@ -35,6 +35,7 @@
 
 .card {
     width: 100%;
+    margin: 0 auto;
     aspect-ratio: 433 / 256;
     min-height: 160px;
     border-radius: clamp(16px, 2.5vw, 25px);

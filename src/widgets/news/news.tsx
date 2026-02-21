@@ -16,16 +16,38 @@ import Link from "next/link";
 import { getLocaleFromPath } from "@/shared/lib/i18n/get-locale-from-path";
 import { usePathname } from "next/navigation";
 import { useTranslations } from "next-intl";
+import { Skeleton } from "@/shared/ui/skeleton";
 
 export function News() {
     const pathname = usePathname();
     const locale = getLocaleFromPath(pathname);
     const t = useTranslations("home");
     const { data, isPending } = usePosts({ page: 1 });
-    const posts = data?.data ?? [];
+    const posts = data?.data;
 
-    if (isPending && posts.length === 0) return null;
-    if (posts.length === 0) return null;
+    const showSkeleton = isPending || !posts?.length;
+
+    if (showSkeleton) {
+        return (
+            <section className={styles.news}>
+                <header className={styles.header}>
+                    <h2 className={styles.title}>{t("news-title")}</h2>
+                    <p className={styles.subtitle}>{t("news-des")}</p>
+                </header>
+                <div className={styles.sliderWrap}>
+                    <div className={styles.skeletonGrid}>
+                        {[1, 2, 3].map((i) => (
+                            <article key={i} className={styles.card}>
+                                <Skeleton className={styles.skeletonImage} />
+                                <Skeleton className={styles.skeletonDate} />
+                                <Skeleton className={styles.skeletonTitle} />
+                            </article>
+                        ))}
+                    </div>
+                </div>
+            </section>
+        );
+    }
 
     return (
         <section className={styles.news}>
@@ -54,7 +76,7 @@ export function News() {
                         el: ".news-pagination",
                     }}
                 >
-                    {posts.slice(0, 12).map((item, index) => (
+                    {posts!.slice(0, 12).map((item, index) => (
                         <SwiperSlide key={item.id}>
                             <AnimatedItem index={index}>
                                 <article className={styles.card}>

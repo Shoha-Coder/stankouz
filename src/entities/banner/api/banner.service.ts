@@ -5,6 +5,6 @@ const BANNERS_ENDPOINT = "/banners";
 
 export async function getBanners(page = "home"): Promise<Banner[]> {
     const { data } = await api.get<BannersResponse>(BANNERS_ENDPOINT);
-    const items = data?.data ?? [];
-    return items.filter((b) => b.page === page);
+    const items = data?.data;
+    return items ? items.filter((b) => b.page === page) : [];
 }

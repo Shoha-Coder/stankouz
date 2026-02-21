@@ -36,7 +36,38 @@
     color: #6c6c6c;
 }
 
+/* Skeleton */
+.skeletonImage {
+    width: 100%;
+    aspect-ratio: 433 / 256;
+    border-radius: clamp(16px, 2.5vw, 25px);
+}
+
+.skeletonTitle {
+    height: clamp(18px, 1.5vw, 20px);
+    width: 80%;
+}
+
+.skeletonText {
+    height: clamp(14px, 1.5vw, 18px);
+    width: 100%;
+}
+
 /* GRID */
+
+.gridWrap {
+    width: 100%;
+    overflow: hidden;
+    transition: max-height 0.4s ease-in-out;
+
+    &.collapsed {
+        max-height: 800px;
+    }
+
+    &.expanded {
+        max-height: 5000px;
+    }
+}
 
 .grid {
     display: grid;
@@ -140,20 +171,27 @@
 
 .outlineBtn {
     height: clamp(48px, 8vw, 60px);
-    width: fit-content !important;
     padding: 10px 5px;
+    padding-left: 20px;
     border-radius: clamp(24px, 5vw, 30px);
     border: 1px solid #0863ad;
     background: transparent;
-    display: flex;
+    display: inline-flex;
     align-items: center;
     justify-content: space-between;
-    padding-left: 20px;
     gap: clamp(10px, 1.5vw, 15px);
     font-family: "Inter";
     font-size: clamp(14px, 1.2vw, 16px);
-    color: #0863AD;
+    font-weight: 500;
+    color: #0863ad;
+    text-decoration: none;
     cursor: pointer;
+    transition: opacity 0.2s ease;
+
+    &:hover {
+        opacity: 0.9;
+    }
+
 }
 
 .iconCircle {
@@ -165,9 +203,19 @@
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
+    transform: rotate(90deg);
+    transition: transform 0.3s ease;
 
     svg {
         width: clamp(20px, 4vw, 24px);
         height: clamp(20px, 4vw, 24px);
     }
+}
+
+.iconCircleOpen {
+    transform: rotate(-90deg);
+}
+
+.iconCircleLink {
+    transform: none;
 }

@@ -18,9 +18,9 @@ export interface PostsResult {
 
 export async function getPosts(params?: PostParams): Promise<PostsResult> {
     const { data } = await api.get<PostsResponse>(POSTS_ENDPOINT, { params });
-    const raw = data?.data ?? [];
+    const raw = data?.data;
     return {
-        data: raw.map(toPost),
+        data: raw ? raw.map(toPost) : [],
         meta: data?.meta ?? { current_page: 1, last_page: 1, per_page: 12, total: 0 },
         links: data?.links ?? { first: "", last: "", prev: null, next: null },
     };

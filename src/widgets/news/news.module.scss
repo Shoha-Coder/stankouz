@@ -31,6 +31,30 @@
     color: #6c6c6c;
 }
 
+/* Skeleton */
+.skeletonGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 24px;
+}
+
+.skeletonImage {
+    width: 100%;
+    aspect-ratio: 433 / 256;
+    border-radius: clamp(16px, 2.5vw, 25px);
+}
+
+.skeletonDate {
+    height: 18px;
+    width: 80px;
+    margin-bottom: 12px;
+}
+
+.skeletonTitle {
+    height: clamp(18px, 1.5vw, 20px);
+    width: 90%;
+}
+
 /* SLIDER */
 
 .sliderWrap {

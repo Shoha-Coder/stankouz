@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import styles from "./products.module.scss";
 import { AnimatedItem } from "@/shared/ui/animated-item";
 import ArrowRight from "@/shared/ui/icons/arrow-right";
@@ -9,15 +10,41 @@ import { usePathname } from "next/navigation";
 import { ImageWithLoader } from "@/shared/ui/image-with-loader";
 import { useTranslations } from "next-intl";
 import { useProducts } from "@/entities/product/model/useProducts";
+import { Skeleton } from "@/shared/ui/skeleton";
+
+const INITIAL_LIMIT = 6;
 
 export function Products({ isLab }: { isLab?: boolean }) {
   const pathname = usePathname();
   const locale = getLocaleFromPath(pathname);
   const t = useTranslations("home");
-  const { data, isPending } = useProducts({ page: 1 });
-  const products = data?.data ?? [];
+  const { data, isPending } = useProducts({ page: 1, ...(isLab ? { category_id: 17 } : undefined) });
+  const products = data?.data;
+  const [expanded, setExpanded] = useState(false);
 
-  if (isPending || products.length === 0) return null;
+  const showSkeleton = isPending || !products?.length;
+  const hasMore = (products?.length ?? 0) > INITIAL_LIMIT;
+  const displayed = products ?? [];
+
+  if (showSkeleton) {
+    return (
+      <section className={`${styles.products} ${isLab ? styles.lab : ""}`}>
+        <div className={styles.header}>
+          <h2 className={styles.title}>{t("products")}</h2>
+          {!isLab && <p className={styles.subtitle}>{t("products-title")}</p>}
+        </div>
+        <div className={styles.grid}>
+          {[1, 2, 3, 4, 5, 6].map((i) => (
+            <div key={i} className={styles.card}>
+              <Skeleton className={styles.skeletonImage} />
+              <Skeleton className={styles.skeletonTitle} />
+              <Skeleton className={styles.skeletonText} />
+            </div>
+          ))}
+        </div>
+      </section>
+    );
+  }
 
   const productPath = "machines"; // products (machines) detail
   const morePath = isLab ? "labs" : "machines";
@@ -29,48 +56,64 @@ export function Products({ isLab }: { isLab?: boolean }) {
         {!isLab && <p className={styles.subtitle}>{t("products-title")}</p>}
       </div>
 
-      <div className={styles.grid}>
-        {products.slice(0, 6).map((item, index) => (
-          <AnimatedItem key={item.id} index={index}>
-            <Link href={`/${locale}/${productPath}/${item.slug}`} className={styles.card}>
-              <div className={styles.imageWrapper}>
-                {item.categoryLabel && (
-                  <span className={styles.badge}>{item.categoryLabel}</span>
+      <div
+        className={`${styles.gridWrap} ${hasMore && !expanded ? styles.collapsed : styles.expanded}`}
+      >
+        <div className={styles.grid}>
+          {displayed.map((item, index) => (
+            <AnimatedItem key={item.id} index={index}>
+              <Link href={`/${locale}/${productPath}/${item.slug}`} className={styles.card}>
+                <div className={styles.imageWrapper}>
+                  {item.categoryLabel && (
+                    <span className={styles.badge}>{item.categoryLabel}</span>
+                  )}
+                  <ImageWithLoader
+                    src={item.image}
+                    alt={item.title}
+                    width={433}
+                    height={256}
+                    fillWrapper
+                  />
+                </div>
+                <h3 className={styles.cardTitle}>{item.title}</h3>
+                {item.description && (
+                  <p className={styles.cardText}>{item.description}</p>
                 )}
-                <ImageWithLoader
-                  src={item.image}
-                  alt={item.title}
-                  width={433}
-                  height={256}
-                  fillWrapper
-                />
-              </div>
-              <h3 className={styles.cardTitle}>{item.title}</h3>
-              {item.description && (
-                <p className={styles.cardText}>{item.description}</p>
-              )}
-              <Link
-                href={`/${locale}/${productPath}/${item.slug}`}
-                className={styles.details}
-                onClick={(e) => e.stopPropagation()}
-              >
-                {t("details")}
+                <Link
+                  href={`/${locale}/${productPath}/${item.slug}`}
+                  className={styles.details}
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  {t("details")}
+                </Link>
               </Link>
-            </Link>
-          </AnimatedItem>
-        ))}
+            </AnimatedItem>
+          ))}
+        </div>
       </div>
 
       <div className={styles.action}>
-        <Link href={`/${locale}/${morePath}`} className={styles.outlineBtn}>
-          {isLab ? t("more-button") : t("see-catalog")}
-          <div
-            className={styles.iconCircle}
-            style={{ transform: isLab ? "rotate(90deg)" : "none" }}
+        {hasMore ? (
+          <button
+            type="button"
+            className={styles.outlineBtn}
+            onClick={() => setExpanded((e) => !e)}
           >
-            <ArrowRight />
-          </div>
-        </Link>
+            <span>{expanded ? t("less-button") : t("more-button")}</span>
+            <span
+              className={`${styles.iconCircle} ${expanded ? styles.iconCircleOpen : ""}`}
+            >
+              <ArrowRight />
+            </span>
+          </button>
+        ) : (
+          <Link href={`/${locale}/${morePath}`} className={styles.outlineBtn}>
+            <span>{isLab ? t("more-button") : t("see-catalog")}</span>
+            <span className={`${styles.iconCircle} ${styles.iconCircleLink}`}>
+              <ArrowRight />
+            </span>
+          </Link>
+        )}
       </div>
     </section>
   );

@@ -11,6 +11,8 @@ export interface Banner {
   url: string;
   page: string;
   images: BannerImages;
+  /** Optional video URL (mp4, webm, etc.) for hero background */
+  video?: string;
 }
 
 export interface BannersResponse {

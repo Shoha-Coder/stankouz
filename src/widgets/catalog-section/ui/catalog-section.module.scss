@@ -20,6 +20,12 @@
     padding: 0 20px;
 }
 
+.skeletonCard {
+    width: 100%;
+    aspect-ratio: 433 / 256;
+    border-radius: clamp(12px, 2vw, 20px);
+}
+
 .grid {
     margin-top: 32px;
     display: grid;

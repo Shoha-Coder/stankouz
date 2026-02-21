@@ -165,13 +165,15 @@ $nav-active: #0863ad;
     margin: 0 auto;
     padding: 24px clamp(16px, 4vw, 24px);
     max-height: 70vh;
+    min-height: 0;
 }
 
 .catalogLeft {
     display: flex;
     flex-direction: column;
     gap: 16px;
-    overflow-y: auto;
+    min-height: 0;
+    overflow: hidden;
 }
 
 .searchWrap {
@@ -179,7 +181,7 @@ $nav-active: #0863ad;
     display: flex;
     align-items: center;
     width: 100%;
-    // max-width: 277px;
+    flex-shrink: 0;
 }
 
 .searchInput {
@@ -218,6 +220,10 @@ $nav-active: #0863ad;
     display: flex;
     flex-direction: column;
     gap: 5px;
+    overflow-y: auto;
+    flex: 1;
+    min-height: 0;
+    max-height: 468px;
 }
 
 .categoryItem {
@@ -290,6 +296,11 @@ $nav-active: #0863ad;
     &:hover {
         color: $nav-active;
     }
+}
+
+.productItemSkeleton {
+    min-height: 24px;
+    border-radius: 4px;
 }
 
 /* ========== MOBILE DROPDOWN (like catalog - below navbar, no overlay) ========== */

@@ -27,11 +27,11 @@ export async function getMembers(
         },
         headers: locale ? { "Accept-Language": locale } : undefined,
     });
-    const raw = data?.data ?? [];
+    const raw = data?.data;
     const meta = data?.meta;
     return {
-        data: raw.map((item: MemberApiItem) => toMember(item)),
-        total: meta?.total ?? raw.length,
+        data: raw ? raw.map((item: MemberApiItem) => toMember(item)) : [],
+        total: meta?.total ?? (raw?.length ?? 0),
         currentPage: meta?.current_page,
         lastPage: meta?.last_page,
     };

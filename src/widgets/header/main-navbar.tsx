@@ -19,7 +19,9 @@ import {
   type CatalogSubcategory,
 } from "./model/nav-config";
 import { useCategories } from "@/entities/category/model/useCategories";
+import { useCategoryProducts } from "@/entities/category/model/useCategoryProducts";
 import { toCatalogCategories } from "@/entities/category/model/mappers";
+import { Skeleton } from "@/shared/ui/skeleton";
 
 import styles from "./main-navbar.module.scss";
 
@@ -138,8 +140,8 @@ export function MainNavbar() {
   const buildHref = (path: string) =>
     path ? `/${locale}/${path}` : `/${locale}`;
 
-  const { data: categories = [] } = useCategories();
-  const catalogCategories = toCatalogCategories(categories);
+  const { data: categories } = useCategories();
+  const catalogCategories = categories?.length ? toCatalogCategories(categories) : [];
 
   const filteredCategories = searchQuery
     ? catalogCategories.filter((c) =>
@@ -148,6 +150,24 @@ export function MainNavbar() {
     : catalogCategories;
 
   const displayCategory = selectedCategory ?? filteredCategories[0];
+
+  const categoryId = displayCategory ? Number(displayCategory.id) : null;
+  const { data: categoryProducts, isPending: productsPending } = useCategoryProducts({
+    categoryId: Number.isNaN(categoryId as number) ? null : categoryId,
+    limit: 6,
+  });
+
+  const mobileSubcategory =
+    typeof currentMobileView === "object" &&
+    currentMobileView !== null &&
+    "categoryId" in currentMobileView
+      ? (currentMobileView as CatalogSubcategory)
+      : null;
+  const { data: mobileSubcategoryProducts } = useCategoryProducts({
+    categoryId: mobileSubcategory ? Number(mobileSubcategory.categoryId) : null,
+    subcategoryId: mobileSubcategory ? Number(mobileSubcategory.id) : null,
+    limit: 6,
+  });
 
   return (
     <nav ref={navRef} className={styles.nav} aria-label="Main navigation">
@@ -243,17 +263,43 @@ export function MainNavbar() {
             <div className={styles.catalogRight}>
               <h3 className={styles.catalogTitle}>{displayCategory?.title}</h3>
               <div className={styles.productGrid}>
-                {(displayCategory?.subcategories ?? []).flatMap((sub) =>
-                  sub.products.map((p) => (
+                {productsPending ? (
+                  Array.from({ length: 6 }).map((_, i) => (
+                    <Skeleton key={i} className={styles.productItemSkeleton} />
+                  ))
+                ) : categoryProducts?.length ? (
+                  <>
+                    {categoryProducts.map((p) => (
+                      <Link
+                        key={p.id}
+                        href={buildHref(`machines/${p.slug}`) as any}
+                        className={styles.productItem}
+                        onClick={closeCatalog}
+                      >
+                        {p.title}
+                      </Link>
+                    ))}
                     <Link
-                      key={p.id}
-                      href={buildHref(p.href) as any}
+                      href={buildHref(`machines?category=${displayCategory?.id}`) as any}
                       className={styles.productItem}
                       onClick={closeCatalog}
                     >
-                      {p.title}
+                      Barchasini ko&apos;rish
                     </Link>
-                  ))
+                  </>
+                ) : (
+                  (displayCategory?.subcategories ?? []).flatMap((sub) =>
+                    sub.products.map((p) => (
+                      <Link
+                        key={p.id}
+                        href={buildHref(p.href) as any}
+                        className={styles.productItem}
+                        onClick={closeCatalog}
+                      >
+                        {p.title}
+                      </Link>
+                    ))
+                  )
                 )}
               </div>
             </div>
@@ -317,6 +363,7 @@ export function MainNavbar() {
               ) : (
                 <MobileProductView
                   subcategory={currentMobileView as CatalogSubcategory}
+                  products={mobileSubcategoryProducts}
                   onBack={handleMobileBack}
                   buildHref={buildHref}
                   closeMobile={closeMobile}
@@ -436,6 +483,7 @@ function MobileSubcategoryView({
 
 function MobileProductView({
   subcategory,
+  products,
   onBack,
   buildHref,
   closeMobile,
@@ -447,6 +495,7 @@ function MobileProductView({
   styles: s,
 }: {
   subcategory: CatalogSubcategory;
+  products?: { id: number; title: string; slug: string }[] | undefined;
   onBack: () => void;
   buildHref: (path: string) => string;
   closeMobile: () => void;
@@ -457,11 +506,14 @@ function MobileProductView({
   ChevronRight: React.ComponentType<{ className?: string }>;
   styles: Record<string, string>;
 }) {
+  const source = products?.length
+    ? products.map((p) => ({ id: String(p.id), title: p.title, href: `machines/${p.slug}` }))
+    : subcategory.products;
   const filtered = searchQuery
-    ? subcategory.products.filter((p) =>
+    ? source.filter((p) =>
         p.title.toLowerCase().includes(searchQuery.toLowerCase())
       )
-    : subcategory.products;
+    : source;
 
   return (
     <>

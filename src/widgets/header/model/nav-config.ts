@@ -14,6 +14,7 @@ export type CatalogProduct = {
 export type CatalogSubcategory = {
   id: string;
   title: string;
+  categoryId: string;
   products: CatalogProduct[];
 };
 

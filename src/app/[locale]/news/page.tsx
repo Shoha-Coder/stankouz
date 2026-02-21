@@ -11,6 +11,7 @@ import { getLocaleFromPath } from "@/shared/lib/i18n/get-locale-from-path";
 import { usePathname } from "next/navigation";
 import { Pagination } from "@/shared/ui/pagination";
 import { useTranslations } from "next-intl";
+import { Skeleton } from "@/shared/ui/skeleton";
 
 export default function NewsPage() {
     const tBreadcrumb = useTranslations("breadcrumbs");
@@ -23,20 +24,32 @@ export default function NewsPage() {
     const [page, setPage] = useState(1);
     const { data, isPending } = usePosts({ page });
 
-    const posts = data?.data ?? [];
+    const posts = data?.data;
     const totalPages = data?.meta?.last_page ?? 1;
+
+    const showSkeleton = isPending;
 
     return (
         <div className={styles.page}>
             <Breadcrumb items={BREADCRUMB_ITEMS} />
-            {isPending && posts.length === 0 ? (
+            {showSkeleton ? (
+                <div className={styles.cards}>
+                    {[1, 2, 3, 4, 5, 6].map((i) => (
+                        <article key={i} className={styles.card}>
+                            <Skeleton className={styles.skeletonImage} />
+                            <Skeleton className={styles.skeletonDate} />
+                            <Skeleton className={styles.skeletonTitle} />
+                        </article>
+                    ))}
+                </div>
+            ) : !posts?.length ? (
                 <p style={{ padding: "2rem", textAlign: "center", color: "#6c6c6c" }}>
-                    Yuklanmoqda...
+                    Yangiliklar topilmadi
                 </p>
             ) : (
                 <>
                     <div className={styles.cards}>
-                        {posts.map((item, index) => (
+                        {posts!.map((item, index) => (
                             <AnimatedItem key={item.id} index={index}>
                                 <article className={styles.card}>
                                     <div className={styles.imageWrap}>

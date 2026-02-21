@@ -113,6 +113,13 @@
     pointer-events: none;
 }
 
+/* SKELETON */
+.skeletonCard {
+    width: 100%;
+    aspect-ratio: 433 / 256;
+    border-radius: clamp(12px, 2vw, 20px);
+}
+
 /* PRODUCT GRID */
 
 .grid {

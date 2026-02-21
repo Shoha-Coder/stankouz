@@ -10,6 +10,7 @@ import { useProducts } from "@/entities/product/model/useProducts";
 import ArrowRight from "@/shared/ui/icons/arrow-right";
 import { labProductsSwiperConfig } from "@/shared/config/swiper";
 import styles from "./lab-products-section.module.scss";
+import { Skeleton } from "@/shared/ui/skeleton";
 
 interface Props {
     title: string;
@@ -17,10 +18,23 @@ interface Props {
 }
 
 export function LabProductsSection({ title, categoryId }: Props) {
-    const { data } = useProducts({ category_id: categoryId, page: 1 });
-    const products = (data?.data ?? []).slice(0, 12);
+    const { data, isPending } = useProducts({ category_id: categoryId, page: 1 });
+    const products = data?.data?.slice(0, 12);
 
-    if (products.length === 0) return null;
+    const showSkeleton = isPending || !products?.length;
+
+    if (showSkeleton) {
+        return (
+            <section className={styles.root}>
+                <h2 className={styles.title}>{title}</h2>
+                <div className={styles.skeletonRow}>
+                    {[1, 2, 3, 4].map((i) => (
+                        <Skeleton key={i} className={styles.skeletonCard} />
+                    ))}
+                </div>
+            </section>
+        );
+    }
 
     return (
         <section className={styles.root}>
@@ -32,7 +46,7 @@ export function LabProductsSection({ title, categoryId }: Props) {
                     {...labProductsSwiperConfig}
                     className={styles.swiper}
                 >
-                    {products.map((product, index) => (
+                    {products!.map((product, index) => (
                         <SwiperSlide key={product.id} className={styles.slide}>
                             <AnimatedItem index={index}>
                                 <ProductCard product={product} />

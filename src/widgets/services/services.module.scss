@@ -40,6 +40,39 @@
     color: #6c6c6c;
 }
 
+/* Skeleton */
+.skeletonList {
+    display: flex;
+    flex-direction: column;
+}
+
+.skeletonImage {
+    width: 100%;
+    aspect-ratio: 433 / 275;
+    max-width: 433px;
+    border-radius: clamp(12px, 2vw, 20px);
+}
+
+.skeletonTitle {
+    height: clamp(18px, 2vw, 24px);
+    width: 70%;
+}
+
+.skeletonShort {
+    height: clamp(14px, 1.5vw, 18px);
+    width: 90%;
+}
+
+.skeletonLine {
+    height: 16px;
+    width: 100%;
+}
+
+.skeletonLineShort {
+    height: 16px;
+    width: 70%;
+}
+
 /* LIST */
 
 .list {

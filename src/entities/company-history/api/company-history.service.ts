@@ -28,9 +28,9 @@ export async function getCompanyHistories(
             headers: locale ? { "Accept-Language": locale } : undefined,
         }
     );
-    const raw = data?.data ?? [];
+    const raw = data?.data;
     return {
-        data: raw.map((item: CompanyHistoryApiItem) => toCompanyHistory(item)),
-        total: data?.meta?.total ?? raw.length,
+        data: raw ? raw.map((item: CompanyHistoryApiItem) => toCompanyHistory(item)) : [],
+        total: data?.meta?.total ?? (raw?.length ?? 0),
     };
 }

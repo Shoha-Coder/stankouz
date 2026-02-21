@@ -18,6 +18,12 @@
     padding-bottom: 50px;
 }
 
+.skeletonCard {
+    width: 100%;
+    aspect-ratio: 433 / 256;
+    border-radius: clamp(12px, 2vw, 20px);
+}
+
 .grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr));

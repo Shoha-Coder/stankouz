@@ -24,5 +24,8 @@ export const api = axios.create({
 api.interceptors.request.use((config) => {
     const locale = config.headers["Accept-Language"] ?? getLocaleFromPathname();
     config.headers["Accept-Language"] = locale;
+    if (config.data instanceof FormData) {
+        delete config.headers["Content-Type"];
+    }
     return config;
 });

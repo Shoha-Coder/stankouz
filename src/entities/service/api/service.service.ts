@@ -11,9 +11,9 @@ export interface ServicesResult {
 
 export async function getServices(): Promise<ServicesResult> {
     const { data } = await api.get<ServicesResponse>(SERVICES_ENDPOINT);
-    const raw = data?.data ?? [];
+    const raw = data?.data;
     return {
-        data: raw.map(toService),
+        data: raw ? raw.map(toService) : [],
         meta: data?.meta ?? { total: 0 },
     };
 }

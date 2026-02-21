@@ -13,6 +13,24 @@
     width: 100%;
 }
 
+.skeletonImage {
+    width: 100%;
+    height: 256px;
+    border-radius: 25px;
+    margin-bottom: 16px;
+}
+
+.skeletonDate {
+    height: 18px;
+    width: 80px;
+    margin-bottom: 8px;
+}
+
+.skeletonTitle {
+    height: 20px;
+    width: 80%;
+}
+
 .imageWrap {
     width: 100%;
     height: 256px;

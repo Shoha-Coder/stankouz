@@ -4,6 +4,18 @@
     margin-top: 50px;
 }
 
+.skeletonHero {
+    width: 100%;
+    aspect-ratio: 1029 / 370;
+    border-radius: clamp(16px, 2.5vw, 25px);
+}
+
+.skeletonDesc {
+    margin-top: 40px;
+    height: 120px;
+    border-radius: 8px;
+}
+
 .content {
     max-width: 1360px;
     width: 100%;

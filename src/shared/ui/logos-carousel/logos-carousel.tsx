@@ -78,7 +78,7 @@ export function LogosCarousel({ title, subtitle, items }: Props) {
         spaceBetween={16}
         breakpoints={{
           640: { slidesPerView: 3, spaceBetween: 20 },
-          1024: { slidesPerView: 3, spaceBetween: 20 },
+          1024: { slidesPerView: 4, spaceBetween: 10 },
         }}
         loop
         freeMode
@@ -102,7 +102,7 @@ export function LogosCarousel({ title, subtitle, items }: Props) {
         spaceBetween={16}
         breakpoints={{
           640: { slidesPerView: 3, spaceBetween: 20 },
-          1024: { slidesPerView: 3, spaceBetween: 20 },
+          1024: { slidesPerView: 4, spaceBetween: 10 },
         }}
         loop
         freeMode

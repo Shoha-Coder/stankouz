@@ -27,6 +27,19 @@
     }
 }
 
+.skeletonRow {
+    display: flex;
+    gap: 20px;
+    overflow: hidden;
+}
+
+.skeletonCard {
+    width: 316px;
+    aspect-ratio: 433 / 256;
+    border-radius: clamp(12px, 2vw, 20px);
+    flex-shrink: 0;
+}
+
 .title {
     font-family: "Unbounded", sans-serif;
     font-weight: 600;

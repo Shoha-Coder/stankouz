@@ -22,28 +22,39 @@ function DescriptionContent({ text }: { text: string }) {
   );
 }
 
+const FEATURES_LEFT_COUNT = 4;
+
+function FeatureRow({ feature }: { feature: ProductDetail["features"][0] }) {
+  return (
+    <div className={styles.featureRow}>
+      <span className={styles.featureLabel}>{feature.name}</span>
+      <span className={styles.featureDots} aria-hidden />
+      <span className={styles.featureValue}>{feature.value}</span>
+    </div>
+  );
+}
+
 function FeaturesContent({ features }: { features: ProductDetail["features"] }) {
   if (features.length === 0) return null;
+  const leftFeatures = features.slice(0, FEATURES_LEFT_COUNT);
+  const rightFeatures = features.slice(FEATURES_LEFT_COUNT);
+  const hasRightColumn = rightFeatures.length > 0;
   return (
-    <div className={styles.featuresContainer}>
+    <div
+      className={`${styles.featuresContainer} ${!hasRightColumn ? styles.featuresContainerFull : ""}`}
+    >
       <div className={styles.features}>
-        {features.map((feature, index) => (
-          <div key={index} className={styles.featureRow}>
-            <span className={styles.featureLabel}>{feature.name}</span>
-            <span className={styles.featureDots} aria-hidden />
-            <span className={styles.featureValue}>{feature.value}</span>
-          </div>
+        {leftFeatures.map((feature, index) => (
+          <FeatureRow key={index} feature={feature} />
         ))}
       </div>
-      <div className={styles.features}>
-        {features.map((feature, index) => (
-          <div key={index} className={styles.featureRow}>
-            <span className={styles.featureLabel}>{feature.name}</span>
-            <span className={styles.featureDots} aria-hidden />
-            <span className={styles.featureValue}>{feature.value}</span>
-          </div>
-        ))}
-      </div>
+      {hasRightColumn && (
+        <div className={styles.features}>
+          {rightFeatures.map((feature, index) => (
+            <FeatureRow key={index} feature={feature} />
+          ))}
+        </div>
+      )}
     </div>
   );
 }

@@ -9,6 +9,7 @@ import { Breadcrumb } from "@/shared/ui/breadcrumb/breadcrumb";
 import { Pagination } from "@/shared/ui/pagination";
 import { useProducts } from "@/entities/product/model/useProducts";
 import { useTranslations } from "next-intl";
+import { Skeleton } from "@/shared/ui/skeleton";
 
 export default function MachinesPage() {
     const tBreadcrumb = useTranslations("breadcrumbs");
@@ -28,7 +29,7 @@ export default function MachinesPage() {
         page,
     });
 
-    const products = data?.data ?? [];
+    const products = data?.data;
     const meta = data?.meta;
     const totalPages = meta?.last_page ?? 1;
     const total = meta?.total ?? 0;
@@ -89,13 +90,19 @@ export default function MachinesPage() {
                     </div>
 
                     {isPending ? (
+                        <div className={styles.grid}>
+                            {[1, 2, 3, 4, 5, 6].map((i) => (
+                                <Skeleton key={i} className={styles.skeletonCard} />
+                            ))}
+                        </div>
+                    ) : !products?.length ? (
                         <p style={{ padding: "2rem", textAlign: "center", color: "#6c6c6c" }}>
-                            Yuklanmoqda...
+                            Mahsulot topilmadi
                         </p>
                     ) : (
                         <>
                             <div className={styles.grid}>
-                                {products.slice(0, 6).map((p, index) => (
+                                {products!.slice(0, 6).map((p, index) => (
                                     <AnimatedItem key={p.id} index={index}>
                                         <ProductCard product={p} />
                                     </AnimatedItem>

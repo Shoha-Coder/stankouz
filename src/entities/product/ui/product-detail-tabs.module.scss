@@ -19,6 +19,10 @@
         grid-template-columns: 1fr;
         gap: 25px;
     }
+
+    &.featuresContainerFull {
+        grid-template-columns: 1fr;
+    }
 }
 
 .descriptionList {

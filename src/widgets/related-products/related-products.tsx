@@ -12,6 +12,7 @@ import { KoproqButton } from "@/shared/ui/koproq-button";
 import { relatedProductsSwiperConfig } from "@/shared/config/swiper";
 import styles from "./related-products.module.scss";
 import { useTranslations } from "next-intl";
+import { Skeleton } from "@/shared/ui/skeleton";
 
 interface Props {
     excludeId?: number;
@@ -20,11 +21,30 @@ interface Props {
 
 export function RelatedProducts({ excludeId, isLab }: Props) {
     const t = useTranslations("home");
-    const { data } = useProducts({ page: 1 });
-    const all = data?.data ?? [];
-    const products = excludeId ? all.filter((p) => p.id !== excludeId).slice(0, 12) : all.slice(0, 12);
+    const { data, isPending } = useProducts({ page: 1 });
+    const all = data?.data;
+    const products = all
+        ? excludeId
+            ? all.filter((p) => p.id !== excludeId).slice(0, 12)
+            : all.slice(0, 12)
+        : [];
 
-    if (products.length === 0) return null;
+    const showSkeleton = isPending || !products.length;
+
+    if (showSkeleton) {
+        return (
+            <section className={`${styles.root} ${isLab ? styles.lab : ""}`}>
+                <header className={styles.header}>
+                    <Skeleton className={styles.skeletonTitle} />
+                </header>
+                <div className={styles.skeletonRow}>
+                    {[1, 2, 3, 4].map((i) => (
+                        <Skeleton key={i} className={styles.skeletonCard} />
+                    ))}
+                </div>
+            </section>
+        );
+    }
 
     return (
         <section className={`${styles.root} ${isLab ? styles.lab : ""}`}>
@@ -41,7 +61,7 @@ export function RelatedProducts({ excludeId, isLab }: Props) {
                     {...relatedProductsSwiperConfig}
                     className={styles.swiper}
                 >
-                    {products.map((product, index) => (
+                    {products!.map((product, index) => (
                         <SwiperSlide key={product.id} className={styles.slide}>
                             <AnimatedItem index={index}>
                                 <ProductCard product={product} />

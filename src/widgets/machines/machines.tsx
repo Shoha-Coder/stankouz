@@ -28,7 +28,7 @@ export function Machines() {
               <p>{t("products-title")}</p>
             </div>
 
-            <Link href={{ pathname: `/${locale}/machines/1` }} className={styles.cardBtn}>
+            <Link href={{ pathname: `/${locale}/machines` }} className={styles.cardBtn}>
               <span>{t("details")}</span>
               <span className={styles.icon}>
                 <ArrowRight />
@@ -46,7 +46,7 @@ export function Machines() {
               <p>{t("products-title")}</p>
             </div>
 
-            <Link href={{ pathname: `/${locale}/machines/2` }} className={styles.cardBtn}>
+            <Link href={{ pathname: `/${locale}/machines` }} className={styles.cardBtn}>
               <span>{t("details")}</span>
               <span className={styles.icon}>
                 <ArrowRight />

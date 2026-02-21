@@ -13,9 +13,9 @@ const STAGGER = 0.06;
 export default function HomePage() {
   return (
     <main>
-      <AnimatedSection delay={0}>
+      {/* <AnimatedSection delay={0}> */}
         <Hero />
-      </AnimatedSection>
+      {/* </AnimatedSection> */}
       <AnimatedSection delay={STAGGER}>
         <About />
       </AnimatedSection>

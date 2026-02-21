@@ -100,7 +100,10 @@
     "contact": "Our location on the map",
     "about": "About us",
     "about-more": "Learn more about us",
-    "details": "Details"
+    "details": "Details",
+    "stats-completed-projects": "Completed projects",
+    "stats-years-experience": "Years of experience",
+    "stats-investment-profit": "Investment profit"
   },
   "catalog": {
     "categories": "Categories",

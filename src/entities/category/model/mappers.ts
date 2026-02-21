@@ -27,11 +27,12 @@ export function toCatalogCategories(categories: Category[]): CatalogCategory[] {
         subcategories: cat.children.map((sub) => ({
             id: String(sub.id),
             title: sub.name,
+            categoryId: String(cat.id),
             products: [
                 {
                     id: `view-${sub.id}`,
                     title: sub.name,
-                    href: `products?category=${cat.id}&sub=${sub.id}`,
+                    href: `machines?category=${cat.id}&sub=${sub.id}`,
                 },
             ] as { id: string; title: string; href: string }[],
         })) as CatalogSubcategory[],

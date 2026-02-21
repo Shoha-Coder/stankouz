@@ -1,19 +1,56 @@
 "use client";
 
+import { useState } from "react";
+import { useTranslations } from "next-intl";
 import { ProductDetail } from "../model/types";
 import styles from "./product-info.module.scss";
+
+const TRUNCATE_LENGTH = 200;
 
 interface Props {
   product: ProductDetail;
 }
 
 export function ProductInfo({ product }: Props) {
+  const t = useTranslations("home");
+  const [expanded, setExpanded] = useState(false);
+  const desc = product.description?.trim() ?? "";
+  const isLong = desc.length > TRUNCATE_LENGTH;
+
   return (
     <div className={styles.info}>
       <h1 className={styles.title}>{product.title}</h1>
 
-      {product.description && (
-        <p className={styles.description}>{product.description}</p>
+      {desc && (
+        <p className={styles.description}>
+          {!expanded && isLong ? (
+            <>
+              {desc.slice(0, TRUNCATE_LENGTH)}
+              {"... "}
+              <button
+                type="button"
+                className={styles.expandBtn}
+                onClick={() => setExpanded(true)}
+              >
+                {t("more-button")}
+              </button>
+            </>
+          ) : isLong ? (
+            <>
+              {desc}
+              {" "}
+              <button
+                type="button"
+                className={styles.expandBtn}
+                onClick={() => setExpanded(false)}
+              >
+                {t("less-button")}
+              </button>
+            </>
+          ) : (
+            desc
+          )}
+        </p>
       )}
 
       {product.features?.length > 0 && (

@@ -12,7 +12,8 @@ const PRODUCTS_ENDPOINT = "/products";
 
 export async function getProducts(params?: ProductParams) {
     const { data } = await api.get<ProductResponse>(PRODUCTS_ENDPOINT, { params });
-    const items = (data?.data ?? []).map(toProduct);
+    const raw = data?.data;
+    const items = raw ? raw.map(toProduct) : [];
     return {
         data: items,
         meta: data?.meta ?? { current_page: 1, last_page: 1, per_page: 12, total: 0 },

@@ -10,6 +10,41 @@
     padding-bottom: 50px;
 }
 
+/* Skeleton */
+.skeletonCard {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.skeletonImage {
+    width: 100%;
+    aspect-ratio: 433 / 256;
+    border-radius: clamp(12px, 2vw, 20px);
+}
+
+.skeletonContent {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.skeletonTitle {
+    height: clamp(18px, 1.5vw, 20px);
+    width: 70%;
+}
+
+.skeletonText {
+    height: 14px;
+    width: 100%;
+}
+
+.vacanciesList {
+    width: 100%;
+    overflow: hidden;
+    transition: max-height 0.4s ease-in-out;
+}
+
 .vacancies {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(clamp(19.188rem, 17.777rem + 6.02vw, 25rem), 1fr));
@@ -25,4 +60,10 @@
 
 .buttonIcon {
     transform: rotate(90deg);
+    transition: transform 0.3s ease;
+}
+
+.buttonIconOpen {
+    transform: rotate(-90deg);
+    transition: transform 0.3s ease;
 }
