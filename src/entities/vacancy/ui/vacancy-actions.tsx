@@ -8,9 +8,10 @@ import { usePathname } from "next/navigation";
 
 interface VacancyActionsProps {
   vacancyId?: number;
+  vacancyTitle?: string;
 }
 
-export function VacancyActions({ vacancyId }: VacancyActionsProps) {
+export function VacancyActions({ vacancyId, vacancyTitle }: VacancyActionsProps) {
   const pathname = usePathname();
   const [modalOpen, setModalOpen] = useState(false);
 
@@ -39,6 +40,7 @@ export function VacancyActions({ vacancyId }: VacancyActionsProps) {
         open={modalOpen}
         onClose={() => setModalOpen(false)}
         vacancyId={vacancyId}
+        vacancyTitle={vacancyTitle}
         page="vacancy"
       />
     </div>

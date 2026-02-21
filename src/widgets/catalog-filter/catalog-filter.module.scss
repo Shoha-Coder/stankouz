@@ -10,7 +10,8 @@
 
 @media (min-width: 1025px) {
     .sidebar {
-        display: block;
+        display: flex;
+        flex-direction: column;
         width: 100%;
         max-width: 317px;
         background: #ffffff;
@@ -19,6 +20,12 @@
         padding-top: 0;
         border: 1px solid #f0f0f0;
         height: fit-content;
+
+        .sheetActions {
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid #f0f0f0;
+        }
     }
 }
 
@@ -110,7 +117,7 @@
     position: fixed;
     inset: 0;
     background: rgba(0, 0, 0, 0.4);
-    z-index: 999;
+    z-index: 1100;
     animation: fadeIn 0.2s ease;
 }
 
@@ -127,9 +134,10 @@
     max-height: 85vh;
     background: #fff;
     border-radius: 20px 20px 0 0;
-    z-index: 1000;
+    z-index: 1101;
     display: flex;
     flex-direction: column;
+    overflow: hidden;
     animation: slideUp 0.3s ease;
     box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.15);
 }
@@ -178,8 +186,10 @@
 
 .sheetContent {
     flex: 1;
+    min-height: 0;
     overflow-y: auto;
     padding: 24px;
+    -webkit-overflow-scrolling: touch;
 }
 
 .sheetContent .category {
@@ -201,6 +211,7 @@
     padding: 20px;
     border-top: 1px solid #f0f0f0;
     flex-shrink: 0;
+    background: #fff;
 }
 
 .btnClear {
@@ -266,6 +277,32 @@
     cursor: pointer;
     padding: 0;
     min-height: 24px;
+}
+
+.categoryTitleClickable {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 0;
+    border-bottom: 1px solid #f0f0f0;
+    font-family: Inter, sans-serif;
+    font-weight: 500;
+    font-size: 18px;
+    color: #282828;
+
+    input {
+        flex-shrink: 0;
+    }
+}
+
+.categoryName {
+    padding: 14px 0;
+    border-bottom: 1px solid #f0f0f0;
+    font-family: Inter, sans-serif;
+    font-weight: 500;
+    font-size: 18px;
+    color: #282828;
 }
 
 .chevron {

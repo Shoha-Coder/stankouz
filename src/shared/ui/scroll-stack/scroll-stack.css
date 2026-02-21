@@ -38,6 +38,19 @@
   padding-bottom: 180px;
 }
 
+/* 510-640px: smooth transition for height */
+@media (min-width: 511px) and (max-width: 640px) {
+  .scroll-stack-scroller.scroll-stack-window .scroll-stack-inner {
+    padding-bottom: 400px;
+  }
+}
+
+@media (min-height: 511px) and (max-height: 640px) {
+  .scroll-stack-scroller.scroll-stack-window .scroll-stack-inner {
+    padding-bottom: 200px;
+  }
+}
+
 @media (min-width: 641px) {
   .scroll-stack-scroller.scroll-stack-window .scroll-stack-inner {
     padding-bottom: 220px;

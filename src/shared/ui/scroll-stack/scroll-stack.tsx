@@ -52,7 +52,8 @@ const getEffectiveStackDistance = (
 ): number => {
     const w = width ?? (typeof window !== "undefined" ? window.innerWidth : 1024);
     const h = height ?? (typeof window !== "undefined" ? window.innerHeight : 800);
-    if (w <= 480 || h <= 600) return Math.min(itemStackDistance, 16);
+    if (w <= 480 || h <= 510) return Math.min(itemStackDistance, 14);
+    if (w <= 510 || h <= 560) return Math.min(itemStackDistance, 16);
     if (w <= 640 || h <= 700) return Math.min(itemStackDistance, 20);
     if (w <= 768 || h <= 800) return Math.min(itemStackDistance, 24);
     if (w <= 1024 || h <= 900) return Math.min(itemStackDistance, 32);
@@ -279,7 +280,10 @@ const ScrollStack: React.FC<ScrollStackProps> = ({
         if (!container) return;
         const items = Array.from(container.querySelectorAll(".scroll-stack-item")) as HTMLElement[];
         const w = typeof window !== "undefined" ? window.innerWidth : 1024;
-        const effectiveItemDistance = w <= 640 ? Math.min(itemDistance, 60) : itemDistance;
+        const h = typeof window !== "undefined" ? window.innerHeight : 800;
+        let effectiveItemDistance = itemDistance;
+        if (w <= 510 || h <= 560) effectiveItemDistance = Math.min(itemDistance, 50);
+        else if (w <= 640 || h <= 640) effectiveItemDistance = Math.min(itemDistance, 60);
         items.forEach((item, i) => {
             if (i < items.length - 1) {
                 item.style.marginBottom = `${effectiveItemDistance}px`;

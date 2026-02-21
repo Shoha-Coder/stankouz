@@ -18,7 +18,7 @@ export function VacancySection({ vacancy }: Props) {
         updatedAt={vacancy.date || undefined}
       />
 
-      <VacancyActions vacancyId={vacancy.id} />
+      <VacancyActions vacancyId={vacancy.id} vacancyTitle={vacancy.title} />
     </section>
   );
 }

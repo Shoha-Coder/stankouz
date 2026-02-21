@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState, useCallback } from "react";
+import { createPortal } from "react-dom";
 import ChevronRight from "@/shared/ui/icons/chevron-right";
 import FilterIcon from "@/shared/ui/icons/filter";
 import styles from "./catalog-filter.module.scss";
@@ -8,7 +9,7 @@ import { Category, SubCategory } from "@/entities/category/model/types";
 import { useTranslations } from "next-intl";
 import { useCategories } from "@/entities/category/model/useCategories";
 
-export type Selection = { categoryId: number; subcategoryId: number };
+export type Selection = { categoryId: number; subcategoryId?: number };
 
 interface Props {
     onChange: (selections: Selection[]) => void;
@@ -16,16 +17,12 @@ interface Props {
 
 function FilterContent({
     categories,
-    openIds,
-    setOpenIds,
     activeSubs,
     setActiveSubs,
     onChange,
     tAll,
 }: {
     categories: Category[];
-    openIds: Set<number>;
-    setOpenIds: React.Dispatch<React.SetStateAction<Set<number>>>;
     activeSubs: Set<string>;
     setActiveSubs: React.Dispatch<React.SetStateAction<Set<string>>>;
     onChange: (selections: Selection[]) => void;
@@ -40,7 +37,7 @@ function FilterContent({
                 onChange(
                     Array.from(next).map((k) => {
                         const [cId, sId] = k.split("-").map(Number);
-                        return { categoryId: cId, subcategoryId: sId };
+                        return { categoryId: cId, subcategoryId: sId === 0 ? undefined : sId };
                     })
                 );
                 return next;
@@ -58,7 +55,26 @@ function FilterContent({
                 onChange(
                     Array.from(next).map((k) => {
                         const [cId, sId] = k.split("-").map(Number);
-                        return { categoryId: cId, subcategoryId: sId };
+                        return { categoryId: cId, subcategoryId: sId === 0 ? undefined : sId };
+                    })
+                );
+                return next;
+            });
+        },
+        [onChange, setActiveSubs]
+    );
+
+    const handleCategoryOnlyClick = useCallback(
+        (catId: number) => {
+            const key = `${catId}-0`;
+            setActiveSubs((prev) => {
+                const next = new Set(prev);
+                if (next.has(key)) next.delete(key);
+                else next.add(key);
+                onChange(
+                    Array.from(next).map((k) => {
+                        const [cId, sId] = k.split("-").map(Number);
+                        return { categoryId: cId, subcategoryId: sId === 0 ? undefined : sId };
                     })
                 );
                 return next;
@@ -71,51 +87,48 @@ function FilterContent({
         <>
             {categories.map((cat: Category) => (
                 <div key={cat.id} className={styles.category}>
-                    <button
-                        onClick={() => {
-                            setOpenIds((prev) => {
-                                const next = new Set(prev);
-                                if (next.has(cat.id)) next.delete(cat.id);
-                                else next.add(cat.id);
-                                return next;
-                            });
-                        }}
-                        className={styles.categoryTitle}
-                        aria-expanded={openIds.has(cat.id)}
-                    >
-                        <span>{cat.name}</span>
-                        <span className={`${styles.chevron} ${openIds.has(cat.id) ? styles.chevronDown : ""}`}>
-                            <ChevronRight />
-                        </span>
-                    </button>
-
-                    {openIds.has(cat.id) && (
-                        <div className={styles.subs}>
-                            <label className={styles.subLabel}>
-                                <input
-                                    className={styles.checkbox}
-                                    type="checkbox"
-                                    checked={!cat.children.some((s) => activeSubs.has(`${cat.id}-${s.id}`))}
-                                    onChange={() => handleBarchasi(cat.id)}
-                                />
-                                {tAll}
-                            </label>
-                            {cat.children.map((sub: SubCategory) => {
-                                const key = `${cat.id}-${sub.id}`;
-                                const isChecked = activeSubs.has(key);
-                                return (
-                                    <label key={sub.id} className={styles.subLabel}>
-                                        <input
-                                            className={styles.checkbox}
-                                            type="checkbox"
-                                            checked={isChecked}
-                                            onChange={() => handleSubChange(key)}
-                                        />
-                                        {sub.name}
-                                    </label>
-                                );
-                            })}
-                        </div>
+                    {cat.children.length === 0 ? (
+                        <label className={`${styles.categoryTitle} ${styles.categoryTitleClickable}`}>
+                            <span>{cat.name}</span>
+                            <input
+                                className={styles.checkbox}
+                                type="checkbox"
+                                checked={activeSubs.has(`${cat.id}-0`)}
+                                onChange={() => handleCategoryOnlyClick(cat.id)}
+                            />
+                        </label>
+                    ) : (
+                        <>
+                            <div className={styles.categoryName}>
+                                <span>{cat.name}</span>
+                            </div>
+                            <div className={styles.subs}>
+                                <label className={styles.subLabel}>
+                                    <input
+                                        className={styles.checkbox}
+                                        type="checkbox"
+                                        checked={!cat.children.some((s) => activeSubs.has(`${cat.id}-${s.id}`))}
+                                        onChange={() => handleBarchasi(cat.id)}
+                                    />
+                                    {tAll}
+                                </label>
+                                {cat.children.map((sub: SubCategory) => {
+                                    const key = `${cat.id}-${sub.id}`;
+                                    const isChecked = activeSubs.has(key);
+                                    return (
+                                        <label key={sub.id} className={styles.subLabel}>
+                                            {sub.name}
+                                            <input
+                                                className={styles.checkbox}
+                                                type="checkbox"
+                                                checked={isChecked}
+                                                onChange={() => handleSubChange(key)}
+                                            />
+                                        </label>
+                                    );
+                                })}
+                            </div>
+                        </>
                     )}
                 </div>
             ))}
@@ -127,15 +140,8 @@ export const CatalogFilter = ({ onChange }: Props) => {
     const t = useTranslations("catalog");
     const { data: catalogCategories = [] } = useCategories();
     const categories = catalogCategories.filter(c => c.slug !== "stanki").filter(c => c.slug !== "laboratoriia");
-    const [openIds, setOpenIds] = useState<Set<number>>(new Set());
     const [activeSubs, setActiveSubs] = useState<Set<string>>(new Set());
     const [mobileOpen, setMobileOpen] = useState(false);
-
-    useEffect(() => {
-        if (categories.length > 0 && openIds.size === 0) {
-            setOpenIds(new Set([categories[0].id]));
-        }
-    }, [categories, openIds.size]);
 
     useEffect(() => {
         if (mobileOpen) {
@@ -167,7 +173,7 @@ export const CatalogFilter = ({ onChange }: Props) => {
                 onChange(
                     Array.from(next).map((k) => {
                         const [cId, sId] = k.split("-").map(Number);
-                        return { categoryId: cId, subcategoryId: sId };
+                        return { categoryId: cId, subcategoryId: sId === 0 ? undefined : sId };
                     })
                 );
                 return next;
@@ -188,13 +194,19 @@ export const CatalogFilter = ({ onChange }: Props) => {
                 <h2>{t("categories")}</h2>
                 <FilterContent
                     categories={categories}
-                    openIds={openIds}
-                    setOpenIds={setOpenIds}
                     activeSubs={activeSubs}
                     setActiveSubs={setActiveSubs}
                     onChange={onChange}
                     tAll={t("all")}
                 />
+                <div className={styles.sheetActions}>
+                    <button type="button" className={styles.btnClear} onClick={handleClear}>
+                        {t("clear")}
+                    </button>
+                    <button type="button" className={styles.btnApply} onClick={handleApply}>
+                        {t("apply")}
+                    </button>
+                </div>
             </aside>
 
             {/* Mobile trigger button */}
@@ -230,51 +242,52 @@ export const CatalogFilter = ({ onChange }: Props) => {
                 </div>
             )}
 
-            {/* Mobile bottom sheet */}
-            {mobileOpen && (
-                <>
-                    <div
-                        className={styles.overlay}
-                        onClick={() => setMobileOpen(false)}
-                        aria-hidden
-                    />
-                    <div className={styles.sheet} role="dialog" aria-modal="true" aria-label={t("filter")}>
-                        <div className={styles.sheetHandle} />
-                        <div className={styles.sheetHeader}>
-                            <h2 className={styles.sheetTitle}>{t("filter")}</h2>
-                            <button
-                                type="button"
-                                className={styles.sheetClose}
-                                onClick={() => setMobileOpen(false)}
-                                aria-label={t("close")}
-                            >
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
-                                    <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                                </svg>
-                            </button>
+            {/* Mobile bottom sheet - portal to body so it appears above navbar */}
+            {mobileOpen &&
+                typeof document !== "undefined" &&
+                createPortal(
+                    <>
+                        <div
+                            className={styles.overlay}
+                            onClick={() => setMobileOpen(false)}
+                            aria-hidden
+                        />
+                        <div className={styles.sheet} role="dialog" aria-modal="true" aria-label={t("filter")}>
+                            <div className={styles.sheetHandle} />
+                            <div className={styles.sheetHeader}>
+                                <h2 className={styles.sheetTitle}>{t("filter")}</h2>
+                                <button
+                                    type="button"
+                                    className={styles.sheetClose}
+                                    onClick={() => setMobileOpen(false)}
+                                    aria-label={t("close")}
+                                >
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
+                                        <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                                    </svg>
+                                </button>
+                            </div>
+                            <div className={styles.sheetContent}>
+                                <FilterContent
+                                    categories={categories}
+                                    activeSubs={activeSubs}
+                                    setActiveSubs={setActiveSubs}
+                                    onChange={onChange}
+                                    tAll={t("all")}
+                                />
+                            </div>
+                            <div className={styles.sheetActions}>
+                                <button type="button" className={styles.btnClear} onClick={handleClear}>
+                                    {t("clear")}
+                                </button>
+                                <button type="button" className={styles.btnApply} onClick={handleApply}>
+                                    {t("apply")}
+                                </button>
+                            </div>
                         </div>
-                        <div className={styles.sheetContent}>
-                            <FilterContent
-                                categories={categories}
-                                openIds={openIds}
-                                setOpenIds={setOpenIds}
-                                activeSubs={activeSubs}
-                                setActiveSubs={setActiveSubs}
-                                onChange={onChange}
-                                tAll={t("all")}
-                            />
-                        </div>
-                        <div className={styles.sheetActions}>
-                            <button type="button" className={styles.btnClear} onClick={handleClear}>
-                                {t("clear")}
-                            </button>
-                            <button type="button" className={styles.btnApply} onClick={handleApply}>
-                                {t("apply")}
-                            </button>
-                        </div>
-                    </div>
-                </>
-            )}
+                    </>,
+                    document.body
+                )}
         </div>
     );
 };

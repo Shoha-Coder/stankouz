@@ -17,6 +17,7 @@ export interface ApplicationFormModalProps {
   open: boolean;
   onClose: () => void;
   vacancyId?: number;
+  vacancyTitle?: string;
   page?: string;
 }
 
@@ -24,6 +25,7 @@ export function ApplicationFormModal({
   open,
   onClose,
   vacancyId,
+  vacancyTitle,
   page,
 }: ApplicationFormModalProps) {
   const formRef = useRef<HTMLFormElement>(null);
@@ -114,6 +116,7 @@ export function ApplicationFormModal({
     mutate(
       {
         vacancy_id: vacancyId,
+        vacancy_title: vacancyTitle,
         name,
         phone_number,
         email: email || undefined,
