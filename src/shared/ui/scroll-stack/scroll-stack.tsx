@@ -41,6 +41,8 @@ interface ScrollStackProps {
     /** Use window scroll (for sections in page flow). Default true for embedded use. */
     useWindowScroll?: boolean;
     onStackComplete?: () => void;
+    /** Called when the top/front card index changes (e.g. to collapse descriptions on stacked cards). */
+    onActiveIndexChange?: (index: number) => void;
 }
 
 const getEffectiveStackDistance = (
@@ -89,6 +91,7 @@ const ScrollStack: React.FC<ScrollStackProps> = ({
     blurAmount = 0,
     useWindowScroll = true,
     onStackComplete,
+    onActiveIndexChange,
 }) => {
     const scrollerRef = useRef<HTMLDivElement>(null);
     const innerRef = useRef<HTMLDivElement>(null);
@@ -99,6 +102,7 @@ const ScrollStack: React.FC<ScrollStackProps> = ({
     const effectiveStackDistanceRef = useRef(itemStackDistance);
     const lastTransformsRef = useRef<Map<number, CardTransform>>(new Map());
     const pendingUpdateRef = useRef(false);
+    const lastActiveIndexRef = useRef<number>(-1);
 
     const calculateProgress = useCallback((scrollTop: number, start: number, end: number) => {
         if (scrollTop < start) return 0;
@@ -157,6 +161,21 @@ const ScrollStack: React.FC<ScrollStackProps> = ({
 
         const stackDist = effectiveStackDistanceRef.current;
 
+        let topCardIndex = 0;
+        for (let j = 0; j < cards.length; j++) {
+            const jCard = cards[j];
+            const jPosEl = jCard?.parentElement?.classList.contains("scroll-stack-item")
+                ? jCard.parentElement
+                : jCard;
+            const jCardTop = jPosEl ? getElementOffset(jPosEl as HTMLElement) : 0;
+            const jTriggerStart = jCardTop - stackPositionPx - stackDist * j;
+            if (scrollTop >= jTriggerStart) topCardIndex = j;
+        }
+        if (topCardIndex !== lastActiveIndexRef.current) {
+            lastActiveIndexRef.current = topCardIndex;
+            onActiveIndexChange?.(topCardIndex);
+        }
+
         cards.forEach((card, i) => {
             if (!card) return;
 
@@ -176,16 +195,6 @@ const ScrollStack: React.FC<ScrollStackProps> = ({
 
             let blur = 0;
             if (blurAmount) {
-                let topCardIndex = 0;
-                for (let j = 0; j < cards.length; j++) {
-                    const jCard = cards[j];
-                    const jPosEl = jCard?.parentElement?.classList.contains("scroll-stack-item")
-                        ? jCard.parentElement
-                        : jCard;
-                    const jCardTop = jPosEl ? getElementOffset(jPosEl as HTMLElement) : 0;
-                    const jTriggerStart = jCardTop - stackPositionPx - stackDist * j;
-                    if (scrollTop >= jTriggerStart) topCardIndex = j;
-                }
                 if (i < topCardIndex) {
                     blur = Math.max(0, (topCardIndex - i) * blurAmount);
                 }
@@ -243,6 +252,7 @@ const ScrollStack: React.FC<ScrollStackProps> = ({
         blurAmount,
         useWindowScroll,
         onStackComplete,
+        onActiveIndexChange,
         calculateProgress,
         getScrollData,
         getElementOffset,
@@ -300,6 +310,18 @@ const ScrollStack: React.FC<ScrollStackProps> = ({
             }
         };
     }, [itemStackDistance, scheduleUpdate, updateItemMargins]);
+
+    /* Recalculate when content height changes (e.g. expand/collapse in services) */
+    useEffect(() => {
+        const container = useWindowScroll ? innerRef.current : scrollerRef.current;
+        if (!container) return;
+        const ro = new ResizeObserver(() => {
+            updateItemMargins();
+            scheduleUpdate();
+        });
+        ro.observe(container);
+        return () => ro.disconnect();
+    }, [useWindowScroll, updateItemMargins, scheduleUpdate]);
 
     useLayoutEffect(() => {
         const scroller = scrollerRef.current;
@@ -397,6 +419,7 @@ const ScrollStack: React.FC<ScrollStackProps> = ({
         blurAmount,
         useWindowScroll,
         onStackComplete,
+        onActiveIndexChange,
         handleScroll,
         updateCardTransforms,
         updateItemMargins,

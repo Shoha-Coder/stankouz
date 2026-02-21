@@ -63,6 +63,7 @@ export function toProduct(api: ProductApiItem): Product {
         slug: api.slug,
         categoryLabel,
         description: description || undefined,
+        categories: api.categories ?? [],
     };
 }
 

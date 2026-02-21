@@ -9,10 +9,53 @@ import {
 import styles from "./contact-section.module.scss";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
+import { useCallback, useState } from "react";
+import { useSubmitApplication } from "@/entities/contact";
+import { formatPhoneUz, parsePhoneForSubmit } from "@/shared/lib/format-phone";
 
 export function ContactSection() {
   const tForm = useTranslations("form");
   const tFooter = useTranslations("footer");
+  const [phoneValue, setPhoneValue] = useState("");
+  const { mutate, isPending, isSuccess, isError, reset } = useSubmitApplication();
+
+  const handlePhoneChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    setPhoneValue(formatPhoneUz(e.target.value));
+  }, []);
+
+  const handleNameKeyDown = useCallback((e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (/[0-9]/.test(e.key)) e.preventDefault();
+  }, []);
+
+  const handleNameChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    e.target.value = e.target.value.replace(/[0-9]/g, "");
+  }, []);
+
+  const handleSubmit = useCallback(
+    (e: React.FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
+      const form = e.currentTarget;
+      const formData = new FormData(form);
+      const name = (formData.get("name") as string)?.trim();
+      const phone_number = parsePhoneForSubmit(phoneValue);
+      const email = (formData.get("email") as string)?.trim();
+      const message = (formData.get("message") as string)?.trim();
+
+      if (!name || phone_number.length < 12) return;
+
+      mutate(
+        { name, phone_number, email: email || undefined, message: message || undefined, page: "contacts" },
+        {
+          onSuccess: () => {
+            form.reset();
+            setPhoneValue("");
+          },
+        }
+      );
+    },
+    [phoneValue, mutate]
+  );
+
   return (
     <section className={styles.root}>
       <div className={styles.container}>
@@ -59,20 +102,54 @@ export function ContactSection() {
         <div className={styles.formCard}>
           <h3>{tForm("title2")}</h3>
 
-          <form>
-            <div className={styles.row}>
-              <input placeholder={tForm("name-surname")} />
-              <input placeholder={tForm("phone")} />
+          {isSuccess ? (
+            <div className={styles.success}>
+              <p>{tForm("success")}</p>
+              <button type="button" onClick={() => { reset(); setPhoneValue(""); }}>
+                {tForm("sendAnother")}
+              </button>
             </div>
+          ) : (
+            <form onSubmit={handleSubmit}>
+              <div className={styles.row}>
+                <input
+                  name="name"
+                  placeholder={tForm("name-surname")}
+                  required
+                  disabled={isPending}
+                  onKeyDown={handleNameKeyDown}
+                  onChange={handleNameChange}
+                  autoComplete="name"
+                />
+                <input
+                  type="tel"
+                  name="phone_number"
+                  placeholder={tForm("phone")}
+                  value={phoneValue}
+                  onChange={handlePhoneChange}
+                  required
+                  disabled={isPending}
+                  autoComplete="tel"
+                />
+              </div>
 
-            <input placeholder={tForm("email")} />
+              <input
+                name="email"
+                type="email"
+                placeholder={tForm("email")}
+                disabled={isPending}
+                autoComplete="email"
+              />
 
-            <textarea placeholder={tForm("message")} />
+              <textarea name="message" placeholder={tForm("message")} disabled={isPending} />
 
-            <button type="submit">
-              {tForm("send")} <span>→</span>
-            </button>
-          </form>
+              {isError && <p className={styles.error}>{tForm("error")}</p>}
+
+              <button type="submit" disabled={isPending}>
+                {isPending ? tForm("sending") : tForm("send")} <span>→</span>
+              </button>
+            </form>
+          )}
         </div>
       </div>
     </section>

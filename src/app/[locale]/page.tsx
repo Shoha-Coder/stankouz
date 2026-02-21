@@ -23,7 +23,7 @@ export default function HomePage() {
         <Services />
       </AnimatedSection>
       <AnimatedSection delay={STAGGER * 3}>
-        <Products />
+        <Products isHome={true} />
       </AnimatedSection>
       <AnimatedSection delay={STAGGER * 4}>
         <Machines />

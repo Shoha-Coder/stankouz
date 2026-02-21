@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import styles from "./services.module.scss";
 import { useServices } from "@/entities/service";
 import { ImageWithLoader } from "@/shared/ui/image-with-loader";
@@ -15,6 +15,14 @@ export function Services() {
     const [expandedIds, setExpandedIds] = useState<Set<number>>(new Set());
     const { data, isPending } = useServices();
     const services = data?.data;
+
+    const handleActiveIndexChange = useCallback((activeIndex: number) => {
+        setExpandedIds((prev) => {
+            const activeId = services?.[activeIndex]?.id;
+            if (activeId == null) return new Set();
+            return prev.has(activeId) ? new Set([activeId]) : new Set();
+        });
+    }, [services]);
 
     const showSkeleton = isPending || !services?.length;
 
@@ -51,7 +59,13 @@ export function Services() {
                 <p className={styles.subtitle}>{t("service-title")}</p>
             </div>
 
-            <ScrollStack className={styles.list} useWindowScroll itemDistance={80} itemStackDistance={24}>
+            <ScrollStack
+                className={styles.list}
+                useWindowScroll
+                itemDistance={80}
+                itemStackDistance={24}
+                onActiveIndexChange={handleActiveIndexChange}
+            >
                 {services.map((item) => (
                     <ScrollStackItem key={item.id} itemClassName={styles.row}>
                         <div className={styles.imageWrapper}>

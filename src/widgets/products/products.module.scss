@@ -59,14 +59,6 @@
     width: 100%;
     overflow: hidden;
     transition: max-height 0.4s ease-in-out;
-
-    &.collapsed {
-        max-height: 800px;
-    }
-
-    &.expanded {
-        max-height: 5000px;
-    }
 }
 
 .grid {
@@ -89,6 +81,7 @@
     text-decoration: none;
     color: inherit;
     transition: all 0.3s ease;
+    min-height: fit-content;
     &:hover {
         transform: translateY(-10px);
     }

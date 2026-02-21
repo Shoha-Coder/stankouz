@@ -89,7 +89,7 @@ export default function AboutPage() {
       )}
       <News />
       <Partners />
-      <ContactSection />
+      <ContactSection page="about" />
     </main>
   );
 }

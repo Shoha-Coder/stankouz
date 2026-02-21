@@ -125,7 +125,8 @@ function FilterContent({
 
 export const CatalogFilter = ({ onChange }: Props) => {
     const t = useTranslations("catalog");
-    const { data: categories = [] } = useCategories();
+    const { data: catalogCategories = [] } = useCategories();
+    const categories = catalogCategories.filter(c => c.slug !== "stanki").filter(c => c.slug !== "laboratoriia");
     const [openIds, setOpenIds] = useState<Set<number>>(new Set());
     const [activeSubs, setActiveSubs] = useState<Set<string>>(new Set());
     const [mobileOpen, setMobileOpen] = useState(false);

@@ -126,19 +126,45 @@
         height: clamp(48px, 8vw, 59px);
         padding: 0 clamp(16px, 2vw, 20px);
         border-radius: 100px;
-        border: 1px solid #62adea;
-        color: #62ADEA;
+        border: 1px solid rgba(255, 255, 255, 0.5);
+        color: #fff;
         background: transparent;
         font-size: clamp(14px, 1.5vw, 16px);
         outline: none;
 
         &::placeholder {
-            color: #62ADEA;
+            color: rgba(255, 255, 255, 0.7);
             opacity: 1;
             font-family: Inter;
             font-weight: 400;
             font-size: clamp(14px, 1.5vw, 16px);
         }
+    }
+
+    .success {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+
+        p {
+            font-size: clamp(14px, 1.5vw, 16px);
+            color: #fff;
+        }
+
+        button {
+            align-self: flex-start;
+            padding: 12px 24px;
+            background: #ffd427;
+            border: none;
+            border-radius: 999px;
+            font-weight: 500;
+            cursor: pointer;
+        }
+    }
+
+    .error {
+        color: #ff6b6b;
+        font-size: clamp(13px, 1.2vw, 14px);
     }
 
     textarea {

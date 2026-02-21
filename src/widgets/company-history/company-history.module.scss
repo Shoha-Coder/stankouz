@@ -91,18 +91,18 @@
     }
 }
 
-/* THUMBNAILS */
+/* THUMBNAILS SWIPER */
 
-.thumbs {
-    display: flex;
-    gap: clamp(12px, 3vw, 20px);
+.thumbsSwiper {
     margin-bottom: clamp(16px, 3vw, 20px);
-    // flex-wrap: wrap;
+
+    :global(.swiper-slide) {
+        height: auto;
+    }
 }
 
 .thumb {
-    flex: 1;
-    // min-width: min(100%, 318px);
+    width: 100%;
     max-width: 318px;
     aspect-ratio: 433 / 256;
     border-radius: clamp(12px, 3vw, 20px);
@@ -135,7 +135,7 @@
     display: flex;
     gap: clamp(12px, 3vw, 20px);
     margin-bottom: clamp(16px, 3vw, 20px);
-    max-width: 340px;
+    max-width: 100%;
     overflow-x: auto;
     overflow-y: hidden;
     user-select: none;

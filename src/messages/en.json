@@ -44,7 +44,11 @@
     "phone": "+998 (00) 000-00-00",
     "email": "Email address (optional)",
     "message": "Message",
-    "send": "Send a message"
+    "send": "Send a message",
+    "sending": "Sending...",
+    "success": "Your message was sent successfully!",
+    "sendAnother": "Send another",
+    "error": "Something went wrong. Please try again."
   },
   "common": {
     "breadcrumbs": {

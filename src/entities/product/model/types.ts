@@ -76,6 +76,7 @@ export interface Product {
     slug: string;
     categoryLabel: string;
     description?: string;
+    categories: {id: number, name: string}[];
 }
 
 export interface ProductFeature {

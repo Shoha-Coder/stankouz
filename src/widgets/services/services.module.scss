@@ -173,10 +173,11 @@
 
 @media (max-width: 1024px) {
     .row {
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
         grid-template-areas:
-            "imageWrapper imageWrapper"
-            "textBlock descBlock";
+            "imageWrapper textBlock"
+            "imageWrapper descBlock";
+        align-items: start;
     }
 
     .imageWrapper {
@@ -200,5 +201,10 @@
             "imageWrapper"
             "textBlock"
             "descBlock";
+        row-gap: clamp(16px, 3vw, 20px);
+    }
+
+    .imageWrapper {
+        max-width: 100%;
     }
 }

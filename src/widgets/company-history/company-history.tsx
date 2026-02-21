@@ -5,7 +5,7 @@ import styles from "./company-history.module.scss";
 import type { HistoryItem } from "./model/history";
 import { ImageWithLoader } from "@/shared/ui/image-with-loader";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Pagination } from "swiper/modules";
+import { Pagination, Controller } from "swiper/modules";
 import type { Swiper as SwiperType } from "swiper";
 
 import "swiper/css";
@@ -21,6 +21,7 @@ type Props = {
 export function CompanyHistory({ title, items }: Props) {
   const [activeYear, setActiveYear] = useState(items[0]?.year);
   const [mainSwiper, setMainSwiper] = useState<SwiperType | null>(null);
+  const [thumbsSwiper, setThumbsSwiper] = useState<SwiperType | null>(null);
   const activeItem = items.find((i) => i.year === activeYear);
   const yearsRef = useRef<HTMLDivElement>(null);
   const isPointerDownRef = useRef(false);
@@ -86,7 +87,8 @@ export function CompanyHistory({ title, items }: Props) {
         {/* MAIN IMAGE SWIPER */}
         <div className={styles.mainImage}>
           <Swiper
-            modules={[Pagination]}
+            modules={[Pagination, Controller]}
+            controller={{ control: thumbsSwiper }}
             onSwiper={setMainSwiper}
             onSlideChange={handleSlideChange}
             slidesPerView={1}
@@ -112,21 +114,31 @@ export function CompanyHistory({ title, items }: Props) {
 
         {/* CONTENT */}
         <div className={styles.content}>
-          {/* THUMBNAILS */}
-          <div className={styles.thumbs}>
-            {items?.slice(0, 2)?.map((item) => (
-              <button
-                key={item.id ?? item.year}
-                className={`${styles.thumb} ${
-                  item.year === activeYear ? styles.activeThumb : ""
-                }`}
-                onClick={() => goToIndex(items.findIndex((i) => i.year === item.year))}
-                aria-label={`Show year ${item.year}`}
-              >
-                <ImageWithLoader src={item.image} alt="" width={433} height={256} fillWrapper />
-              </button>
+          {/* THUMBNAILS SWIPER */}
+          <Swiper
+            modules={[Controller]}
+            controller={{ control: mainSwiper }}
+            onSwiper={setThumbsSwiper}
+            slidesPerView={2}
+            spaceBetween={16}
+            watchSlidesProgress
+            className={styles.thumbsSwiper}
+          >
+            {items.map((item, index) => (
+              <SwiperSlide key={item.id ?? item.year}>
+                <button
+                  type="button"
+                  className={`${styles.thumb} ${
+                    item.year === activeYear ? styles.activeThumb : ""
+                  }`}
+                  onClick={() => goToIndex(index)}
+                  aria-label={`Show year ${item.year}`}
+                >
+                  <ImageWithLoader src={item.image} alt="" width={433} height={256} fillWrapper />
+                </button>
+              </SwiperSlide>
             ))}
-          </div>
+          </Swiper>
 
           {/* YEARS */}
           <div
@@ -159,7 +171,7 @@ export function CompanyHistory({ title, items }: Props) {
           {activeItem && (
             <>
               <h3 className={styles.title}>{activeItem.title}</h3>
-              <p className={styles.description}><HtmlContent content={activeItem.description} /></p>
+              <div className={styles.description}><HtmlContent content={activeItem.description} /></div>
             </>
           )}
         </div>

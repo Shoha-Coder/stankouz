@@ -42,6 +42,9 @@
     color: #282828;
     line-height: 100%;
     margin-bottom: 6px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .ts {
@@ -49,4 +52,7 @@
     font-weight: 400;
     font-size: 18px;
     color: #9d9d9d;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }

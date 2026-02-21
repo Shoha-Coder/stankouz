@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import styles from "./products.module.scss";
 import { AnimatedItem } from "@/shared/ui/animated-item";
 import ArrowRight from "@/shared/ui/icons/arrow-right";
@@ -14,17 +14,36 @@ import { Skeleton } from "@/shared/ui/skeleton";
 
 const INITIAL_LIMIT = 6;
 
-export function Products({ isLab }: { isLab?: boolean }) {
+export function Products({ isLab, isHome }: { isLab?: boolean, isHome?: boolean }) {
   const pathname = usePathname();
   const locale = getLocaleFromPath(pathname);
   const t = useTranslations("home");
-  const { data, isPending } = useProducts({ page: 1, ...(isLab ? { category_id: 17 } : undefined) });
-  const products = data?.data;
+  const { data, isPending } = useProducts({ page: 1, ...(isLab ? { category_id: 17 } : {}) });
+  const products = isHome ? data?.data?.filter(p => !p.categories.some(c => c.id === 17)).filter(p => !p.categories.some(c => c.id === 18)) : data?.data;
   const [expanded, setExpanded] = useState(false);
 
   const showSkeleton = isPending || !products?.length;
   const hasMore = (products?.length ?? 0) > INITIAL_LIMIT;
-  const displayed = products ?? [];
+  const displayed = products
+    ? expanded
+      ? products
+      : products.slice(0, INITIAL_LIMIT)
+    : [];
+
+  const gridRef = useRef<HTMLDivElement>(null);
+  const [wrapHeight, setWrapHeight] = useState<number | null>(null);
+
+  useEffect(() => {
+    if (!gridRef.current || !displayed.length) return;
+    const ro = new ResizeObserver(() => {
+      if (gridRef.current) {
+        setWrapHeight(gridRef.current.scrollHeight);
+      }
+    });
+    ro.observe(gridRef.current);
+    setWrapHeight(gridRef.current.scrollHeight);
+    return () => ro.disconnect();
+  }, [displayed.length, expanded]);
 
   if (showSkeleton) {
     return (
@@ -57,9 +76,14 @@ export function Products({ isLab }: { isLab?: boolean }) {
       </div>
 
       <div
-        className={`${styles.gridWrap} ${hasMore && !expanded ? styles.collapsed : styles.expanded}`}
+        className={styles.gridWrap}
+        style={
+          hasMore && wrapHeight != null
+            ? { maxHeight: wrapHeight }
+            : undefined
+        }
       >
-        <div className={styles.grid}>
+        <div ref={gridRef} className={styles.grid}>
           {displayed.map((item, index) => (
             <AnimatedItem key={item.id} index={index}>
               <Link href={`/${locale}/${productPath}/${item.slug}`} className={styles.card}>

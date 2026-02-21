@@ -127,6 +127,16 @@ export function MainNavbar() {
       document.body.style.overflow = "";
     };
   }, [mobileOpen, isMobile]);
+  useEffect(() => {
+    if ((catalogOpen)) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [catalogOpen]);
 
   useEffect(() => {
     if (!mobileOpen) return;
@@ -141,12 +151,12 @@ export function MainNavbar() {
     path ? `/${locale}/${path}` : `/${locale}`;
 
   const { data: categories } = useCategories();
-  const catalogCategories = categories?.length ? toCatalogCategories(categories) : [];
+  const catalogCategories = categories?.length ? toCatalogCategories(categories.filter(c => c.slug !== "stanki").filter(c => c.slug !== "laboratoriia")) : [];
 
   const filteredCategories = searchQuery
     ? catalogCategories.filter((c) =>
-        c.title.toLowerCase().includes(searchQuery.toLowerCase())
-      )
+      c.title.toLowerCase().includes(searchQuery.toLowerCase())
+    )
     : catalogCategories;
 
   const displayCategory = selectedCategory ?? filteredCategories[0];
@@ -159,8 +169,8 @@ export function MainNavbar() {
 
   const mobileSubcategory =
     typeof currentMobileView === "object" &&
-    currentMobileView !== null &&
-    "categoryId" in currentMobileView
+      currentMobileView !== null &&
+      "categoryId" in currentMobileView
       ? (currentMobileView as CatalogSubcategory)
       : null;
   const { data: mobileSubcategoryProducts } = useCategoryProducts({
@@ -197,7 +207,7 @@ export function MainNavbar() {
                 ) : (
                   <Link
                     href={buildHref(item.href) as any}
-                      className={`${styles.navLink} ${item.href === pathnameWithoutLocale ? styles.navLinkActive : ""}`}
+                    className={`${styles.navLink} ${item.href === pathnameWithoutLocale ? styles.navLinkActive : ""}`}
                     onClick={() => isMobile && closeMobile()}
                   >
                     {tNav(item.labelKey)}
@@ -246,11 +256,10 @@ export function MainNavbar() {
                   <li key={cat.id}>
                     <button
                       type="button"
-                      className={`${styles.categoryItem} ${
-                        selectedCategory?.id === cat.id || (!selectedCategory && cat.id === filteredCategories[0]?.id)
+                      className={`${styles.categoryItem} ${selectedCategory?.id === cat.id || (!selectedCategory && cat.id === filteredCategories[0]?.id)
                           ? styles.categoryItemActive
                           : ""
-                      }`}
+                        }`}
                       onClick={() => handleCategorySelect(cat)}
                     >
                       {cat.title}
@@ -315,66 +324,66 @@ export function MainNavbar() {
           aria-label="Navigation menu"
         >
           <div className={styles.mobileContent}>
-              {currentMobileView === "root" ? (
-                <>
-                  <button
-                    type="button"
-                    className={`${styles.mobileNavItem} ${catalogOpen && styles.mobileNavItemActive}`}
-                    onClick={() => setMobileCatalogStack((s) => [...s, "catalog"])}
+            {currentMobileView === "root" ? (
+              <>
+                <button
+                  type="button"
+                  className={`${styles.mobileNavItem} ${catalogOpen && styles.mobileNavItemActive}`}
+                  onClick={() => setMobileCatalogStack((s) => [...s, "catalog"])}
+                >
+                  {tNav("catalog")}
+                  <ChevronRight className={styles.mobileChevron} />
+                </button>
+                {NAV_ITEMS.filter((i) => !i.hasDropdown).map((item) => (
+                  <Link
+                    key={item.labelKey}
+                    href={buildHref(item.href) as any}
+                    className={`${styles.mobileNavItem} ${item.href === pathnameWithoutLocale ? styles.navLinkActive : ""}`}
+                    onClick={closeMobile}
                   >
-                    {tNav("catalog")}
-                    <ChevronRight className={styles.mobileChevron} />
-                  </button>
-                  {NAV_ITEMS.filter((i) => !i.hasDropdown).map((item) => (
-                    <Link
-                      key={item.labelKey}
-                      href={buildHref(item.href) as any}
-                      className={`${styles.mobileNavItem} ${item.href === pathnameWithoutLocale ? styles.navLinkActive : ""}`}
-                      onClick={closeMobile}
-                    >
-                      {tNav(item.labelKey)}
-                    </Link>
-                  ))}
-                  <div className={styles.mobileLangWrap}>
-                    <LangSwitcher />
-                  </div>
-                </>
-              ) : currentMobileView === "catalog" ? (
-                <MobileCatalogView
-                  title={tNav("catalog")}
-                  searchPlaceholder={tNav("searchPlaceholder")}
-                  searchQuery={searchQuery}
-                  onSearchChange={setSearchQuery}
-                  onBack={handleMobileBack}
-                  categories={filteredCategories}
-                  onCategorySelect={handleMobileCategorySelect}
-                  SearchIcon={SearchIcon}
-                  ChevronRight={ChevronRight}
-                  styles={styles}
-                />
-              ) : "subcategories" in currentMobileView ? (
-                <MobileSubcategoryView
-                  category={currentMobileView as CatalogCategory}
-                  onBack={handleMobileBack}
-                  onSubcategorySelect={handleMobileSubcategorySelect}
-                  ChevronRight={ChevronRight}
-                  styles={styles}
-                />
-              ) : (
-                <MobileProductView
-                  subcategory={currentMobileView as CatalogSubcategory}
-                  products={mobileSubcategoryProducts}
-                  onBack={handleMobileBack}
-                  buildHref={buildHref}
-                  closeMobile={closeMobile}
-                  searchPlaceholder={tNav("searchPlaceholder")}
-                  searchQuery={searchQuery}
-                  onSearchChange={setSearchQuery}
-                  SearchIcon={SearchIcon}
-                  ChevronRight={ChevronRight}
-                  styles={styles}
-                />
-              )}
+                    {tNav(item.labelKey)}
+                  </Link>
+                ))}
+                <div className={styles.mobileLangWrap}>
+                  <LangSwitcher />
+                </div>
+              </>
+            ) : currentMobileView === "catalog" ? (
+              <MobileCatalogView
+                title={tNav("catalog")}
+                searchPlaceholder={tNav("searchPlaceholder")}
+                searchQuery={searchQuery}
+                onSearchChange={setSearchQuery}
+                onBack={handleMobileBack}
+                categories={filteredCategories}
+                onCategorySelect={handleMobileCategorySelect}
+                SearchIcon={SearchIcon}
+                ChevronRight={ChevronRight}
+                styles={styles}
+              />
+            ) : "subcategories" in currentMobileView ? (
+              <MobileSubcategoryView
+                category={currentMobileView as CatalogCategory}
+                onBack={handleMobileBack}
+                onSubcategorySelect={handleMobileSubcategorySelect}
+                ChevronRight={ChevronRight}
+                styles={styles}
+              />
+            ) : (
+              <MobileProductView
+                subcategory={currentMobileView as CatalogSubcategory}
+                products={mobileSubcategoryProducts}
+                onBack={handleMobileBack}
+                buildHref={buildHref}
+                closeMobile={closeMobile}
+                searchPlaceholder={tNav("searchPlaceholder")}
+                searchQuery={searchQuery}
+                onSearchChange={setSearchQuery}
+                SearchIcon={SearchIcon}
+                ChevronRight={ChevronRight}
+                styles={styles}
+              />
+            )}
           </div>
         </div>
       )}
@@ -511,8 +520,8 @@ function MobileProductView({
     : subcategory.products;
   const filtered = searchQuery
     ? source.filter((p) =>
-        p.title.toLowerCase().includes(searchQuery.toLowerCase())
-      )
+      p.title.toLowerCase().includes(searchQuery.toLowerCase())
+    )
     : source;
 
   return (

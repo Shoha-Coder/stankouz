@@ -173,6 +173,7 @@ $heroStagger: 0.12s;
     align-items: center;
     flex-direction: column;
     align-items: center;
+    padding-top: 100px;
     gap: 30px;
     color: #ffffff;
 
@@ -258,10 +259,10 @@ $heroStagger: 0.12s;
     &:hover {
         background: transparent;
         border-color: #fff;
-        // transform: translateY(-4px);
-        // box-shadow: 0 8px 24px rgba(8, 99, 173, 0.35);
 
         .iconCircle {
+            transform: rotate(90deg);
+
             .icon {
                 fill: #0863ad;
             }
@@ -297,6 +298,8 @@ $heroStagger: 0.12s;
         border-color: #0863ad;
 
         .iconCircle {
+            transform: rotate(90deg);
+
             .icon {
                 fill: #0863ad;
             }
@@ -304,7 +307,7 @@ $heroStagger: 0.12s;
     }
 }
 
-/* Icon circle */
+/* Icon circle - animates in after the button */
 .iconCircle {
     width: clamp(2.5rem, 2.348rem + 0.65vw, 3.125rem);
     height: clamp(2.5rem, 2.348rem + 0.65vw, 3.125rem);
@@ -313,7 +316,17 @@ $heroStagger: 0.12s;
     display: flex;
     align-items: center;
     justify-content: center;
+    opacity: 0;
+    animation: heroFadeUp $heroDuration $heroEase forwards;
     transition: transform 0.35s $heroEase, background 0.35s $heroEase;
+
+    .primaryBtn & {
+        animation-delay: #{$heroStagger * 1 + $heroDuration};
+    }
+
+    .secondaryBtn & {
+        animation-delay: #{$heroStagger * 2 + $heroDuration};
+    }
 
     .icon {
         width: 24px;

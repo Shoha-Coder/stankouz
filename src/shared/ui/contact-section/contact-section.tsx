@@ -4,8 +4,55 @@ import Link from "next/link";
 import { FacebookIcon, InstagramIcon, TelegramIcon, YouTubeIcon } from "../icons";
 import styles from "./contact-section.module.scss";
 import ArrowRight from "@/shared/ui/icons/arrow-right";
+import { useCallback, useState } from "react";
+import { useSubmitApplication } from "@/entities/contact";
+import { formatPhoneUz, parsePhoneForSubmit } from "@/shared/lib/format-phone";
 
-export function ContactSection() {
+export interface ContactSectionProps {
+  page?: string;
+}
+
+export function ContactSection({ page = "home" }: ContactSectionProps) {
+  const [phoneValue, setPhoneValue] = useState("");
+  const { mutate, isPending, isSuccess, isError, reset } = useSubmitApplication();
+
+  const handlePhoneChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    setPhoneValue(formatPhoneUz(e.target.value));
+  }, []);
+
+  const handleNameKeyDown = useCallback((e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (/[0-9]/.test(e.key)) e.preventDefault();
+  }, []);
+
+  const handleNameChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    e.target.value = e.target.value.replace(/[0-9]/g, "");
+  }, []);
+
+  const handleSubmit = useCallback(
+    (e: React.FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
+      const form = e.currentTarget;
+      const formData = new FormData(form);
+      const name = (formData.get("name") as string)?.trim();
+      const phone_number = parsePhoneForSubmit(phoneValue);
+      const email = (formData.get("email") as string)?.trim();
+      const message = (formData.get("message") as string)?.trim();
+
+      if (!name || phone_number.length < 12) return;
+
+      mutate(
+        { name, phone_number, email: email || undefined, message: message || undefined, page },
+        {
+          onSuccess: () => {
+            form.reset();
+            setPhoneValue("");
+          },
+        }
+      );
+    },
+    [phoneValue, mutate]
+  );
+
   return (
     <section className={styles.wrapper}>
       <div className={styles.container}>
@@ -47,24 +94,60 @@ export function ContactSection() {
         </div>
 
         {/* RIGHT */}
-        <form className={styles.form}>
+        <form className={styles.form} onSubmit={handleSubmit}>
           <h2 className={styles.formTitle}>Ariza qoldirish</h2>
 
-          <div className={styles.row}>
-            <input placeholder="Ismingizni kiriting" />
-            <input placeholder="+998 (00) 000-00-00" />
-          </div>
+          {isSuccess ? (
+            <div className={styles.success}>
+              <p>Xabaringiz muvaffaqiyatli yuborildi!</p>
+              <button type="button" onClick={() => { reset(); setPhoneValue(""); }}>
+                Yana yuborish
+              </button>
+            </div>
+          ) : (
+            <>
+              <div className={styles.row}>
+                <input
+                  name="name"
+                  placeholder="Ismingizni kiriting"
+                  required
+                  disabled={isPending}
+                  onKeyDown={handleNameKeyDown}
+                  onChange={handleNameChange}
+                  autoComplete="name"
+                />
+                <input
+                  type="tel"
+                  name="phone_number"
+                  placeholder="+998 (00) 000-00-00"
+                  value={phoneValue}
+                  onChange={handlePhoneChange}
+                  required
+                  disabled={isPending}
+                  autoComplete="tel"
+                />
+              </div>
 
-          <input placeholder="Elektron pochta manzili (ixtiyoriy)" />
+              <input
+                name="email"
+                type="email"
+                placeholder="Elektron pochta manzili (ixtiyoriy)"
+                disabled={isPending}
+                autoComplete="email"
+              />
 
-          <textarea  placeholder="Xabar (ixtiyoriy)" />
+              <textarea name="message" placeholder="Xabar (ixtiyoriy)" disabled={isPending} />
 
-          <button type="submit" className={styles.submit}>
-            Xabar yuborish
-            <span className={styles.submitIcon}>
-              <ArrowRight />
-            </span>
-          </button>
+              {isError && <p className={styles.error}>Xatolik yuz berdi. Iltimos, qaytadan urinib ko&apos;ring.</p>}
+
+              <button type="submit" className={styles.submit} disabled={isPending}>
+                {isPending ? "Yuborilmoqda..." : "Xabar yuborish"}
+                <span className={styles.submitIcon}>
+                  <ArrowRight />
+                </span>
+              </button>
+            </>
+          )}
         </form>
       </div>
     </section>
