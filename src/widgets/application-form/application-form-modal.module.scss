@@ -277,12 +277,18 @@
   justify-content: center;
   background: #ffd427;
   border-radius: 50%;
+  transition: transform 0.3s ease;
 
   :global(svg path),
   :global(svg) path {
     stroke: #0863ad !important;
   }
+
+  :global(svg) {
+    transition: transform 0.3s ease;
+  }
 }
+
 
 .success {
   display: flex;

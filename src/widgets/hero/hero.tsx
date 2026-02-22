@@ -8,6 +8,8 @@ import "swiper/css/pagination";
 import styles from "./hero.module.scss";
 import { swiperPaginationConfig } from "@/shared/config/swiper";
 import { ArrowRightIcon, DownloadIcon } from "@/shared/ui/icons";
+import { SlidingIcon } from "@/shared/ui/sliding-icon";
+import slidingStyles from "@/shared/ui/sliding-icon/sliding-icon.module.scss";
 import { useTranslations } from "next-intl";
 import { useBanners } from "@/entities/banner/model/useBanners";
 import { Skeleton } from "@/shared/ui/skeleton";
@@ -132,17 +134,21 @@ export function Hero() {
                   <p className={`${styles.subtitle} inter`}>{slide.subtitle}</p>
 
                   <div className={styles.actions}>
-                    <button className={`${styles.primaryBtn} inter`}>
+                    <button className={`${styles.primaryBtn} ${slidingStyles.slidingIconHover} inter`}>
                       <span className={styles.btnText}>{slide.primaryCta}</span>
                       <span className={styles.iconCircle}>
-                        <ArrowRightIcon className={styles.icon} />
+                        <SlidingIcon>
+                          <ArrowRightIcon className={styles.icon} />
+                        </SlidingIcon>
                       </span>
                     </button>
 
-                    <button className={styles.secondaryBtn}>
+                    <button className={`${styles.secondaryBtn} ${slidingStyles.slidingIconHover}`}>
                       <span className={styles.btnText}>{slide.secondaryCta}</span>
                       <span className={styles.iconCircle}>
-                        <DownloadIcon />
+                        <SlidingIcon>
+                          <DownloadIcon />
+                        </SlidingIcon>
                       </span>
                     </button>
                   </div>

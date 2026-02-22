@@ -1,6 +1,8 @@
 "use client";
 
 import { ArrowRightIcon, ShareIcon } from "@/shared/ui/icons";
+import { SlidingIcon } from "@/shared/ui/sliding-icon";
+import slidingStyles from "@/shared/ui/sliding-icon/sliding-icon.module.scss";
 import styles from "../news-article.module.scss";
 import Link from "next/link";
 import { getLocaleFromPath } from "@/shared/lib/i18n/get-locale-from-path";
@@ -34,14 +36,20 @@ export function NewsNavigation({ prevArticle, nextArticle, currentSlug }: Props)
         {prevArticle && prevArticle.slug !== currentSlug ? (
           <Link
             href={`/${locale}/news/${prevArticle.slug}`}
-            className={styles.navBtn}
+            className={`${styles.navBtn} ${slidingStyles.slidingIconHover}`}
           >
-            <ArrowRightIcon className={styles.circle} />
+            <span className={styles.circle}>
+              <SlidingIcon>
+                <ArrowRightIcon />
+              </SlidingIcon>
+            </span>
             {prevArticle.title}
           </Link>
         ) : (
           <span className={`${styles.navBtn} ${styles.navBtnDisabled}`}>
-            <ArrowRightIcon className={styles.circle} />
+            <span className={styles.circle}>
+              <ArrowRightIcon />
+            </span>
             Oldingi xabar
           </span>
         )}
@@ -49,15 +57,21 @@ export function NewsNavigation({ prevArticle, nextArticle, currentSlug }: Props)
         {nextArticle && nextArticle.slug !== currentSlug ? (
           <Link
             href={`/${locale}/news/${nextArticle.slug}`}
-            className={styles.navBtn}
+            className={`${styles.navBtn} ${slidingStyles.slidingIconHover}`}
           >
             {nextArticle.title}
-            <ArrowRightIcon className={styles.circle} />
+            <span className={styles.circle}>
+              <SlidingIcon>
+                <ArrowRightIcon />
+              </SlidingIcon>
+            </span>
           </Link>
         ) : (
           <span className={`${styles.navBtn} ${styles.navBtnDisabled}`}>
             Keyingi xabar
-            <ArrowRightIcon className={styles.circle} />
+            <span className={styles.circle}>
+              <ArrowRightIcon />
+            </span>
           </span>
         )}
       </div>

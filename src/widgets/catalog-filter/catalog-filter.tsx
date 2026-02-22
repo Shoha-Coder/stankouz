@@ -17,70 +17,20 @@ interface Props {
 
 function FilterContent({
     categories,
-    activeSubs,
-    setActiveSubs,
-    onChange,
+    selectedKey,
+    onSelect,
     tAll,
 }: {
     categories: Category[];
-    activeSubs: Set<string>;
-    setActiveSubs: React.Dispatch<React.SetStateAction<Set<string>>>;
-    onChange: (selections: Selection[]) => void;
+    selectedKey: string | null;
+    onSelect: (key: string) => void;
     tAll: string;
 }) {
-    const handleSubChange = useCallback(
+    const handleClick = useCallback(
         (key: string) => {
-            setActiveSubs((prev) => {
-                const next = new Set(prev);
-                if (next.has(key)) next.delete(key);
-                else next.add(key);
-                onChange(
-                    Array.from(next).map((k) => {
-                        const [cId, sId] = k.split("-").map(Number);
-                        return { categoryId: cId, subcategoryId: sId === 0 ? undefined : sId };
-                    })
-                );
-                return next;
-            });
+            onSelect(selectedKey === key ? "" : key);
         },
-        [onChange, setActiveSubs]
-    );
-
-    const handleBarchasi = useCallback(
-        (catId: number) => {
-            setActiveSubs((prev) => {
-                const next = new Set(prev);
-                const keysToRemove = Array.from(next).filter((k) => k.startsWith(`${catId}-`));
-                keysToRemove.forEach((k) => next.delete(k));
-                onChange(
-                    Array.from(next).map((k) => {
-                        const [cId, sId] = k.split("-").map(Number);
-                        return { categoryId: cId, subcategoryId: sId === 0 ? undefined : sId };
-                    })
-                );
-                return next;
-            });
-        },
-        [onChange, setActiveSubs]
-    );
-
-    const handleCategoryOnlyClick = useCallback(
-        (catId: number) => {
-            const key = `${catId}-0`;
-            setActiveSubs((prev) => {
-                const next = new Set(prev);
-                if (next.has(key)) next.delete(key);
-                else next.add(key);
-                onChange(
-                    Array.from(next).map((k) => {
-                        const [cId, sId] = k.split("-").map(Number);
-                        return { categoryId: cId, subcategoryId: sId === 0 ? undefined : sId };
-                    })
-                );
-                return next;
-            });
-        },
-        [onChange, setActiveSubs]
+        [selectedKey, onSelect]
     );
 
     return (
@@ -88,43 +38,37 @@ function FilterContent({
             {categories.map((cat: Category) => (
                 <div key={cat.id} className={styles.category}>
                     {cat.children.length === 0 ? (
-                        <label className={`${styles.categoryTitle} ${styles.categoryTitleClickable}`}>
-                            <span>{cat.name}</span>
-                            <input
-                                className={styles.checkbox}
-                                type="checkbox"
-                                checked={activeSubs.has(`${cat.id}-0`)}
-                                onChange={() => handleCategoryOnlyClick(cat.id)}
-                            />
-                        </label>
+                        <button
+                            type="button"
+                            className={`${styles.selectItem} ${selectedKey === `${cat.id}-0` ? styles.selectItemActive : ""}`}
+                            onClick={() => handleClick(`${cat.id}-0`)}
+                        >
+                            {cat.name}
+                        </button>
                     ) : (
                         <>
                             <div className={styles.categoryName}>
                                 <span>{cat.name}</span>
                             </div>
                             <div className={styles.subs}>
-                                <label className={styles.subLabel}>
-                                    <input
-                                        className={styles.checkbox}
-                                        type="checkbox"
-                                        checked={!cat.children.some((s) => activeSubs.has(`${cat.id}-${s.id}`))}
-                                        onChange={() => handleBarchasi(cat.id)}
-                                    />
+                                <button
+                                    type="button"
+                                    className={`${styles.selectItem} ${selectedKey === `${cat.id}-0` ? styles.selectItemActive : ""}`}
+                                    onClick={() => handleClick(`${cat.id}-0`)}
+                                >
                                     {tAll}
-                                </label>
+                                </button>
                                 {cat.children.map((sub: SubCategory) => {
                                     const key = `${cat.id}-${sub.id}`;
-                                    const isChecked = activeSubs.has(key);
                                     return (
-                                        <label key={sub.id} className={styles.subLabel}>
+                                        <button
+                                            key={sub.id}
+                                            type="button"
+                                            className={`${styles.selectItem} ${selectedKey === key ? styles.selectItemActive : ""}`}
+                                            onClick={() => handleClick(key)}
+                                        >
                                             {sub.name}
-                                            <input
-                                                className={styles.checkbox}
-                                                type="checkbox"
-                                                checked={isChecked}
-                                                onChange={() => handleSubChange(key)}
-                                            />
-                                        </label>
+                                        </button>
                                     );
                                 })}
                             </div>
@@ -140,7 +84,7 @@ export const CatalogFilter = ({ onChange }: Props) => {
     const t = useTranslations("catalog");
     const { data: catalogCategories = [] } = useCategories();
     const categories = catalogCategories.filter(c => c.slug !== "stanki").filter(c => c.slug !== "laboratoriia");
-    const [activeSubs, setActiveSubs] = useState<Set<string>>(new Set());
+    const [selectedKey, setSelectedKey] = useState<string | null>(null);
     const [mobileOpen, setMobileOpen] = useState(false);
 
     useEffect(() => {
@@ -154,8 +98,21 @@ export const CatalogFilter = ({ onChange }: Props) => {
         };
     }, [mobileOpen]);
 
+    const handleSelect = useCallback(
+        (key: string) => {
+            setSelectedKey(key || null);
+            if (!key) {
+                onChange([]);
+                return;
+            }
+            const [cId, sId] = key.split("-").map(Number);
+            onChange([{ categoryId: cId, subcategoryId: sId === 0 ? undefined : sId }]);
+        },
+        [onChange]
+    );
+
     const handleClear = useCallback(() => {
-        setActiveSubs(new Set());
+        setSelectedKey(null);
         onChange([]);
     }, [onChange]);
 
@@ -163,29 +120,21 @@ export const CatalogFilter = ({ onChange }: Props) => {
         setMobileOpen(false);
     }, []);
 
-    const handleRemoveChip = useCallback(
-        (catId: number) => {
-            setActiveSubs((prev) => {
-                const next = new Set(prev);
-                Array.from(next)
-                    .filter((k) => k.startsWith(`${catId}-`))
-                    .forEach((k) => next.delete(k));
-                onChange(
-                    Array.from(next).map((k) => {
-                        const [cId, sId] = k.split("-").map(Number);
-                        return { categoryId: cId, subcategoryId: sId === 0 ? undefined : sId };
-                    })
-                );
-                return next;
-            });
-        },
-        [onChange]
-    );
+    const handleRemoveChip = useCallback(() => {
+        setSelectedKey(null);
+        onChange([]);
+    }, [onChange]);
 
-    const selectedCategoryIds = Array.from(activeSubs)
-        .map((k) => parseInt(k.split("-")[0], 10))
-        .filter((id, i, arr) => arr.indexOf(id) === i);
-    const selectedCategories = categories.filter((c) => selectedCategoryIds.includes(c.id));
+    const selectedLabel = selectedKey
+        ? (() => {
+              const [catId, subId] = selectedKey.split("-").map(Number);
+              const cat = categories.find((c) => c.id === catId);
+              if (!cat) return null;
+              if (subId === 0) return cat.name;
+              const sub = cat.children.find((s) => s.id === subId);
+              return sub ? sub.name : cat.name;
+          })()
+        : null;
 
     return (
         <div className={styles.wrapper}>
@@ -194,9 +143,8 @@ export const CatalogFilter = ({ onChange }: Props) => {
                 <h2>{t("categories")}</h2>
                 <FilterContent
                     categories={categories}
-                    activeSubs={activeSubs}
-                    setActiveSubs={setActiveSubs}
-                    onChange={onChange}
+                    selectedKey={selectedKey}
+                    onSelect={handleSelect}
                     tAll={t("all")}
                 />
                 <div className={styles.sheetActions}>
@@ -221,24 +169,22 @@ export const CatalogFilter = ({ onChange }: Props) => {
                 <ChevronRight className={styles.triggerChevron} />
             </button>
 
-            {/* Mobile selected filter chips */}
-            {selectedCategories.length > 0 && (
+            {/* Mobile selected filter chip */}
+            {selectedLabel && (
                 <div className={styles.chips}>
-                    {selectedCategories.map((cat) => (
-                        <span key={cat.id} className={styles.chip}>
-                            {cat.name}
-                            <button
-                                type="button"
-                                className={styles.chipRemove}
-                                onClick={() => handleRemoveChip(cat.id)}
-                                aria-label={t("removeFilter", { name: cat.name })}
-                            >
-                                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
-                                    <path d="M9 3L3 9M3 3l6 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                                </svg>
-                            </button>
-                        </span>
-                    ))}
+                    <span className={styles.chip}>
+                        {selectedLabel}
+                        <button
+                            type="button"
+                            className={styles.chipRemove}
+                            onClick={handleRemoveChip}
+                            aria-label={t("removeFilter", { name: selectedLabel })}
+                        >
+                            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
+                                <path d="M9 3L3 9M3 3l6 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                            </svg>
+                        </button>
+                    </span>
                 </div>
             )}
 
@@ -270,9 +216,8 @@ export const CatalogFilter = ({ onChange }: Props) => {
                             <div className={styles.sheetContent}>
                                 <FilterContent
                                     categories={categories}
-                                    activeSubs={activeSubs}
-                                    setActiveSubs={setActiveSubs}
-                                    onChange={onChange}
+                                    selectedKey={selectedKey}
+                                    onSelect={handleSelect}
                                     tAll={t("all")}
                                 />
                             </div>

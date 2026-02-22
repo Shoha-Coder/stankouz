@@ -2,6 +2,8 @@
 
 import styles from "./machines.module.scss";
 import ArrowRight from "@/shared/ui/icons/arrow-right";
+import { SlidingIcon } from "@/shared/ui/sliding-icon";
+import slidingStyles from "@/shared/ui/sliding-icon/sliding-icon.module.scss";
 import { ImageWithLoader } from "@/shared/ui/image-with-loader";
 import Link from "next/link";
 import { getLocaleFromPath } from "@/shared/lib/i18n/get-locale-from-path";
@@ -51,10 +53,12 @@ export function Machines() {
               <p>{labDesc}</p>
             </div>
 
-            <Link href={`/${locale}/labs`} className={styles.cardBtn}>
+            <Link href={`/${locale}/labs`} className={`${styles.cardBtn} ${slidingStyles.slidingIconHover}`}>
               <span>{t("details")}</span>
               <span className={styles.icon}>
-                <ArrowRight />
+                <SlidingIcon>
+                  <ArrowRight />
+                </SlidingIcon>
               </span>
             </Link>
           </div>
@@ -69,10 +73,12 @@ export function Machines() {
               <p>{stankiDesc}</p>
             </div>
 
-            <Link href={`/${locale}/machines`} className={styles.cardBtn}>
+            <Link href={`/${locale}/products`} className={`${styles.cardBtn} ${slidingStyles.slidingIconHover}`}>
               <span>{t("details")}</span>
               <span className={styles.icon}>
-                <ArrowRight />
+                <SlidingIcon>
+                  <ArrowRight />
+                </SlidingIcon>
               </span>
             </Link>
           </div>

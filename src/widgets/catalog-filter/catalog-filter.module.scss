@@ -279,22 +279,6 @@
     min-height: 24px;
 }
 
-.categoryTitleClickable {
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 14px 0;
-    border-bottom: 1px solid #f0f0f0;
-    font-family: Inter, sans-serif;
-    font-weight: 500;
-    font-size: 18px;
-    color: #282828;
-
-    input {
-        flex-shrink: 0;
-    }
-}
 
 .categoryName {
     padding: 14px 0;
@@ -331,24 +315,27 @@
     gap: 12px;
 }
 
-.subLabel {
+.selectItem {
+    width: 100%;
+    padding: 10px 0;
+    border: none;
+    background: transparent;
     font-family: Inter, sans-serif;
     font-size: 16px;
     font-weight: 400;
     line-height: 100%;
     letter-spacing: 0;
-    color: #9d9d9d;
-    min-height: 19px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
+    color: #282828;
+    text-align: left;
     cursor: pointer;
+    transition: color 0.2s ease, font-weight 0.2s ease;
 }
 
-.checkbox {
-    width: 18px;
-    height: 18px;
-    flex-shrink: 0;
-    accent-color: #0863ad;
-    cursor: pointer;
+.selectItem:hover {
+    color: #0863ad;
+}
+
+.selectItemActive {
+    color: #0863ad;
+    font-weight: 500;
 }

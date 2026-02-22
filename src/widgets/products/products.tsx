@@ -4,6 +4,8 @@ import { useState, useRef, useEffect } from "react";
 import styles from "./products.module.scss";
 import { AnimatedItem } from "@/shared/ui/animated-item";
 import ArrowRight from "@/shared/ui/icons/arrow-right";
+import { SlidingIcon } from "@/shared/ui/sliding-icon";
+import slidingStyles from "@/shared/ui/sliding-icon/sliding-icon.module.scss";
 import Link from "next/link";
 import { getLocaleFromPath } from "@/shared/lib/i18n/get-locale-from-path";
 import { usePathname } from "next/navigation";
@@ -120,21 +122,25 @@ export function Products({ isLab, isHome, isProducts }: { isLab?: boolean, isHom
         {hasMore ? (
           <button
             type="button"
-            className={styles.outlineBtn}
+            className={`${styles.outlineBtn} ${slidingStyles.slidingIconHover}`}
             onClick={() => setExpanded((e) => !e)}
           >
             <span>{expanded ? t("less-button") : t("more-button")}</span>
             <span
               className={`${styles.iconCircle} ${expanded ? styles.iconCircleOpen : ""}`}
             >
-              <ArrowRight />
+              <SlidingIcon>
+                <ArrowRight />
+              </SlidingIcon>
             </span>
           </button>
         ) : (
-          <Link href={`/${locale}/${morePath}`} className={styles.outlineBtn}>
+          <Link href={`/${locale}/${morePath}`} className={`${styles.outlineBtn} ${slidingStyles.slidingIconHover}`}>
             <span>{isLab ? t("more-button") : t("see-catalog")}</span>
             <span className={`${styles.iconCircle} ${styles.iconCircleLink}`}>
-              <ArrowRight />
+              <SlidingIcon>
+                <ArrowRight />
+              </SlidingIcon>
             </span>
           </Link>
         )}

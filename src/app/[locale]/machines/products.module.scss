@@ -125,7 +125,7 @@
 .grid {
     margin-top: clamp(20px, 3vw, 30px);
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr));
     gap: clamp(16px, 2.5vw, 24px) clamp(20px, 3vw, 40px);
 }
 

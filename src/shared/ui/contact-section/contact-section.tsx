@@ -4,6 +4,8 @@ import Link from "next/link";
 import { FacebookIcon, InstagramIcon, TelegramIcon, YouTubeIcon } from "../icons";
 import styles from "./contact-section.module.scss";
 import ArrowRight from "@/shared/ui/icons/arrow-right";
+import { SlidingIcon } from "@/shared/ui/sliding-icon";
+import slidingStyles from "@/shared/ui/sliding-icon/sliding-icon.module.scss";
 import { useCallback, useState } from "react";
 import { useSubmitApplication } from "@/entities/contact";
 import { formatPhoneUz, parsePhoneForSubmit } from "@/shared/lib/format-phone";
@@ -140,10 +142,12 @@ export function ContactSection({ page = "home" }: ContactSectionProps) {
 
               {isError && <p className={styles.error}>Xatolik yuz berdi. Iltimos, qaytadan urinib ko&apos;ring.</p>}
 
-              <button type="submit" className={styles.submit} disabled={isPending}>
+              <button type="submit" className={`${styles.submit} ${slidingStyles.slidingIconHover}`} disabled={isPending}>
                 {isPending ? "Yuborilmoqda..." : "Xabar yuborish"}
                 <span className={styles.submitIcon}>
-                  <ArrowRight />
+                  <SlidingIcon>
+                    <ArrowRight />
+                  </SlidingIcon>
                 </span>
               </button>
             </>

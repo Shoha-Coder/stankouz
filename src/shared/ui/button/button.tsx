@@ -1,6 +1,8 @@
 import { ButtonHTMLAttributes } from "react";
 import styles from "./button.module.scss";
+import slidingStyles from "../sliding-icon/sliding-icon.module.scss";
 import { ArrowRightIcon } from "../icons";
+import { SlidingIcon } from "../sliding-icon";
 
 type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   outlinebutton?: boolean;
@@ -17,12 +19,17 @@ export function Button({
 }: ButtonProps) {
   if (outlinebutton) {
     return (
-      <button className={`${styles.outlineBtn} ${className}`} {...props}>
+      <button
+        className={`${styles.outlineBtn} ${slidingStyles.slidingIconHover} ${className}`}
+        {...props}
+      >
         <span className={`${styles.text} ${textClassName || "inter"}`}>
           {props.children}
         </span>
         <span className={`${styles.iconCircle} ${circleClassName}`}>
-          <ArrowRightIcon />
+          <SlidingIcon>
+            <ArrowRightIcon />
+          </SlidingIcon>
         </span>
       </button>
     );

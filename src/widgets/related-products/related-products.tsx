@@ -8,6 +8,8 @@ import { ProductCard } from "@/entities/product/ui/product-card";
 import { AnimatedItem } from "@/shared/ui/animated-item";
 import { useProducts } from "@/entities/product/model/useProducts";
 import ArrowRight from "@/shared/ui/icons/arrow-right";
+import { SlidingIcon } from "@/shared/ui/sliding-icon";
+import slidingStyles from "@/shared/ui/sliding-icon/sliding-icon.module.scss";
 import { KoproqButton } from "@/shared/ui/koproq-button";
 import { relatedProductsSwiperConfig } from "@/shared/config/swiper";
 import styles from "./related-products.module.scss";
@@ -72,18 +74,22 @@ export function RelatedProducts({ excludeId, isLab }: Props) {
 
                 <button
                     type="button"
-                    className={`${styles.navBtn} ${styles.prev} related-products-prev`}
+                    className={`${styles.navBtn} ${styles.prev} ${slidingStyles.slidingIconHover} related-products-prev`}
                     aria-label="Oldingi"
                 >
-                    <ArrowRight />
+                    <SlidingIcon>
+                        <ArrowRight />
+                    </SlidingIcon>
                 </button>
 
                 <button
                     type="button"
-                    className={`${styles.navBtn} ${styles.next} related-products-next`}
+                    className={`${styles.navBtn} ${styles.next} ${slidingStyles.slidingIconHover} related-products-next`}
                     aria-label="Keyingi"
                 >
-                    <ArrowRight />
+                    <SlidingIcon>
+                        <ArrowRight />
+                    </SlidingIcon>
                 </button>
             </div>
         </section>

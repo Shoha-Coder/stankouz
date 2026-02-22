@@ -35,7 +35,7 @@ export default function MachinesPage() {
     const total = meta?.total ?? 0;
 
     return (
-        <div style={{ background: "#F6F6F6" }}>
+        <div style={{ background: "#F6F6F6", height: "100%", minHeight: "calc(100vh - 700px)" }}>
             <Breadcrumb items={BREADCRUMB_ITEMS} />
             <div className={styles.layout}>
                 <CatalogFilter

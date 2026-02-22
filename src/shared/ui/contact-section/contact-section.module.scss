@@ -215,10 +215,12 @@
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
+    transition: transform 0.3s ease;
 
     svg {
         width: clamp(20px, 4vw, 24px);
         height: clamp(20px, 4vw, 24px);
+        transition: transform 0.3s ease;
 
         path {
             stroke: black;

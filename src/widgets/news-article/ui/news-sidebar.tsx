@@ -3,6 +3,8 @@
 import styles from "../news-article.module.scss";
 import { NewsItem } from "../model/types";
 import { ArrowRightIcon } from "@/shared/ui/icons";
+import { SlidingIcon } from "@/shared/ui/sliding-icon";
+import slidingStyles from "@/shared/ui/sliding-icon/sliding-icon.module.scss";
 import Link from "next/link";
 import { getLocaleFromPath } from "@/shared/lib/i18n/get-locale-from-path";
 import { usePathname } from "next/navigation";
@@ -37,9 +39,13 @@ export function NewsSidebar({ items }: Props) {
         ))}
       </ul>
 
-      <Link href={{ pathname: `/${locale}/news` }} className={styles.moreBtn}>
+      <Link href={{ pathname: `/${locale}/news` }} className={`${styles.moreBtn} ${slidingStyles.slidingIconHover}`}>
         Ko‘proq xabarlar
-        <ArrowRightIcon className={styles.moreIcon} />
+        <span className={styles.moreIcon}>
+          <SlidingIcon>
+            <ArrowRightIcon />
+          </SlidingIcon>
+        </span>
       </Link>
     </div>
   );

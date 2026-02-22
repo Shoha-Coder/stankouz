@@ -2,6 +2,8 @@
 import Link from "next/link";
 import styles from "./not-found.module.scss";
 import { ArrowRightIcon } from "@/shared/ui/icons";
+import { SlidingIcon } from "@/shared/ui/sliding-icon";
+import slidingStyles from "@/shared/ui/sliding-icon/sliding-icon.module.scss";
 import Logo from "@/shared/ui/icons/logo";
 import { usePathname } from "next/navigation";
 import { getLocaleFromPath } from "@/shared/lib/i18n/get-locale-from-path";
@@ -21,9 +23,11 @@ export default function NotFound() {
         <h1 className={styles.code}>404</h1>
         <p className={styles.text}>Sahifa topilmadi!</p>
 
-        <Link href={`/${locale}`} className={styles.button}>
+        <Link href={`/${locale}`} className={`${styles.button} ${slidingStyles.slidingIconHover}`}>
           <span className={styles.icon}>
-            <ArrowRightIcon />
+            <SlidingIcon>
+              <ArrowRightIcon />
+            </SlidingIcon>
           </span>
           Bosh sahifaga qaytish
         </Link>

@@ -54,6 +54,11 @@
     font-size: 16px;
     line-height: 100%;
     text-align: center;
+    transition: background 0.3s ease;
+
+    &:hover {
+        background: #07579a;
+    }
 }
 
 .arrow {
@@ -65,4 +70,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    transition: transform 0.3s ease;
+
+    svg {
+        transition: transform 0.3s ease;
+    }
 }

@@ -99,9 +99,7 @@ export function Footer() {
         {/* WORKING HOURS */}
         <div className={`${styles.col} ${styles.links}`}>
           <span className={styles.label}>{tFooter("working-hours-text")}</span>
-          <p className={styles.workingHours}>
-            {workTime || "Ish vaqti: 09:00 - 18:00"}
-          </p>
+          <p className={styles.workingHours} dangerouslySetInnerHTML={{ __html: workTime?.replace(/\r\n/g, '<br />') ?? "" }} />
         </div>
       </div>
 

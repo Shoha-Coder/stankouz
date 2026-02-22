@@ -68,7 +68,7 @@
     width: clamp(40px, 8vw, 60px);
     height: clamp(40px, 8vw, 60px);
     border-radius: 50%;
-    background: #ffd93d;
+    background: transparent;
     border: none;
     cursor: pointer;
     display: flex;
@@ -76,10 +76,10 @@
     justify-content: center;
     z-index: 1;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    transition: opacity 0.2s ease;
+    transition: background 0.2s ease, opacity 0.2s ease;
 
     &:hover {
-        opacity: 0.9;
+        background: #ffd93d;
     }
 
     &:global(.swiper-button-disabled) {

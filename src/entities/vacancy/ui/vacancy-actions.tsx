@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import { ArrowRightIcon, ShareIcon } from "@/shared/ui/icons";
+import { SlidingIcon } from "@/shared/ui/sliding-icon";
+import slidingStyles from "@/shared/ui/sliding-icon/sliding-icon.module.scss";
 import { ApplicationFormModal } from "@/widgets/application-form";
 import styles from "./vacancy-actions.module.scss";
 import { usePathname } from "next/navigation";
@@ -27,12 +29,14 @@ export function VacancyActions({ vacancyId, vacancyTitle }: VacancyActionsProps)
       </button>
 
       <button
-        className={styles.apply}
+        className={`${styles.apply} ${slidingStyles.slidingIconHover}`}
         onClick={() => setModalOpen(true)}
       >
         <span>Ariza qoldirish</span>
         <span className={styles.arrow}>
-          <ArrowRightIcon />
+          <SlidingIcon>
+            <ArrowRightIcon />
+          </SlidingIcon>
         </span>
       </button>
 

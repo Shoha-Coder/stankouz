@@ -4,6 +4,8 @@ import { useState } from "react";
 import styles from "./certificates-carousel.module.scss";
 import Heading from "../heading/heading";
 import { ArrowRightIcon } from "../icons";
+import { SlidingIcon } from "../sliding-icon";
+import slidingStyles from "../sliding-icon/sliding-icon.module.scss";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper/modules";
 
@@ -73,17 +75,21 @@ export function CertificatesCarousel({ items }: Props) {
 
         {/* NAV */}
         <button
-          className={`${styles.navBtn} ${styles.prev} certs-prev`}
+          className={`${styles.navBtn} ${styles.prev} ${slidingStyles.slidingIconHover} certs-prev`}
           aria-label="Previous"
         >
-          <ArrowRightIcon />
+          <SlidingIcon>
+            <ArrowRightIcon />
+          </SlidingIcon>
         </button>
 
         <button
-          className={`${styles.navBtn} ${styles.next} certs-next`}
+          className={`${styles.navBtn} ${styles.next} ${slidingStyles.slidingIconHover} certs-next`}
           aria-label="Next"
         >
-          <ArrowRightIcon />
+          <SlidingIcon>
+            <ArrowRightIcon />
+          </SlidingIcon>
         </button>
       </div>
 

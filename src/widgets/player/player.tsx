@@ -1,39 +1,45 @@
-import React, { useState } from "react";
-import { ShakaPlayer } from "../../shared/ui/shaka-player/shaka-player";
-import { MediaPreview } from "../../shared/ui/media-preview/media-preview";
+"use client";
+
+import { useState } from "react";
+import { ShakaPlayer } from "@/shared/ui/shaka-player/shaka-player";
+import { MediaPreview } from "@/shared/ui/media-preview/media-preview";
+import { useBanners } from "@/entities/banner/model/useBanners";
+import { getFallbackImage } from "@/shared/lib/responsive-images";
+import { Skeleton } from "@/shared/ui/skeleton";
 import styles from "./player.module.scss";
 
 const Player = () => {
   const [isPlaying, setIsPlaying] = useState(false);
+  const { data: banners, isPending } = useBanners("about");
+  const banner = banners?.[0];
+  const poster = banner?.images ? getFallbackImage(banner.images) : "";
+  const videoUrl = banner?.url?.trim() || null;
+
+  const posterImage = poster || "/images/preview.png";
+
+  if (isPending) {
+    return (
+      <div className={styles.wrapper}>
+        <div className={styles.player}>
+          <Skeleton className={styles.skeleton} />
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.player}>
-        {isPlaying ? (
-          <ShakaPlayer src="https://media.w3.org/2010/05/sintel/trailer_hd.mp4" />
+        {banner && videoUrl && isPlaying ? (
+          <ShakaPlayer src={videoUrl} />
         ) : (
           <MediaPreview
-            onClick={() => setIsPlaying(true)}
-            poster="/images/preview.png"
+            poster={posterImage}
+            onClick={banner && videoUrl ? () => setIsPlaying(true) : undefined}
           />
         )}
       </div>
-      <p className={styles.text}>
-        Общество с Ограниченной Ответственностью «GIDRO STANKO SERVIS» создано в
-        марте 2007 года на территории города Навоийской области с Уставным
-        капиталом свыше 166,3 млн. сум. Общество с Ограниченной Ответственностью
-        «GIDRO STANKO SERVIS» создано в марте 2007 года на территории города
-        Навоийской области с Уставным капиталом свыше 166,3 млн. сум. Общество с
-        Ограниченной Ответственностью «GIDRO STANKO SERVIS» создано в марте 2007
-        года на территории города Навоийской области с Уставным капиталом свыше
-        166,3 млн. сум. Общество с Ограниченной Ответственностью «GIDRO STANKO
-        SERVIS» создано в марте 2007 года на территории города Навоийской
-        области с Уставным капиталом свыше 166,3 млн. сум. Общество с
-        Ограниченной Ответственностью «GIDRO STANKO SERVIS» создано в марте 2007
-        года на территории города Навоийской области с Уставным капиталом свыше
-        166,3 млн. сум. Общество с Ограниченной Ответственностью «GIDRO STANKO
-        SERVIS» создано в марте 2007 года на территории города Навоийской
-        области с Уставным капиталом свыше 166,3 млн. сум.
-      </p>
+      <p className={styles.text} dangerouslySetInnerHTML={{ __html: banner?.desc || "" }} />
     </div>
   );
 };

@@ -8,6 +8,8 @@ import { ProductCard } from "@/entities/product/ui/product-card";
 import { AnimatedItem } from "@/shared/ui/animated-item";
 import { useProducts } from "@/entities/product/model/useProducts";
 import ArrowRight from "@/shared/ui/icons/arrow-right";
+import { SlidingIcon } from "@/shared/ui/sliding-icon";
+import slidingStyles from "@/shared/ui/sliding-icon/sliding-icon.module.scss";
 import { labProductsSwiperConfig } from "@/shared/config/swiper";
 import styles from "./lab-products-section.module.scss";
 import { Skeleton } from "@/shared/ui/skeleton";
@@ -57,18 +59,22 @@ export function LabProductsSection({ title, categoryId }: Props) {
 
                 <button
                     type="button"
-                    className={`${styles.navBtn} ${styles.prev} lab-products-prev`}
+                    className={`${styles.navBtn} ${styles.prev} ${slidingStyles.slidingIconHover} lab-products-prev`}
                     aria-label="Oldingi"
                 >
-                    <ArrowRight />
+                    <SlidingIcon>
+                        <ArrowRight />
+                    </SlidingIcon>
                 </button>
 
                 <button
                     type="button"
-                    className={`${styles.navBtn} ${styles.next} lab-products-next`}
+                    className={`${styles.navBtn} ${styles.next} ${slidingStyles.slidingIconHover} lab-products-next`}
                     aria-label="Keyingi"
                 >
-                    <ArrowRight />
+                    <SlidingIcon>
+                        <ArrowRight />
+                    </SlidingIcon>
                 </button>
             </div>
         </section>

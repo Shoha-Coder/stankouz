@@ -9,6 +9,8 @@ import "swiper/css/pagination";
 import styles from "./news.module.scss";
 import { swiperPaginationConfig } from "@/shared/config/swiper";
 import ArrowRight from "@/shared/ui/icons/arrow-right";
+import { SlidingIcon } from "@/shared/ui/sliding-icon";
+import slidingStyles from "@/shared/ui/sliding-icon/sliding-icon.module.scss";
 import { AnimatedItem } from "@/shared/ui/animated-item";
 import { usePosts } from "@/entities/post";
 import { ImageWithLoader } from "@/shared/ui/image-with-loader";
@@ -75,6 +77,7 @@ export function News() {
                         clickable: true,
                         el: ".news-pagination",
                     }}
+                    className={styles.swiper}
                 >
                     {posts!.slice(0, 12).map((item, index) => (
                         <SwiperSlide key={item.id}>
@@ -103,21 +106,27 @@ export function News() {
                     ))}
                 </Swiper>
 
-                <button type="button" className={`${styles.navBtn} ${styles.prev} news-prev`} aria-label="Oldingi">
-                    <ArrowRight />
+                <button type="button" className={`${styles.navBtn} ${styles.prev} ${slidingStyles.slidingIconHover} news-prev`} aria-label="Oldingi">
+                    <SlidingIcon>
+                        <ArrowRight />
+                    </SlidingIcon>
                 </button>
-                <button type="button" className={`${styles.navBtn} ${styles.next} news-next`} aria-label="Keyingi">
-                    <ArrowRight />
+                <button type="button" className={`${styles.navBtn} ${styles.next} ${slidingStyles.slidingIconHover} news-next`} aria-label="Keyingi">
+                    <SlidingIcon>
+                        <ArrowRight />
+                    </SlidingIcon>
                 </button>
             </div>
 
             <div className={`${styles.pagination} news-pagination`} />
 
             <div className={styles.actions}>
-                <Link href={`/${locale}/news`} className={styles.outlineBtn}>
+                <Link href={`/${locale}/news`} className={`${styles.outlineBtn} ${slidingStyles.slidingIconHover}`}>
                     <span>{t("more")}</span>
                     <span className={styles.iconCircle}>
-                        <ArrowRight />
+                        <SlidingIcon>
+                            <ArrowRight />
+                        </SlidingIcon>
                     </span>
                 </Link>
             </div>

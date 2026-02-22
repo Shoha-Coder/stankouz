@@ -223,7 +223,7 @@ $nav-active: #0863ad;
     overflow-y: auto;
     flex: 1;
     min-height: 0;
-    max-height: 468px;
+    max-height: clamp(300px, 50vh, 468px);
 }
 
 .categoryItem {

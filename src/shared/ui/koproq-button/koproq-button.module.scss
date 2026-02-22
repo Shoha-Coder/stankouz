@@ -33,6 +33,11 @@
     height: 50px;
     border-radius: 50%;
     background: #ffd93d;
+    transition: transform 0.3s ease;
+
+    svg {
+        transition: transform 0.3s ease;
+    }
 }
 
 .arrow {

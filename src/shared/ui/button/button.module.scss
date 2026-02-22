@@ -30,10 +30,8 @@
     .text {
       color: #ffffff;
     }
-    .iconCircle {
-      svg {
-        fill: #0863ad;
-      }
+    .iconCircle svg {
+      fill: #0863ad;
     }
   }
 }
@@ -46,4 +44,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: transform 0.3s ease;
+
+  svg {
+    transition: fill 0.3s ease, transform 0.3s ease;
+  }
 }

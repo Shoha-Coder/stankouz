@@ -4,6 +4,8 @@ import { useCallback, useRef, useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { useSubmitApplication } from "@/entities/contact";
 import { ArrowRightIcon } from "@/shared/ui/icons";
+import { SlidingIcon } from "@/shared/ui/sliding-icon";
+import slidingStyles from "@/shared/ui/sliding-icon/sliding-icon.module.scss";
 import UploadIcon from "@/shared/ui/icons/upload";
 import { formatPhoneUz, parsePhoneForSubmit } from "@/shared/lib/format-phone";
 import styles from "./application-form-modal.module.scss";
@@ -258,13 +260,15 @@ export function ApplicationFormModal({
             <button
               type="submit"
               disabled={isPending}
-              className={styles.submitBtn}
+              className={`${styles.submitBtn} ${slidingStyles.slidingIconHover}`}
             >
               <span className={styles.submitText}>
                 {isPending ? "Yuborilmoqda..." : "Ariza yuborish"}
               </span>
               <span className={styles.iconCircle}>
-                <ArrowRightIcon />
+                <SlidingIcon>
+                  <ArrowRightIcon />
+                </SlidingIcon>
               </span>
             </button>
           </form>
